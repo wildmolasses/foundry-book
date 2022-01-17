@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Working on an Existing Project - The Foundry Book</title>
+        <title>Fuzz Testing - The Foundry Book</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../../getting-started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../getting-started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../../getting-started/first-steps.html"><strong aria-hidden="true">1.2.</strong> First Steps with Foundry</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/index.html"><strong aria-hidden="true">2.</strong> Forge Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guide/creating-a-new-project.html"><strong aria-hidden="true">2.1.</strong> Creating a New Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/working-on-an-existing-project.html" class="active"><strong aria-hidden="true">2.2.</strong> Working on an Existing Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/dependencies.html"><strong aria-hidden="true">2.3.</strong> Dependencies</a></li><li class="chapter-item expanded "><a href="../../forge/guide/project-layout.html"><strong aria-hidden="true">2.4.</strong> Project Layout</a></li><li class="chapter-item expanded "><a href="../../forge/guide/config.html"><strong aria-hidden="true">2.5.</strong> forge.toml</a></li><li class="chapter-item expanded "><a href="../../forge/guide/tests.html"><strong aria-hidden="true">2.6.</strong> Tests</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guides/traces.html"><strong aria-hidden="true">2.6.1.</strong> Understanding Traces</a></li><li class="chapter-item expanded "><a href="../../forge/guides/fuzz-testing.html"><strong aria-hidden="true">2.6.2.</strong> Fuzz Testing</a></li><li class="chapter-item expanded "><a href="../../forge/guides/cheatcodes.html"><strong aria-hidden="true">2.6.3.</strong> Cheatcodes</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/continous-integration.html"><strong aria-hidden="true">2.7.</strong> Continous Integration</a></li><li class="chapter-item expanded "><a href="../../forge/guide/debugger.html"><strong aria-hidden="true">2.8.</strong> Debugger</a></li><li class="chapter-item expanded "><a href="../../forge/guide/cache.html"><strong aria-hidden="true">2.9.</strong> Cache</a></li></ol></li><li class="chapter-item expanded "><a href="../../guides/index.html"><strong aria-hidden="true">3.</strong> Additional Guides</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guides/incremental-adoption.html"><strong aria-hidden="true">3.1.</strong> Incremental Adoption</a></li><li class="chapter-item expanded "><a href="../../guides/vscode.html"><strong aria-hidden="true">3.2.</strong> Integrating with VSCode</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../../getting-started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../getting-started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../../getting-started/first-steps.html"><strong aria-hidden="true">1.2.</strong> First Steps with Foundry</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/index.html"><strong aria-hidden="true">2.</strong> Forge Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guide/creating-a-new-project.html"><strong aria-hidden="true">2.1.</strong> Creating a New Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/working-on-an-existing-project.html"><strong aria-hidden="true">2.2.</strong> Working on an Existing Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/dependencies.html"><strong aria-hidden="true">2.3.</strong> Dependencies</a></li><li class="chapter-item expanded "><a href="../../forge/guide/project-layout.html"><strong aria-hidden="true">2.4.</strong> Project Layout</a></li><li class="chapter-item expanded "><a href="../../forge/guide/config.html"><strong aria-hidden="true">2.5.</strong> forge.toml</a></li><li class="chapter-item expanded "><a href="../../forge/guide/tests.html"><strong aria-hidden="true">2.6.</strong> Tests</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guides/traces.html"><strong aria-hidden="true">2.6.1.</strong> Understanding Traces</a></li><li class="chapter-item expanded "><a href="../../forge/guides/fuzz-testing.html" class="active"><strong aria-hidden="true">2.6.2.</strong> Fuzz Testing</a></li><li class="chapter-item expanded "><a href="../../forge/guides/cheatcodes.html"><strong aria-hidden="true">2.6.3.</strong> Cheatcodes</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/continous-integration.html"><strong aria-hidden="true">2.7.</strong> Continous Integration</a></li><li class="chapter-item expanded "><a href="../../forge/guide/debugger.html"><strong aria-hidden="true">2.8.</strong> Debugger</a></li><li class="chapter-item expanded "><a href="../../forge/guide/cache.html"><strong aria-hidden="true">2.9.</strong> Cache</a></li></ol></li><li class="chapter-item expanded "><a href="../../guides/index.html"><strong aria-hidden="true">3.</strong> Additional Guides</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guides/incremental-adoption.html"><strong aria-hidden="true">3.1.</strong> Incremental Adoption</a></li><li class="chapter-item expanded "><a href="../../guides/vscode.html"><strong aria-hidden="true">3.2.</strong> Integrating with VSCode</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -113,7 +113,7 @@
                         <a href="https://github.com/onbjerg/foundry-book" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/onbjerg/foundry-book/edit/master/src/doc/src/forge/guide/working-on-an-existing-project.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/onbjerg/foundry-book/edit/master/src/doc/src/forge/guides/fuzz-testing.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
                     </div>
@@ -140,76 +140,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="working-on-an-existing-project"><a class="header" href="#working-on-an-existing-project">Working on an Existing Project</a></h2>
-<p>If you download an existing project that uses Foundry, it is really easy to get going.</p>
-<p>First, get the project from somewhere. In this example, we will clone the <code>forge-std</code> repository from GitHub:</p>
-<pre><code class="language-sh">$ git clone --recursive https://github.com/brockelmore/forge-std
-$ cd forge-std
-</code></pre>
-<p>Notice that we clone with the <code>--recursive</code> flag. This automatically pulls git submodules (which we use as dependencies) as well in case there are any.</p>
-<p>To build, use <code>forge build</code>:</p>
-<pre><code class="language-sh">$ forge build
-compiling...
-success.
-</code></pre>
-<p>And to test, use <code>forge test</code>:</p>
-<pre><code class="language-sh">$ forge test
-compiling...
-no files changed, compilation skipped.
-Running 4 tests for StdCheatsTest.json:StdCheatsTest
-[PASS] testHoax() (gas: 12061)
-[PASS] testHoaxOrigin() (gas: 12227)
-[PASS] testStartHoax() (gas: 21464)
-[PASS] testStartHoaxOrigin() (gas: 21619)
-
-Running 9 tests for StdErrorsTest.json:StdErrorsTest
-[PASS] testExpectArithmetic() (gas: 5652)
-[PASS] testExpectAssertion() (gas: 4839)
-[PASS] testExpectDiv() (gas: 5533)
-[PASS] testExpectEnum() (gas: 5435)
-[PASS] testExpectIntern() (gas: 5021)
-[PASS] testExpectMem() (gas: 4884)
-[PASS] testExpectMod() (gas: 5555)
-[PASS] testExpectOOB() (gas: 5462)
-[PASS] testExpectPop() (gas: 6991)
-
-Running 26 tests for StdStorageTest.json:StdStorageTest
-[PASS] testFailStorageCheckedWriteMapPacked() (gas: 130438)
-[PASS] testFailStorageConst() (gas: 81915)
-[PASS] testFailStorageNativePack() (gas: 332331)
-[PASS] testStorageCheckedWriteDeepMap() (gas: 241705)
-[PASS] testStorageCheckedWriteDeepMapStructA() (gas: 270910)
-[PASS] testStorageCheckedWriteDeepMapStructB() (gas: 319479)
-[PASS] testStorageCheckedWriteHidden() (gas: 167166)
-[PASS] testStorageCheckedWriteMapAddr() (gas: 214549)
-[PASS] testStorageCheckedWriteMapPackedSuccess() (gas: 213075)
-[PASS] testStorageCheckedWriteMapStructA() (gas: 243722)
-[PASS] testStorageCheckedWriteMapStructB() (gas: 291929)
-[PASS] testStorageCheckedWriteMapUint() (gas: 214525)
-[PASS] testStorageCheckedWriteObvious() (gas: 143624)
-[PASS] testStorageCheckedWriteStructA() (gas: 190036)
-[PASS] testStorageCheckedWriteStructB() (gas: 236141)
-[PASS] testStorageDeepMap() (gas: 207713)
-[PASS] testStorageDeepMapStructA() (gas: 236545)
-[PASS] testStorageDeepMapStructB() (gas: 285069)
-[PASS] testStorageHidden() (gas: 136554)
-[PASS] testStorageMapAddrFound() (gas: 182086)
-[PASS] testStorageMapStructA() (gas: 210616)
-[PASS] testStorageMapStructB() (gas: 258995)
-[PASS] testStorageMapUintFound() (gas: 182100)
-[PASS] testStorageObvious() (gas: 112963)
-[PASS] testStorageStructA() (gas: 158602)
-[PASS] testStorageStructB() (gas: 204879)
-</code></pre>
+                        <h1 id="fuzz-testing"><a class="header" href="#fuzz-testing">Fuzz Testing</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../forge/guide/creating-a-new-project.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../forge/guides/traces.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../../forge/guide/dependencies.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../forge/guides/cheatcodes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -218,10 +158,10 @@ Running 26 tests for StdStorageTest.json:StdStorageTest
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../forge/guide/creating-a-new-project.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../forge/guides/traces.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../../forge/guide/dependencies.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../../forge/guides/cheatcodes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

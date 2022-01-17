@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../../getting-started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../getting-started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../../getting-started/first-steps.html"><strong aria-hidden="true">1.2.</strong> First Steps with Foundry</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/index.html"><strong aria-hidden="true">2.</strong> Forge Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guide/creating-a-new-project.html" class="active"><strong aria-hidden="true">2.1.</strong> Creating a New Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/working-on-an-existing-project.html"><strong aria-hidden="true">2.2.</strong> Working on an Existing Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/dependencies.html"><strong aria-hidden="true">2.3.</strong> Dependencies</a></li><li class="chapter-item expanded "><a href="../../forge/guide/project-layout.html"><strong aria-hidden="true">2.4.</strong> Project Layout</a></li><li class="chapter-item expanded "><a href="../../forge/guide/config.html"><strong aria-hidden="true">2.5.</strong> forge.toml</a></li><li class="chapter-item expanded "><a href="../../forge/guide/tests.html"><strong aria-hidden="true">2.6.</strong> Tests</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guides/cheatcodes.html"><strong aria-hidden="true">2.6.1.</strong> Cheatcodes</a></li><li class="chapter-item expanded "><a href="../../forge/guides/traces.html"><strong aria-hidden="true">2.6.2.</strong> Understanding Traces</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/continous-integration.html"><strong aria-hidden="true">2.7.</strong> Continous Integration</a></li><li class="chapter-item expanded "><a href="../../forge/guide/debugger.html"><strong aria-hidden="true">2.8.</strong> Debugger</a></li><li class="chapter-item expanded "><a href="../../forge/guide/cache.html"><strong aria-hidden="true">2.9.</strong> Cache</a></li></ol></li><li class="chapter-item expanded "><a href="../../guides/index.html"><strong aria-hidden="true">3.</strong> Additional Guides</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guides/incremental-adoption.html"><strong aria-hidden="true">3.1.</strong> Incremental Adoption</a></li><li class="chapter-item expanded "><a href="../../guides/vscode.html"><strong aria-hidden="true">3.2.</strong> Integrating with VSCode</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../../getting-started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../getting-started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../../getting-started/first-steps.html"><strong aria-hidden="true">1.2.</strong> First Steps with Foundry</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/index.html"><strong aria-hidden="true">2.</strong> Forge Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guide/creating-a-new-project.html" class="active"><strong aria-hidden="true">2.1.</strong> Creating a New Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/working-on-an-existing-project.html"><strong aria-hidden="true">2.2.</strong> Working on an Existing Project</a></li><li class="chapter-item expanded "><a href="../../forge/guide/dependencies.html"><strong aria-hidden="true">2.3.</strong> Dependencies</a></li><li class="chapter-item expanded "><a href="../../forge/guide/project-layout.html"><strong aria-hidden="true">2.4.</strong> Project Layout</a></li><li class="chapter-item expanded "><a href="../../forge/guide/config.html"><strong aria-hidden="true">2.5.</strong> forge.toml</a></li><li class="chapter-item expanded "><a href="../../forge/guide/tests.html"><strong aria-hidden="true">2.6.</strong> Tests</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../forge/guides/traces.html"><strong aria-hidden="true">2.6.1.</strong> Understanding Traces</a></li><li class="chapter-item expanded "><a href="../../forge/guides/fuzz-testing.html"><strong aria-hidden="true">2.6.2.</strong> Fuzz Testing</a></li><li class="chapter-item expanded "><a href="../../forge/guides/cheatcodes.html"><strong aria-hidden="true">2.6.3.</strong> Cheatcodes</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/guide/continous-integration.html"><strong aria-hidden="true">2.7.</strong> Continous Integration</a></li><li class="chapter-item expanded "><a href="../../forge/guide/debugger.html"><strong aria-hidden="true">2.8.</strong> Debugger</a></li><li class="chapter-item expanded "><a href="../../forge/guide/cache.html"><strong aria-hidden="true">2.9.</strong> Cache</a></li></ol></li><li class="chapter-item expanded "><a href="../../guides/index.html"><strong aria-hidden="true">3.</strong> Additional Guides</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../guides/incremental-adoption.html"><strong aria-hidden="true">3.1.</strong> Incremental Adoption</a></li><li class="chapter-item expanded "><a href="../../guides/vscode.html"><strong aria-hidden="true">3.2.</strong> Integrating with VSCode</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -140,7 +140,42 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="creating-a-new-project"><a class="header" href="#creating-a-new-project">Creating a New Project</a></h1>
+                        <h2 id="creating-a-new-project"><a class="header" href="#creating-a-new-project">Creating a New Project</a></h2>
+<p>To start a new project with Foundry, use <code>forge init</code>:</p>
+<pre><code class="language-sh">$ forge init hello_foundry
+</code></pre>
+<p>This creates a new directory <code>hello_foundry</code> from the default template. This also initializes a new <code>git</code> repository.</p>
+<p>If you want to create a new project using a different template, you would pass the <code>--template</code> flag, like so:</p>
+<pre><code class="language-sh">forge init --template https://github.com/FrankieIsLost/forge-template hello_template
+</code></pre>
+<p>For now, let's check what the default template looks like:</p>
+<pre><code class="language-sh">$ cd hello_foundry
+$ tree .
+.
+├── lib
+│   └── ds-test
+└── src
+    ├── Contract.sol
+    └── test
+        └── Contract.t.sol
+
+6 directories, 7 files
+</code></pre>
+<p>The default template comes with one dependency installed: <code>ds-test</code>. This is the preferred assertion library used for Foundry projects. Additionally, the template also comes with an empty starter contract and a simple test.</p>
+<p>Let's build the project:</p>
+<pre><code class="language-sh">$ forge build
+compiling...
+success.
+</code></pre>
+<p>And run the tests:</p>
+<pre><code class="language-sh">$ forge test
+compiling...
+no files changed, compilation skipped.
+Running 1 test for ContractTest.json:ContractTest
+[PASS] testExample() (gas: 254)
+</code></pre>
+<p>You'll notice that two new directories have popped up: <code>out</code> and <code>cache</code>.</p>
+<p>The <code>out</code> directory contains your contract artifact, such as the ABI, while the <code>cache</code> is used by <code>forge</code> to only recompile what is necessary.</p>
 
                     </main>
 
