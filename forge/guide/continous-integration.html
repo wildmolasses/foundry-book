@@ -140,7 +140,30 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="continous-integration"><a class="header" href="#continous-integration">Continous Integration</a></h1>
+                        <h2 id="continous-integration"><a class="header" href="#continous-integration">Continous Integration</a></h2>
+<h3 id="github-actions"><a class="header" href="#github-actions">GitHub Actions</a></h3>
+<p>To test your project using GitHub Actions, here is a sample workflow:</p>
+<pre><code class="language-yml">on: [push]
+
+name: test
+
+jobs:
+  check:
+    name: Foundry project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: onbjerg/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Run tests
+        run: forge test -vvv
+</code></pre>
 
                     </main>
 

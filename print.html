@@ -357,7 +357,30 @@ ds-test/=lib/ds-test/src/
 <div style="break-before: page; page-break-before: always;"></div><h1 id="understanding-traces"><a class="header" href="#understanding-traces">Understanding Traces</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fuzz-testing"><a class="header" href="#fuzz-testing">Fuzz Testing</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cheatcodes"><a class="header" href="#cheatcodes">Cheatcodes</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="continous-integration"><a class="header" href="#continous-integration">Continous Integration</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="continous-integration"><a class="header" href="#continous-integration">Continous Integration</a></h2>
+<h3 id="github-actions"><a class="header" href="#github-actions">GitHub Actions</a></h3>
+<p>To test your project using GitHub Actions, here is a sample workflow:</p>
+<pre><code class="language-yml">on: [push]
+
+name: test
+
+jobs:
+  check:
+    name: Foundry project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: onbjerg/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Run tests
+        run: forge test -vvv
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="debugger"><a class="header" href="#debugger">Debugger</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cache"><a class="header" href="#cache">Cache</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="additional-guides"><a class="header" href="#additional-guides">Additional Guides</a></h1>
