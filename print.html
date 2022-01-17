@@ -179,7 +179,36 @@
 <p>After this, run the following to build Foundry from source:</p>
 <pre><code>cargo install --git https://github.com/gakonst/foundry --bins --locked
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="first-steps-with-foundry"><a class="header" href="#first-steps-with-foundry">First Steps with Foundry</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="first-steps-with-foundry"><a class="header" href="#first-steps-with-foundry">First Steps with Foundry</a></h2>
+<p>This section provides an overview of the <code>forge</code> command line tool. We demonstrate how to create a new project, compile and test it.</p>
+<p>To start a new project with Foundry, use <code>forge init</code>:</p>
+<pre><code>forge init hello_foundry
+</code></pre>
+<p>Let's check out what <code>forge</code> generated for us:</p>
+<pre><code class="language-sh">$ cd hello_foundry
+$ tree .
+.
+├── lib
+│   └── ds-test
+└── src
+    ├── Contract.sol
+    └── test
+        └── Contract.t.sol
+
+6 directories, 7 files
+</code></pre>
+<p>We can build the project:</p>
+<pre><code class="language-sh">$ forge build
+compiling...
+success.
+</code></pre>
+<p>And run the tests:</p>
+<pre><code class="language-sh">$ forge test
+compiling...
+no files changed, compilation skipped.
+Running 1 test for ContractTest.json:ContractTest
+[PASS] testExample() (gas: 254)
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="forge-guide"><a class="header" href="#forge-guide">Forge Guide</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-new-project"><a class="header" href="#creating-a-new-project">Creating a New Project</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="working-on-an-existing-project"><a class="header" href="#working-on-an-existing-project">Working on an Existing Project</a></h1>
