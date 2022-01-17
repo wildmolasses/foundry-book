@@ -405,7 +405,10 @@ jobs:
         run: forge test -vvv
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="debugger"><a class="header" href="#debugger">Debugger</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="cache"><a class="header" href="#cache">Cache</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cache"><a class="header" href="#cache">Cache</a></h2>
+<p>Forge caches compiled contracts each time you build your project to provide incremental builds. This cache lives in <code>cache/</code>.</p>
+<p>Additionally, Forge also saves contract artifacts in <code>out/</code>, such as ABIs.</p>
+<p>Both of these directories can be removed using <code>forge clean</code>, and it is generally recommended to add them in your <code>.gitignore</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="additional-guides"><a class="header" href="#additional-guides">Additional Guides</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="incremental-adoption"><a class="header" href="#incremental-adoption">Incremental Adoption</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="integrating-with-vscode"><a class="header" href="#integrating-with-vscode">Integrating with VSCode</a></h1>
