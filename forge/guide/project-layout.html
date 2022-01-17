@@ -140,7 +140,29 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="project-layout"><a class="header" href="#project-layout">Project Layout</a></h1>
+                        <h2 id="project-layout"><a class="header" href="#project-layout">Project Layout</a></h2>
+<p>Forge is flexible on how you structure your project. By default, the structure is:</p>
+<pre><code>.
+├── remappings.txt
+├── foundry.toml
+├── src/
+│   ├── Contract.sol
+│   └── test/
+│       └── Contract.t.sol
+└── lib/
+    └── ds-test/
+</code></pre>
+<ul>
+<li>You can configure Foundry's behavior using <code>foundry.toml</code>.</li>
+<li>Remappings are specified in <code>remappings.txt</code>.</li>
+<li>The default directory for contracts is <code>src/</code>.</li>
+<li>The default directory for tests is <code>src/</code>, where any contract with function that starts with <code>test</code>.
+is considered to be a test.</li>
+<li>Dependencies are stored as git submodules in <code>lib/</code>.</li>
+</ul>
+<p>You can configure where Forge looks for both dependencies and contracts using the <code>--lib-paths</code> and <code>--contracts</code> flags respectively. Alternatively you can configure it in <code>foundry.toml</code>.</p>
+<p>Combined with remappings, this gives you the flexibility needed to support the project structure of other toolchains such as Hardhat and Truffle.</p>
+<p>For automatic Hardhat support you can also pass the <code>--hh</code> flag, which sets the following flags: <code>--lib-paths node_modules --contracts contracts</code>.</p>
 
                     </main>
 
