@@ -141,6 +141,26 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<h2 id="using-forgeup"><a class="header" href="#using-forgeup">Using <code>forgeup</code></a></h2>
+<p>The easiest way to get Foundry is to install the latest release by using <code>forgeup</code>.</p>
+<p>On Linux and macOS systems, this is done as follows:</p>
+<pre><code>curl https://raw.githubusercontent.com/gakonst/foundry/master/forgeup/install | bash
+</code></pre>
+<p>This will download <code>forgeup</code>. To start install Foundry, run:</p>
+<pre><code>forgeup
+</code></pre>
+<p>On Windows, build from source.</p>
+<p>Running <code>forgeup</code> again will update to the latest Foundry release. You can also revert to a specific version of Foundry with <code>forgeup -v $VERSION</code>.</p>
+<h2 id="building-from-source"><a class="header" href="#building-from-source">Building from source</a></h2>
+<p>To build from source, you need to get <a href="https://rust-lang.org">Rust</a> and Cargo. The easiest way to get both is by using <code>rustup</code>.</p>
+<p>On Linux and macOS systems, this is done as follows:</p>
+<pre><code>curl https://sh.rustup.rs -sSf | sh
+</code></pre>
+<p>It will download a script and start installation.</p>
+<p>On Windows, download and run <code>rustup-init</code> from <a href="https://rustup.rs">rustup.rs</a>. It will start the installation in a console.</p>
+<p>After this, run the following to build Foundry from source:</p>
+<pre><code>cargo install --git https://github.com/gakonst/foundry --bins --locked
+</code></pre>
 
                     </main>
 
