@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>foundry.toml Reference - The Foundry Book</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../getting-started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting-started/first-steps.html"><strong aria-hidden="true">1.2.</strong> First Steps with Foundry</a></li></ol></li><li class="chapter-item expanded "><a href="../forge/index.html"><strong aria-hidden="true">2.</strong> Forge Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../forge/creating-a-new-project.html"><strong aria-hidden="true">2.1.</strong> Creating a New Project</a></li><li class="chapter-item expanded "><a href="../forge/working-on-an-existing-project.html"><strong aria-hidden="true">2.2.</strong> Working on an Existing Project</a></li><li class="chapter-item expanded "><a href="../forge/dependencies.html"><strong aria-hidden="true">2.3.</strong> Dependencies</a></li><li class="chapter-item expanded "><a href="../forge/project-layout.html"><strong aria-hidden="true">2.4.</strong> Project Layout</a></li><li class="chapter-item expanded "><a href="../forge/config.html"><strong aria-hidden="true">2.5.</strong> Configuring with foundry.toml</a></li><li class="chapter-item expanded "><a href="../forge/tests.html"><strong aria-hidden="true">2.6.</strong> Tests</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../forge/writing-tests.html"><strong aria-hidden="true">2.6.1.</strong> Writing Tests</a></li><li class="chapter-item expanded "><a href="../forge/cheatcodes.html"><strong aria-hidden="true">2.6.2.</strong> Cheatcodes</a></li><li class="chapter-item expanded "><a href="../forge/fuzz-testing.html"><strong aria-hidden="true">2.6.3.</strong> Fuzz Testing</a></li><li class="chapter-item expanded "><a href="../forge/traces.html"><strong aria-hidden="true">2.6.4.</strong> Understanding Traces</a></li></ol></li><li class="chapter-item expanded "><a href="../forge/continous-integration.html"><strong aria-hidden="true">2.7.</strong> Continous Integration</a></li><li class="chapter-item expanded "><a href="../forge/debugger.html"><strong aria-hidden="true">2.8.</strong> Debugger</a></li><li class="chapter-item expanded "><a href="../forge/cache.html"><strong aria-hidden="true">2.9.</strong> Cache</a></li></ol></li><li class="chapter-item expanded "><a href="../guides/index.html"><strong aria-hidden="true">3.</strong> Additional Guides</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../guides/incremental-adoption.html"><strong aria-hidden="true">3.1.</strong> Incremental Adoption</a></li><li class="chapter-item expanded "><a href="../guides/vscode.html"><strong aria-hidden="true">3.2.</strong> Integrating with VSCode</a></li><li class="chapter-item expanded "><a href="../guides/shell-autocompletion.html"><strong aria-hidden="true">3.3.</strong> Shell Autocompletion</a></li></ol></li><li class="chapter-item expanded "><a href="../reference/index.html"><strong aria-hidden="true">4.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../reference/config.html" class="active"><strong aria-hidden="true">4.1.</strong> foundry.toml Reference</a></li><li class="chapter-item expanded "><a href="../reference/ds-test.html"><strong aria-hidden="true">4.2.</strong> ds-test Reference</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Foundry Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/onbjerg/foundry-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/onbjerg/foundry-book/edit/master/src/doc/src/reference/config.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="foundrytoml-reference"><a class="header" href="#foundrytoml-reference"><code>foundry.toml</code> Reference</a></h2>
+<p>Foundry's configuration system allows you to configure its tools.</p>
+<h3 id="profiles"><a class="header" href="#profiles">Profiles</a></h3>
+<p>Configuration can be arbitrarily namespaced into profiles. The default profile is named <code>default</code>, and all other profiles inherit values from this profile.</p>
+<p>You can select the profile to use by setting the <code>FOUNDRY_PROFILE</code> environment variable.</p>
+<h3 id="global-configuration"><a class="header" href="#global-configuration">Global configuration</a></h3>
+<p>You can create a <code>foundry.toml</code> file in your home folder to configure Foundry globally.</p>
+<h3 id="environment-variables"><a class="header" href="#environment-variables">Environment variables</a></h3>
+<p>Configuration can be overriden with <code>FOUNDRY_</code> and <code>DAPP_</code> prefixed environment variables.</p>
+<h3 id="configuration-format"><a class="header" href="#configuration-format">Configuration format</a></h3>
+<p>Configuration files are written in the <a href="https://toml.io">TOML format</a>, with simple key-value pairs inside of sections. The following gives a quick overview of all settings (and their default values), with detailed descriptions found below.</p>
+<pre><code class="language-toml">[default]
+src = 'src'                                                   # the source directory
+test = 'test'                                                 # the test directory
+out = 'out'                                                   # the output directory (for artifacts)
+libs = ['lib']                                                # a list of library directories
+remappings = []                                               # a list of remappings
+libraries = []                                                # a list of deployed libraries to link against
+cache = true                                                  # whether to cache builds or not
+force = false                                                 # whether to ignore the cache (clean build)
+evm_version = 'london'                                        # the evm version (by hardfork name)
+#solc_version = '0.8.10'                                      # override for the solc version (setting this ignores `auto_detect_solc`)
+auto_detect_solc = true                                       # enable auto-detection of the appropriate solc version to use
+optimizer = true                                              # enable or disable the solc optimizer
+optimizer_runs = 200                                          # the number of optimizer runs
+verbosity = 0                                                 # the verbosity of tests
+ignored_error_codes = []                                      # a list of ignored solc error codes
+fuzz_runs = 256                                               # the number of fuzz runs for tests
+ffi = false                                                   # whether to enable ffi or not
+sender = '0x00a329c0648769a73afac7f9381e08fb43dbea72'         # the address of `msg.sender` in tests
+tx_origin = '0x00a329c0648769a73afac7f9381e08fb43dbea72'      # the address of `tx.origin` in tests
+initial_balance = '0xffffffffffffffffffffffff'                # the initial balance of the test contract
+block_number = 0                                              # the block number we are at in tests
+chain_id = 1                                                  # the chain id we are on in tests
+gas_limit = 9223372036854775807                               # the gas limit in tests
+gas_price = 0                                                 # the gas price (in wei) in tests
+block_base_fee_per_gas = 0                                    # the base fee (in wei) in tests
+block_coinbase = '0x0000000000000000000000000000000000000000' # the address of `block.coinbase` in tests
+block_timestamp = 0                                           # the value of `block.timestamp` in tests
+block_difficulty = 0                                          # the value of `block.difficulty` in tests
+</code></pre>
+<h3 id="configuration-keys"><a class="header" href="#configuration-keys">Configuration keys</a></h3>
+<p>This section documents all configuration keys. All configuration keys must live under a profile, such as <code>default</code>.</p>
+<h4 id="project"><a class="header" href="#project">Project</a></h4>
+<p>Configuration related to the project in general.</p>
+<h5 id="src"><a class="header" href="#src"><code>src</code></a></h5>
+<ul>
+<li>Type: string</li>
+<li>Default: src</li>
+<li>Environment: <code>FOUNDRY_SRC</code> or <code>DAPP_SRC</code></li>
+</ul>
+<p>The path to the contract sources relative to the root of the project.</p>
+<h5 id="test"><a class="header" href="#test"><code>test</code></a></h5>
+<ul>
+<li>Type: string</li>
+<li>Default: test</li>
+<li>Environment: <code>FOUNDRY_TEST</code> or <code>DAPP_TEST</code></li>
+</ul>
+<p>The path to the test contract sources relative to the root of the project.</p>
+<h5 id="out"><a class="header" href="#out"><code>out</code></a></h5>
+<ul>
+<li>Type: string</li>
+<li>Default: out</li>
+<li>Environment: <code>FOUNDRY_OUT</code> or <code>DAPP_OUT</code></li>
+</ul>
+<p>The path to put contract artifacts in, relative to the root of the project.</p>
+<h5 id="libs"><a class="header" href="#libs"><code>libs</code></a></h5>
+<ul>
+<li>Type: array of strings (paths)</li>
+<li>Default: lib</li>
+<li>Environment: <code>FOUNDRY_LIBS</code> or <code>DAPP_LIBS</code></li>
+</ul>
+<p>An array of paths that contain libraries, relative to the root of the project.</p>
+<h5 id="cache"><a class="header" href="#cache"><code>cache</code></a></h5>
+<ul>
+<li>Type: boolean</li>
+<li>Default: true</li>
+<li>Environment: <code>FOUNDRY_CACHE</code> or <code>DAPP_CACHE</code></li>
+</ul>
+<p>Whether or not to enable caching. If enabled, the result of compiling sources, tests, and dependencies, are cached in <code>cache</code>.</p>
+<h5 id="force"><a class="header" href="#force"><code>force</code></a></h5>
+<ul>
+<li>Type: boolean</li>
+<li>Default: false</li>
+<li>Environment: <code>FOUNDRY_FORCE</code> or <code>DAPP_FORCE</code></li>
+</ul>
+<p>Whether or not to perform a clean build, discarding the cache.</p>
+<h4 id="solidity-compiler"><a class="header" href="#solidity-compiler">Solidity compiler</a></h4>
+<p>Configuration related to the behavior of the Solidity compiler.</p>
+<h5 id="remappings"><a class="header" href="#remappings"><code>remappings</code></a></h5>
+<ul>
+<li>Type: array of strings (remappings)</li>
+<li>Default: none</li>
+<li>Environment: <code>FOUNDRY_REMAPPINGS</code> or <code>DAPP_REMAPPINGS</code></li>
+</ul>
+<p>An array of remappings in the following format: <code>&lt;name&gt;=&lt;target&gt;</code>.</p>
+<p>A remapping <em>remaps</em> Solidity imports to different directories. For example, the following remapping</p>
+<pre><code>@openzeppelin/=node_modules/@openzeppelin/openzeppelin-contracts/
+</code></pre>
+<p>with an import like</p>
+<pre><code class="language-solidity">import &quot;@openzeppelin/contracts/utils/Context.sol&quot;;
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-solidity">import &quot;node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Context.sol&quot;;
+</code></pre>
+<h5 id="libraries"><a class="header" href="#libraries"><code>libraries</code></a></h5>
+<ul>
+<li>Type: array of strings (libraries)</li>
+<li>Default: none</li>
+<li>Environment: <code>FOUNDRY_LIBRARIES</code> or <code>DAPP_LIBRARIES</code></li>
+</ul>
+<p>An array of libraries to link against in the following format: <code>&lt;file&gt;:&lt;lib&gt;:&lt;address&gt;</code>, for example: <code>src/MyLibrary.sol:MyLibrary:0xfD88CeE74f7D78697775aBDAE53f9Da1559728E4</code>.</p>
+<h5 id="solc_version"><a class="header" href="#solc_version"><code>solc_version</code></a></h5>
+<ul>
+<li>Type: string (semver)</li>
+<li>Default: none</li>
+<li>Environment: <code>FOUNDRY_SOLC_VERSION</code> or <code>DAPP_SOLC_VERSION</code></li>
+</ul>
+<p>If specified, overrides the auto-detection system (more below) and uses a single Solidity compiler version for the project.</p>
+<p>Only strict versions are supported (i.e. <code>0.8.11</code> is valid, but <code>^0.8.0</code> is not).</p>
+<h5 id="auto_detect_solc"><a class="header" href="#auto_detect_solc"><code>auto_detect_solc</code></a></h5>
+<ul>
+<li>Type: boolean</li>
+<li>Default: true</li>
+<li>Environment: <code>FOUNDRY_AUTO_DETECT_SOLC</code> or <code>DAPP_AUTO_DETECT_SOLC</code></li>
+</ul>
+<p>If enabled, Foundry will automatically try to resolve appropriate Solidity compiler versions to compile your project.</p>
+<p>This key is ignored if <code>solc_version</code> is set.</p>
+<h5 id="optimizer"><a class="header" href="#optimizer"><code>optimizer</code></a></h5>
+<ul>
+<li>Type: boolean</li>
+<li>Default: true</li>
+<li>Environment: <code>FOUNDRY_OPTIMIZER</code> or <code>DAPP_OPTIMIZER</code></li>
+</ul>
+<p>Whether or not to enable the Solidity compiler optimizer.</p>
+<h5 id="optimizer_runs"><a class="header" href="#optimizer_runs"><code>optimizer_runs</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 200</li>
+<li>Environment: <code>FOUNDRY_OPTIMIZER_RUNS</code> or <code>DAPP_OPTIMIZER_RUNS</code></li>
+</ul>
+<p>The amount of optimizer runs to perform.</p>
+<h5 id="ignored_error_codes"><a class="header" href="#ignored_error_codes"><code>ignored_error_codes</code></a></h5>
+<ul>
+<li>Type: array of integers</li>
+<li>Default: none for source, SPDX license identifiers and contract size for tests</li>
+<li>Environment: <code>FOUNDRY_IGNORED_ERROR_CODES</code> or <code>DAPP_IGNORED_ERROR_CODES</code></li>
+</ul>
+<p>An array of Solidity compiler error codes to ignore during build, such as warnings.</p>
+<h4 id="tests"><a class="header" href="#tests">Tests</a></h4>
+<p>Configuration related to the behavior of <code>forge test</code>.</p>
+<h5 id="verbosity"><a class="header" href="#verbosity"><code>verbosity</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 0</li>
+<li>Environment: <code>FOUNDRY_VERBOSITY</code> or <code>DAPP_VERBOSITY</code></li>
+</ul>
+<p>The verbosity level to use during tests.</p>
+<ul>
+<li><strong>Level 2 (<code>-vv</code>)</strong>: Logs emitted during tests are also displayed.</li>
+<li><strong>Level 3 (<code>-vvv</code>)</strong>: Stack traces for failing tests are also displayed.</li>
+<li><strong>Level 4 (<code>-vvvv</code>)</strong>: Stack traces for all tests are displayed, and setup traces for failing tests are displayed.</li>
+<li><strong>Level 5 (<code>-vvvvv</code>)</strong>: Stack traces and setup traces are always displayed.</li>
+</ul>
+<h5 id="evm_version"><a class="header" href="#evm_version"><code>evm_version</code></a></h5>
+<ul>
+<li>Type: string</li>
+<li>Default: london</li>
+<li>Environment: <code>FOUNDRY_EVM_VERSION</code> or <code>DAPP_EVM_VERSION</code></li>
+</ul>
+<p>The EVM version to use during tests. The value <strong>must</strong> be an EVM hardfork name, such as <code>london</code>, <code>byzantium</code>, etc.</p>
+<h5 id="fuzz_runs"><a class="header" href="#fuzz_runs"><code>fuzz_runs</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 256</li>
+<li>Environment: <code>FOUNDRY_FUZZ_RUNS</code> or <code>DAPP_FUZZ_RUNS</code></li>
+</ul>
+<p>The amount of fuzz runs to perform for each fuzz test case. Higher values gives more confidence in results at the cost of testing speed.</p>
+<h5 id="ffi"><a class="header" href="#ffi"><code>ffi</code></a></h5>
+<ul>
+<li>Type: boolean</li>
+<li>Default: false</li>
+<li>Environment: <code>FOUNDRY_FFI</code> or <code>DAPP_FFI</code></li>
+</ul>
+<p>Whether or not to enable the <code>ffi</code> cheatcode.</p>
+<p><strong>Warning:</strong> Enabling this cheatcode has security implications for your project, as it allows tests to execute arbitrary programs on your computer.</p>
+<h5 id="sender"><a class="header" href="#sender"><code>sender</code></a></h5>
+<ul>
+<li>Type: string (address)</li>
+<li>Default: 0x00a329c0648769a73afac7f9381e08fb43dbea72</li>
+<li>Environment: <code>FOUNDRY_SENDER</code> or <code>DAPP_SENDER</code></li>
+</ul>
+<p>The value of <code>msg.sender</code> in tests.</p>
+<h5 id="tx_origin"><a class="header" href="#tx_origin"><code>tx_origin</code></a></h5>
+<ul>
+<li>Type: string (address)</li>
+<li>Default: 0x00a329c0648769a73afac7f9381e08fb43dbea72</li>
+<li>Environment: <code>FOUNDRY_TX_ORIGIN</code> or <code>DAPP_TX_ORIGIN</code></li>
+</ul>
+<p>The value of <code>tx.origin</code> in tests.</p>
+<h5 id="initial_balance"><a class="header" href="#initial_balance"><code>initial_balance</code></a></h5>
+<ul>
+<li>Type: string (hexadecimal)</li>
+<li>Default: 0xffffffffffffffffffffffff</li>
+<li>Environment: <code>FOUNDRY_INITIAL_BALANCE</code> or <code>DAPP_INITIAL_BALANCE</code></li>
+</ul>
+<p>The initial balance of the test contracts in wei, written in hexadecimal.</p>
+<h5 id="block_number"><a class="header" href="#block_number"><code>block_number</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 0</li>
+<li>Environment: <code>FOUNDRY_BLOCK_NUMBER</code> or <code>DAPP_BLOCK_NUMBER</code></li>
+</ul>
+<p>The value of <code>block.number</code> in tests.</p>
+<h5 id="chain_id"><a class="header" href="#chain_id"><code>chain_id</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 1</li>
+<li>Environment: <code>FOUNDRY_CHAIN_ID</code> or <code>DAPP_CHAIN_ID</code></li>
+</ul>
+<p>The value of the <code>chainid</code> opcode in tests.</p>
+<h5 id="gas_limit"><a class="header" href="#gas_limit"><code>gas_limit</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 9223372036854775807</li>
+<li>Environment: <code>FOUNDRY_GAS_LIMIT</code> or <code>DAPP_GAS_LIMIT</code></li>
+</ul>
+<p>The gas limit for each test case.</p>
+<h5 id="gas_price"><a class="header" href="#gas_price"><code>gas_price</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 0</li>
+<li>Environment: <code>FOUNDRY_GAS_PRICE</code> or <code>DAPP_GAS_PRICE</code></li>
+</ul>
+<p>The price of gas (in wei) in tests.</p>
+<h5 id="block_base_fee_per_gas"><a class="header" href="#block_base_fee_per_gas"><code>block_base_fee_per_gas</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 0</li>
+<li>Environment: <code>FOUNDRY_BLOCK_BASE_FEE_PER_GAS</code> or <code>DAPP_BLOCK_BASE_FEE_PER_GAS</code></li>
+</ul>
+<p>The base fee per gas (in wei) in tests.</p>
+<h5 id="block_coinbase"><a class="header" href="#block_coinbase"><code>block_coinbase</code></a></h5>
+<ul>
+<li>Type: string (address)</li>
+<li>Default: 0x0000000000000000000000000000000000000000</li>
+<li>Environment: <code>FOUNDRY_BLOCK_COINBASE</code> or <code>DAPP_BLOCK_COINBASE</code></li>
+</ul>
+<p>The value of <code>block.coinbase</code> in tests.</p>
+<h5 id="block_timestamp"><a class="header" href="#block_timestamp"><code>block_timestamp</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 0</li>
+<li>Environment: <code>FOUNDRY_BLOCK_TIMESTAMP</code> or <code>DAPP_BLOCK_TIMESTAMP</code></li>
+</ul>
+<p>The value of <code>block.timestamp</code> in tests.</p>
+<h5 id="block_difficulty"><a class="header" href="#block_difficulty"><code>block_difficulty</code></a></h5>
+<ul>
+<li>Type: integer</li>
+<li>Default: 0</li>
+<li>Environment: <code>FOUNDRY_BLOCK_DIFFICULTY</code> or <code>DAPP_BLOCK_DIFFICULTY</code></li>
+</ul>
+<p>The value of <code>block.difficulty</code> in tests.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reference/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../reference/ds-test.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reference/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../reference/ds-test.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/static/solidity.min.js"></script>
+    </body>
+</html>
