@@ -179,7 +179,7 @@ ds-test/=lib/ds-test/src/
 <pre><code>solmate-utils/=lib/solmate/src/utils/
 </code></pre>
 <p>Now we can import any of the contracts in <code>src/utils</code> of the solmate repository like so:</p>
-<pre><code class="language-javascript=">import &quot;solmate-utils/Contract.sol&quot;;
+<pre><code class="language-solidity">import &quot;solmate-utils/Contract.sol&quot;;
 </code></pre>
 <h3 id="hardhat-compatibility"><a class="header" href="#hardhat-compatibility">Hardhat compatibility</a></h3>
 <p>Forge also supports Hardhat-style projects where dependencies are npm packages (stored in <code>node_modules</code>) and contracts are stored in <code>contracts</code> as opposed to source.</p>
@@ -222,5 +222,6 @@ ds-test/=lib/ds-test/src/
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/static/solidity.min.js"></script>
     </body>
 </html>
