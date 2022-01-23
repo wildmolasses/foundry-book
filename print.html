@@ -1159,8 +1159,8 @@ emit log_named_decimal_uint(&quot;amount&quot;, amount, 18);
 <p>assertTrue(bool condition)</p>
 </blockquote>
 <p>Asserts the <code>condition</code> is true.</p>
-<pre><code class="language-solidity">(bool sent, bytes memory data) = _to.call{value: msg.value}(&quot;&quot;);
-assertTrue(sent);
+<pre><code class="language-solidity">bool success = contract.fun();
+assertTrue(success);
 </code></pre>
 <br>
 <blockquote>
@@ -1168,8 +1168,7 @@ assertTrue(sent);
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code></p>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
-<pre><code class="language-solidity">uint256 amount = 1 ether;
-assertEq(amount, 1e18);
+<pre><code class="language-solidity">assertEq(1 ether, 1e18 wei);
 </code></pre>
 <br>
 <blockquote>
@@ -1177,8 +1176,7 @@ assertEq(amount, 1e18);
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
-<pre><code class="language-solidity">uint256 amount = 1 ether;
-assertEqDecimal(amount, 1e18, 18);
+<pre><code class="language-solidity">assertEqDecimal(1 ether, 1e18 wei, 18);
 </code></pre>
 <br>
 <blockquote>
@@ -1202,63 +1200,63 @@ assertEq0(bytes(name1), bytes(name2));
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(1, 1);
+<pre><code class="language-solidity">assertGt(1 ether, 1e18 wei);
 </code></pre>
 <br>
 <blockquote>
-<p>assertGtDecimal (&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
+<p>assertGtDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(1, 1, 0);
+<pre><code class="language-solidity">assertGtDecimal(1 ether, 1e18 wei, 18);
 </code></pre>
 <br>
 <blockquote>
-<p>assertGe (&lt;type&gt; a, &lt;type&gt; b)</p>
+<p>assertGe(&lt;type&gt; a, &lt;type&gt; b)</p>
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(1, 0);
+<pre><code class="language-solidity">assertGe(2 ether, 1e18 wei);
 </code></pre>
 <br>
 <blockquote>
-<p>assertGeDecimal (&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
+<p>assertGeDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(1, 0, 0);
+<pre><code class="language-solidity">assertGeDecimal(2 ether, 1e18 wei, 18);
 </code></pre>
 <br>
 <blockquote>
-<p>assertLt (&lt;type&gt; a, &lt;type&gt; b)</p>
+<p>assertLt(&lt;type&gt; a, &lt;type&gt; b)</p>
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is less than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(1, 1);
+<pre><code class="language-solidity">assertLt(1e18 wei, 1 ether);
 </code></pre>
 <br>
 <blockquote>
-<p>assertLtDecimal (&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
+<p>assertLtDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is less than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(1, 1, 0);
+<pre><code class="language-solidity">assertLtDecimal(1e18 wei, 1 ether, 18);
 </code></pre>
 <br>
 <blockquote>
-<p>assertLe (&lt;type&gt; a, &lt;type&gt; b)</p>
+<p>assertLe(&lt;type&gt; a, &lt;type&gt; b)</p>
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is less than <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(0, 1);
+<pre><code class="language-solidity">assertLe(1e18 wei, 2 ether);
 </code></pre>
 <br>
 <blockquote>
-<p>assertLeDecimal (&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
+<p>assertLeDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is less than <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(0, 1, 0);
+<pre><code class="language-solidity">assertLeDecimal(1e18 wei, 2 ether, 18);
 </code></pre>
 <br>
 <blockquote>
