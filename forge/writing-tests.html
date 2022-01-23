@@ -141,23 +141,34 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="writing-tests"><a class="header" href="#writing-tests">Writing Tests</a></h2>
-<p>Let's go over the default way of writing tests, using the <a href="https://github.com/dapphub/ds-test"><code>ds-test</code></a> library.</p>
-<blockquote>
-<p>👋 Gm</p>
-<p>See our <a href="./reference/ds-test.html"><code>ds-test</code> Reference</a> if you're unfamiliar with the library.</p>
-</blockquote>
-<p><code>ds-test</code> provides basic logging and assertion functionality, and other test helpers.</p>
-<p>To use it in your testing contract, import the <code>test.sol</code> and inherit from <code>DSTest</code>, like so:</p>
-<pre><code class="language-solidity">import &quot;ds-test/src/test.sol&quot;
-contract ContractTest is DSTest {}
+<p>Tests are written in Solidity. If the test function reverts, the test fails, otherwise it passes.</p>
+<p>Let's go over the most common way of writing tests, using the <a href="https://github.com/dapphub/ds-test"><code>ds-test</code></a> library.</p>
+<p><code>ds-test</code> provides basic logging and assertion functionality.</p>
+<p>To use it in your testing contract, import <code>ds-test/test.sol</code> and inherit from <code>DSTest</code>, like so:</p>
+<pre><code class="language-solidity">import &quot;ds-test/test.sol&quot;;
+
+contract ContractTest is DSTest {
+    // ... tests ...
+}
 </code></pre>
-<p>You should also import the contract you wish to test, example:</p>
-<pre><code class="language-solidity">import &quot;src/contract.sol&quot;
+<p>Let's examine a basic test using <code>ds-test</code>:</p>
+<pre><code class="language-solidity">import &quot;ds-test/test.sol&quot;;
+
+contract BasicTest is DSTest {
+    uint256 testNumber;
+
+    function setUp() {
+        testNumber = 42;
+    }
+
+    function testNumberIs42() {
+        assertEq(testNumber, 42);
+    }
+}
 </code></pre>
-<br>
-<p>Forge uses the following keyboards in names of testing functions:</p>
+<p>Forge uses the following keywords in tests:</p>
 <ul>
-<li><code>setUp</code> - the function called before each test
+<li><code>setUp</code>: An optional function invoked before each test case is run
 <pre><code class="language-solidity">Contract contract;
 
 function setUp() public {
@@ -165,14 +176,14 @@ function setUp() public {
 }
 </code></pre>
 </li>
-<li><code>test</code> - precedes the function name to mark it as a test
+<li><code>test</code>: Functions prefixed with <code>test</code> are run as a test case
 <pre><code class="language-solidity">function testIncrement() public {
     contract.increment();
     assertEq(contract.counter(), 1);
 }
 </code></pre>
 </li>
-<li><code>testFail</code> - the same as <code>test</code>, but is expected to fail (which will result in <code>[PASS]</code>)
+<li><code>testFail</code>: The inverse of the <code>test</code> prefix - if the function does not revert, the test fails.
 <pre><code class="language-solidity">function testFailDecrement() public {
     contract.decrement(); // expected to fail
 }
@@ -180,14 +191,11 @@ function setUp() public {
 </li>
 </ul>
 <br>
-<p>Fuzzing is supported.</p>
-<p>Instead of hard coding function parameters, define argument types for your tests, like so:</p>
-<pre><code class="language-solidity">function testSetCounter(uint number) public {
-    contract.setCounter(number);
-}
-</code></pre>
-<p>Forge will populate those values at runtime and might uncover edge cases that cause your test to fail. It returns such an input to you if one is found.</p>
-<p>We go more in dept on the topic in <a href="fuzz-testing.html">Fuzz Testing</a>.</p>
+<p>It is possible to use other testing libraries or roll your own. For example, if you find yourself lacking a special type of assertion, you could extend <code>ds-test</code>.</p>
+<blockquote>
+<p>👋 <strong>No experience with <code>ds-test</code>?</strong></p>
+<p>See our <a href="/reference/ds-test.html"><code>ds-test</code> Reference</a> if you're unfamiliar with the library.</p>
+</blockquote>
 
                     </main>
 
