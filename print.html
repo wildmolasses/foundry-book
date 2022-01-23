@@ -168,10 +168,10 @@
 <h3 id="using-foundryup"><a class="header" href="#using-foundryup">Using <code>foundryup</code></a></h3>
 <p>The easiest way to get Foundry is to install the latest release by using <code>foundryup</code>.</p>
 <p>On Linux and macOS systems, this is done as follows:</p>
-<pre><code>curl -L https://foundry.paradigm.xyz | bash
+<pre><code class="language-sh">curl -L https://foundry.paradigm.xyz | bash
 </code></pre>
 <p>This will download <code>foundryup</code>. To start install Foundry, run:</p>
-<pre><code>foundryup
+<pre><code class="language-sh">foundryup
 </code></pre>
 <p>If everything goes well, you will now have two binaries at your disposal: <code>forge</code> and <code>cast</code>.</p>
 <p>On Windows, build from source.</p>
@@ -179,17 +179,17 @@
 <h3 id="building-from-source"><a class="header" href="#building-from-source">Building from source</a></h3>
 <p>To build from source, you need to get <a href="https://rust-lang.org">Rust</a> and Cargo. The easiest way to get both is by using <code>rustup</code>.</p>
 <p>On Linux and macOS systems, this is done as follows:</p>
-<pre><code>curl https://sh.rustup.rs -sSf | sh
+<pre><code class="language-sh">curl https://sh.rustup.rs -sSf | sh
 </code></pre>
 <p>It will download a script and start installation.</p>
 <p>On Windows, download and run <code>rustup-init</code> from <a href="https://rustup.rs">rustup.rs</a>. It will start the installation in a console.</p>
 <p>After this, run the following to build Foundry from source:</p>
-<pre><code>cargo install --git https://github.com/gakonst/foundry --bins --locked
+<pre><code class="language-sh">cargo install --git https://github.com/gakonst/foundry --bins --locked
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="first-steps-with-foundry"><a class="header" href="#first-steps-with-foundry">First Steps with Foundry</a></h2>
 <p>This section provides an overview of the <code>forge</code> command line tool. We demonstrate how to create a new project, compile, and test it.</p>
 <p>To start a new project with Foundry, use <code>forge init</code>:</p>
-<pre><code>$ forge init hello_foundry
+<pre><code class="language-sh">$ forge init hello_foundry
 </code></pre>
 <p>Let's check out what <code>forge</code> generated for us:</p>
 <pre><code class="language-sh">$ cd hello_foundry
@@ -351,7 +351,7 @@ ds-test/=lib/ds-test/src/
 </ul>
 <p>You can customize these remappings by creating a <code>remappings.txt</code> file in the root of your project.</p>
 <p>Let's create a remapping called <code>solmate-utils</code> that points to the <code>utils</code> folder in the solmate repository!</p>
-<pre><code>solmate-utils/=lib/solmate/src/utils/
+<pre><code class="language-sh">solmate-utils/=lib/solmate/src/utils/
 </code></pre>
 <p>Now we can import any of the contracts in <code>src/utils</code> of the solmate repository like so:</p>
 <pre><code class="language-solidity">import &quot;solmate-utils/Contract.sol&quot;;
@@ -361,7 +361,7 @@ ds-test/=lib/ds-test/src/
 <p>To enable Hardhat compatability mode pass the <code>--hh</code> flag.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="project-layout"><a class="header" href="#project-layout">Project Layout</a></h2>
 <p>Forge is flexible on how you structure your project. By default, the structure is:</p>
-<pre><code>.
+<pre><code class="language-ignore">.
 ├── remappings.txt
 ├── foundry.toml
 ├── src/
@@ -634,7 +634,7 @@ block_difficulty = 0                                          # the value of `bl
 </ul>
 <p>An array of remappings in the following format: <code>&lt;name&gt;=&lt;target&gt;</code>.</p>
 <p>A remapping <em>remaps</em> Solidity imports to different directories. For example, the following remapping</p>
-<pre><code>@openzeppelin/=node_modules/@openzeppelin/openzeppelin-contracts/
+<pre><code class="language-ignore">@openzeppelin/=node_modules/@openzeppelin/openzeppelin-contracts/
 </code></pre>
 <p>with an import like</p>
 <pre><code class="language-solidity">import &quot;@openzeppelin/contracts/utils/Context.sol&quot;;
