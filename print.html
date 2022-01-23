@@ -640,11 +640,100 @@ Running 2 tests for OwnerUpOnlyTest.json:OwnerUpOnlyTest
 </ul>
 <p>In the future, Forge will also support these:</p>
 <ul>
+<li><a href="forge/advanced-testing.html#">Invariant Testing</a></li>
 <li><a href="forge/advanced-testing.html#">Symbolic Execution</a></li>
 <li><a href="forge/advanced-testing.html#">Mutation Testing</a></li>
 </ul>
 <p>Each chapter dives into what problem the testing methods solve, and how to apply them to your own project.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="fuzz-testing"><a class="header" href="#fuzz-testing">Fuzz Testing</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="fuzz-testing"><a class="header" href="#fuzz-testing">Fuzz Testing</a></h2>
+<p>Forge supports property based testing.</p>
+<p>Property-based testing is a way of testing general behaviors as opposed to isolated scenarios.</p>
+<p>Let's examine what that means by writing a unit test, finding the general property we are testing for, and converting it to a property-based test instead:</p>
+<pre><code class="language-solidity">pragma solidity ^0.8.0;
+
+contract Safe {
+  receive() external payable {}
+
+  function withdraw() external {
+    payable(msg.sender).transfer(address(this).balance);
+  }
+}
+
+import &quot;ds-test/test.sol&quot;;
+
+contract SafeTest is DSTest {
+  Safe safe;
+
+  // Needed so the test contract itself can receive ether
+  receive() external payable {}
+
+  function setUp() public {
+    safe = new Safe();
+  }
+
+  function testWithdraw() public {
+    payable(address(safe)).transfer(1 ether);
+    uint256 preBalance = address(this).balance;
+    safe.withdraw();
+    uint256 postBalance = address(this).balance;
+    assertEq(preBalance + 1 ether, postBalance);
+  }
+}
+</code></pre>
+<p>Running the test, we see it passes:</p>
+<pre><code class="language-ignore">$ forge test
+compiling...
+no files changed, compilation skipped.
+Running 1 test for SafeTest.json:SafeTest
+[PASS] testWithdraw() (gas: 15005)
+</code></pre>
+<p>This unit test <em>does test</em> that we can withdraw ether from our safe. However, who is to say that it works for all amounts, not just 1 ether?</p>
+<p>The general property here is: given a safe balance, when we withdraw, we should get whatever is in the safe.</p>
+<p>Forge will run any test that takes at least one parameter as a property-based test, so let's rewrite:</p>
+<pre><code class="language-solidity">contract SafeTest is DSTest {
+  // safe
+  // receive
+  // setUp
+
+  function testWithdraw(uint256 amount) public {
+    payable(address(safe)).transfer(amount);
+    uint256 preBalance = address(this).balance;
+    safe.withdraw();
+    uint256 postBalance = address(this).balance;
+    assertEq(preBalance + amount, postBalance);
+  }
+}
+</code></pre>
+<p>If we run the test now, we can see that Forge runs the property-based test, but it fails for high values of <code>amount</code>:</p>
+<pre><code class="language-ignore">$ forge test
+compiling...
+no files changed, compilation skipped.
+Running 1 test for SafeTest.json:SafeTest
+[FAIL. Counterexample: calldata=0x215a2f200000000000000000000000000000000000000001000000000000000000000000, args=[79228162514264337593543950336]] testWithdraw(uint256) (runs: 1, μ: 14993, ~: 14993)
+
+Failed tests:
+[FAIL. Counterexample: calldata=0x215a2f200000000000000000000000000000000000000001000000000000000000000000, args=[79228162514264337593543950336]] testWithdraw(uint256) (runs: 1, μ: 14993, ~: 14993)
+</code></pre>
+<p>The default amount of ether that the test contract is given is <code>2**96</code> wei (as in DappTools), so let's make sure we do not send more than we have:</p>
+<pre><code class="language-solidity">contract SafeTest is DSTest {
+  // safe
+  // receive
+  // setUp
+
+  function testWithdraw(uint96 amount) public {
+    // snip
+  }
+}
+</code></pre>
+<p>And now it passes:</p>
+<pre><code class="language-ignore">$ forge test
+compiling...
+success.
+Running 1 test for SafeTest.json:SafeTest
+[PASS] testWithdraw(uint96) (runs: 256, μ: 15086, ~: 15087)
+</code></pre>
+<p>There are different ways to run property-based tests, notably parametric testing and fuzzing. Forge only supports fuzzing.</p>
+<p>When running a property-based test, the fuzzer will try to generate as many test cases as possible to uncover edge cases. You can configure the amount of scenarios the fuzzer will generate by setting <a href="forge/../reference/config.html#fuzz_runs"><code>FOUNDRY_FUZZ_RUNS</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="continous-integration"><a class="header" href="#continous-integration">Continous Integration</a></h2>
 <h3 id="github-actions"><a class="header" href="#github-actions">GitHub Actions</a></h3>
 <p>To test your project using GitHub Actions, here is a sample workflow:</p>
