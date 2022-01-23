@@ -336,6 +336,9 @@ lib
 2 directories, 0 files
 </code></pre>
 <p>We can see that Forge installed <code>solmate</code>!</p>
+<p>By default, <code>forge install</code> installs the latest master branch version. If you want to install a specific tag or commit,you can do it like so:</p>
+<pre><code class="language-sh">$ forge install Rari-Capital/solmate@v6
+</code></pre>
 <h3 id="remapping-dependencies"><a class="header" href="#remapping-dependencies">Remapping dependencies</a></h3>
 <p>Forge can remap dependencies to make them easier to import. Forge will automatically try to deduce some remappings for you:</p>
 <pre><code class="language-sh">$ forge remappings
@@ -355,6 +358,17 @@ ds-test/=lib/ds-test/src/
 </code></pre>
 <p>Now we can import any of the contracts in <code>src/utils</code> of the solmate repository like so:</p>
 <pre><code class="language-solidity">import &quot;solmate-utils/Contract.sol&quot;;
+</code></pre>
+<h3 id="updating-dependencies"><a class="header" href="#updating-dependencies">Updating dependencies</a></h3>
+<p>You can update a specific dependency to the latest commit on the version you have specified using <code>forge update &lt;dep&gt;</code>. For example, if we wanted to pull the latest commit from our previously installed master-version of <code>solmate</code>, we would run:</p>
+<pre><code class="language-sh">$ forge update lib/solmate
+</code></pre>
+<p>Alternatively, you can do this for all dependencies at once by just running <code>forge update</code>.</p>
+<h3 id="removing-dependencies"><a class="header" href="#removing-dependencies">Removing dependencies</a></h3>
+<p>You can remove dependencies using <code>forge remove &lt;deps&gt;...</code>, where <code>&lt;deps&gt;</code> is either the full path to the dependency or just the name. For example, to remove <code>ds-test</code> both of these commands are equivalent:</p>
+<pre><code class="language-ignore">forge remove ds-test
+# ... is equivalent to ...
+forge remove lib/ds-test
 </code></pre>
 <h3 id="hardhat-compatibility"><a class="header" href="#hardhat-compatibility">Hardhat compatibility</a></h3>
 <p>Forge also supports Hardhat-style projects where dependencies are npm packages (stored in <code>node_modules</code>) and contracts are stored in <code>contracts</code> as opposed to source.</p>
