@@ -1445,6 +1445,11 @@ assertEq0(bytes(name1), bytes(name2));
 <p>When a call is made to <code>where</code> the call data is first checked to see if it matches in its entirety with <code>data</code>. If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.</p>
 <p>If a match is found, then <code>retdata</code> is returned from the call.</p>
 <p>Mocked calls are in effect until <a href="reference/cheatcodes.html#clearmockedcalls"><code>clearMockedCalls</code></a> is called.</p>
+<blockquote>
+<p><strong>Note:</strong> Calls to mocked addresses may revert if there is no code on the address.
+This is because Solidity inserts an <code>extcodesize</code> check before some contract calls.</p>
+<p>To circumvent this, use the <a href="reference/cheatcodes.html#etch"><code>etch</code></a> cheatcode if the mocked address has no code.</p>
+</blockquote>
 <h5 id="mocking-an-exact-call"><a class="header" href="#mocking-an-exact-call">Mocking an exact call</a></h5>
 <pre><code class="language-solidity">function testMockCall() public {
   vm.mockCall(
