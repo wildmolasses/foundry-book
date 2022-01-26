@@ -1116,7 +1116,7 @@ contract ContractTest is DSTest {}
 </code></pre>
 <h3 id="cheatcodes-address"><a class="header" href="#cheatcodes-address">Cheatcodes Address</a></h3>
 <p>You can get the address of the cheatcodes account by accessing the <code>HEVM_ADDRESS</code> constant:</p>
-<pre><code class="language-solidity">Vm vm = Vm(HEVM_ADDRESS);
+<pre><code class="language-solidity">Cheats cheats = Cheats(HEVM_ADDRESS);
 </code></pre>
 <h3 id="logging"><a class="header" href="#logging">Logging</a></h3>
 <p><code>DSTest</code> contains the following events for logging:</p>
@@ -1124,12 +1124,14 @@ contract ContractTest is DSTest {}
 <p>log(string)</p>
 </blockquote>
 <pre><code class="language-solidity">emit log(&quot;here&quot;);
+// here
 </code></pre>
 <br>
 <blockquote>
 <p>logs(bytes)</p>
 </blockquote>
 <pre><code class="language-solidity">emit logs(bytes(&quot;abcd&quot;));
+// 0x6162636400000000000000000000000000000000000000000000000000000000
 </code></pre>
 <br>
 <blockquote>
@@ -1138,6 +1140,7 @@ contract ContractTest is DSTest {}
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code>, <code>bytes</code>, <code>string</code></p>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
 emit log_uint(amount);
+// 1000000000000000000
 </code></pre>
 <br>
 <blockquote>
@@ -1146,6 +1149,7 @@ emit log_uint(amount);
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code>, <code>bytes</code>, <code>string</code></p>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
 emit log_named_uint(&quot;amount&quot;, amount);
+// amount: 1000000000000000000
 </code></pre>
 <br>
 <blockquote>
@@ -1154,6 +1158,7 @@ emit log_named_uint(&quot;amount&quot;, amount);
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
 emit log_named_decimal_uint(&quot;amount&quot;, amount, 18);
+// amount: 1.000000000000000000
 </code></pre>
 <h3 id="assertions"><a class="header" href="#assertions">Assertions</a></h3>
 <p><code>DSTest</code> contains the following assertion functions:</p>
@@ -1194,7 +1199,7 @@ assertTrue(success);
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
 <pre><code class="language-solidity">string memory name1 = &quot;Alice&quot;;
 string memory name2 = &quot;Bob&quot;;
-assertEq0(bytes(name1), bytes(name2));
+assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </code></pre>
 <br>
 <blockquote>
@@ -1331,40 +1336,101 @@ assertEq0(bytes(name1), bytes(name2));
 <pre><code class="language-solidity">function warp(uint256) external;
 </code></pre>
 <p>Sets <code>block.timestamp</code>.</p>
+<h5 id="example"><a class="header" href="#example">Example</a></h5>
+<pre><code class="language-solidity">cheats.warp(1641070800);
+emit log_uint(block.timestamp); // 1641070800
+</code></pre>
+<br>
+<hr />
 <h4 id="roll"><a class="header" href="#roll"><code>roll</code></a></h4>
 <pre><code class="language-solidity">function roll(uint256) external;
 </code></pre>
 <p>Sets <code>block.number</code>.</p>
+<h5 id="example-1"><a class="header" href="#example-1">Example</a></h5>
+<pre><code class="language-solidity">cheats.roll(100);
+emit log_uint(block.number); // 100
+</code></pre>
+<br>
+<hr />
 <h4 id="fee"><a class="header" href="#fee"><code>fee</code></a></h4>
 <pre><code class="language-solidity">function fee(uint256) external;
 </code></pre>
 <p>Sets <code>block.basefee</code>.</p>
+<h5 id="example-2"><a class="header" href="#example-2">Example</a></h5>
+<pre><code class="language-solidity">cheats.fee(25 gwei);
+emit log_uint(block.basefee); // 25000000000
+</code></pre>
+<br>
+<hr />
 <h4 id="load"><a class="header" href="#load"><code>load</code></a></h4>
 <pre><code class="language-solidity">function load(address account, bytes32 slot) external returns (bytes32);
 </code></pre>
 <p>Loads the value from storage slot <code>slot</code> on account <code>account</code>.</p>
+<h5 id="example-3"><a class="header" href="#example-3">Example</a></h5>
+<pre><code class="language-solidity">/// contract LeetContract {
+///     uint256 private leet = 1337; // slot 0
+/// }
+
+bytes32 leet = cheats.load(address(leetContract), bytes32(uint256(0)));
+emit log_uint(uint256(leet)); // 1337
+</code></pre>
+<br>
+<hr />
 <h4 id="store"><a class="header" href="#store"><code>store</code></a></h4>
 <pre><code class="language-solidity">function store(address account, bytes32 slot, bytes32 value) external;
 </code></pre>
 <p>Stores the value <code>value</code> in storage slot <code>slot</code> on account <code>account</code>.</p>
+<h5 id="example-4"><a class="header" href="#example-4">Example</a></h5>
+<pre><code class="language-solidity">/// contract LeetContract {
+///     uint256 private leet = 1337; // slot 0
+/// }
+
+cheats.store(address(leetContract), bytes32(uint256(0)), bytes32(uint256(31337)));
+bytes32 leet = cheats.load(address(leetContract), bytes32(uint256(0)));
+emit log_uint(uint256(leet)); // 31337
+</code></pre>
+<br>
+<hr />
 <h4 id="sign"><a class="header" href="#sign"><code>sign</code></a></h4>
 <pre><code class="language-solidity">function sign(uint256 privateKey, bytes32 digest) external returns (uint8 v, bytes32 r, bytes32 s);
 </code></pre>
 <p>Signs a digest <code>digest</code> with private key <code>privateKey</code>, returning <code>(v, r, s)</code>.</p>
 <p>This is useful for testing functions that take signed data and performs an <code>ecrecover</code> to verify the signer.</p>
+<h5 id="example-5"><a class="header" href="#example-5">Example</a></h5>
+<pre><code class="language-solidity">address alice = cheats.addr(1);
+bytes32 hash = keccak256(&quot;Signed by Alice&quot;);
+(uint8 v, bytes32 r, bytes32 s) = cheats.sign(1, hash);
+address signer = ecrecover(hash, v, r, s);
+assertEq(alice, signer); // [PASS]
+</code></pre>
+<br>
+<hr />
 <h4 id="addr"><a class="header" href="#addr"><code>addr</code></a></h4>
 <pre><code class="language-solidity">function addr(uint256 privateKey) external returns (address);
 </code></pre>
 <p>Computes the address for a given private key.</p>
+<h5 id="example-6"><a class="header" href="#example-6">Example</a></h5>
+<pre><code class="language-solidity">address alice = cheats.addr(1);
+emit log_address(alice); // 0x7e5f4552091a69125d5dfcb7b8c2659029395bdf
+</code></pre>
+<br>
+<hr />
 <h4 id="ffi-1"><a class="header" href="#ffi-1"><code>ffi</code></a></h4>
 <pre><code class="language-solidity">function ffi(string[] calldata) external returns (bytes memory);
 </code></pre>
 <p>Calls an arbitrary command if <a href="reference/./config.html#ffi"><code>ffi</code></a> is enabled.</p>
 <p>It is generally advised to use this cheat code as a last resort, and to not enable it by default, as anyone who can change the tests of a project will be able to execute arbitrary commands on devices that run the tests.</p>
+<br>
+<hr />
 <h4 id="prank"><a class="header" href="#prank"><code>prank</code></a></h4>
 <pre><code class="language-solidity">function prank(address) external;
 </code></pre>
 <p>Sets <code>msg.sender</code> to the specified address <strong>for the next call</strong>. &quot;The next call&quot; includes static calls as well, but not calls to the cheat code address.</p>
+<pre><code class="language-solidity">/// function withdraw() public onlyOwner {...}
+
+cheats.prank(ownersAddress);
+myContract.withdraw(); // [PASS]
+</code></pre>
 <h5 id="alternative-signature"><a class="header" href="#alternative-signature">Alternative Signature</a></h5>
 <pre><code class="language-solidity">function prank(address sender, address origin) external;
 </code></pre>
@@ -1381,14 +1447,31 @@ assertEq0(bytes(name1), bytes(name2));
 <pre><code class="language-solidity">function stopPrank() external;
 </code></pre>
 <p>Resets <code>msg.sender</code> to <a href="reference/./config.html#sender"><code>FOUNDRY_SENDER</code></a>. Always used in conjunction with <a href="reference/cheatcodes.html#startprank"><code>startPrank</code></a>.</p>
+<br>
+<hr />
 <h4 id="deal"><a class="header" href="#deal"><code>deal</code></a></h4>
 <pre><code class="language-solidity">function deal(address who, uint256 newBalance) external;
 </code></pre>
 <p>Sets the balance of an address <code>who</code> to <code>newBalance</code>.</p>
+<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<pre><code class="language-solidity">address alice = address(1);
+cheats.deal(alice, 1 ether);
+log_uint256(alice.balance); // 1000000000000000000
+</code></pre>
+<br>
+<hr />
 <h4 id="etch"><a class="header" href="#etch"><code>etch</code></a></h4>
 <pre><code class="language-solidity">function etch(address who, bytes calldata code) external;
 </code></pre>
 <p>Sets the bytecode of an address <code>who</code> to <code>code</code>.</p>
+<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
+<pre><code class="language-solidity">address code = address(awesomeContract).code;
+address targetAddr = address(1);
+cheats.etch(targetAddr, code);
+log_bytes(address(targetAddr).code); // 0x6080604052348015610010...
+</code></pre>
+<br>
+<hr />
 <h4 id="expectrevert"><a class="header" href="#expectrevert"><code>expectRevert</code></a></h4>
 <pre><code class="language-solidity">function expectRevert(bytes calldata msg) external;
 </code></pre>
@@ -1399,7 +1482,7 @@ assertEq0(bytes(name1), bytes(name2));
 <p>To use <code>expectRevert</code> with a custom <a href="https://docs.soliditylang.org/en/v0.8.11/contracts.html#errors">error type</a> with parameters, ABI encode the error type.</p>
 <pre><code class="language-solidity">cheats.expectRevert(
   abi.encodeWithSelector(MyContract.CustomError.selector, 1, 2)
-)
+);
 </code></pre>
 <h5 id="alternative-signature-2"><a class="header" href="#alternative-signature-2">Alternative Signature</a></h5>
 <pre><code class="language-solidity">function expectRevert(bytes4) external;
@@ -1407,6 +1490,8 @@ assertEq0(bytes(name1), bytes(name2));
 <p>An alternative version of <a href="reference/cheatcodes.html#expectrevert"><code>expectRevert</code></a> that only takes an error type signature. Useful for custom error types that do not take parameters.</p>
 <pre><code class="language-solidity">cheats.expectRevert(MyContract.CustomError.selector)
 </code></pre>
+<br>
+<hr />
 <h4 id="record"><a class="header" href="#record"><code>record</code></a></h4>
 <pre><code class="language-solidity">function record() external;
 </code></pre>
@@ -1416,6 +1501,21 @@ assertEq0(bytes(name1), bytes(name2));
 </code></pre>
 <p>Gets all storage slots that have been read (<code>reads</code>) or written to (<code>writes</code>) on an address.</p>
 <p>Note that <a href="reference/cheatcodes.html#record"><code>record</code></a> must be called first.</p>
+<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
+<pre><code class="language-solidity">/// contract NumsContract {
+///     uint256 public num1 = 100; // slot 0
+///     uint256 public num2 = 200; // slot 1
+/// }
+
+cheats.record();
+numsContract.num2();
+(bytes32[] memory reads, bytes32[] memory writes) = cheats.accesses(
+  address(numsContract)
+);
+emit log_uint(uint256(reads[0])); // 1
+</code></pre>
+<br>
+<hr />
 <h4 id="expectemit"><a class="header" href="#expectemit"><code>expectEmit</code></a></h4>
 <pre><code class="language-solidity">function expectEmit(bool checkTopic1, bool checkTopic2, bool checkTopic3, bool checkData) external;
 </code></pre>
@@ -1438,6 +1538,8 @@ assertEq0(bytes(name1), bytes(name2));
   myToken.transfer(address(1), 10);
 }
 </code></pre>
+<br>
+<hr />
 <h4 id="mockcall"><a class="header" href="#mockcall"><code>mockCall</code></a></h4>
 <pre><code class="language-solidity">function mockCall(address where, bytes calldata data, bytes calldata retdata) external;
 </code></pre>
@@ -1452,7 +1554,7 @@ This is because Solidity inserts an <code>extcodesize</code> check before some c
 </blockquote>
 <h5 id="mocking-an-exact-call"><a class="header" href="#mocking-an-exact-call">Mocking an exact call</a></h5>
 <pre><code class="language-solidity">function testMockCall() public {
-  vm.mockCall(
+  cheats.mockCall(
     address(0),
     abi.encodeWithSelector(MyToken.balanceOf.selector, address(1)),
     abi.encode(10)
@@ -1462,7 +1564,7 @@ This is because Solidity inserts an <code>extcodesize</code> check before some c
 </code></pre>
 <h5 id="mocking-an-entire-function"><a class="header" href="#mocking-an-entire-function">Mocking an entire function</a></h5>
 <pre><code class="language-solidity">function testMockCall() public {
-  vm.mockCall(
+  cheats.mockCall(
     address(0),
     abi.encodeWithSelector(MyToken.balanceOf.selector),
     abi.encode(10)
@@ -1477,12 +1579,23 @@ This is because Solidity inserts an <code>extcodesize</code> check before some c
 <pre><code class="language-solidity">function clearMockedCalls() external;
 </code></pre>
 <p>Clears all mocked calls.</p>
+<br>
+<hr />
 <h4 id="expectcall"><a class="header" href="#expectcall"><code>expectCall</code></a></h4>
 <pre><code class="language-solidity">function expectCall(address where, bytes calldata data) external;
 </code></pre>
 <p>Expects at least one call to address <code>where</code> where the call data either strictly or loosely matches <code>data</code>.</p>
 <p>When a call is made to <code>where</code> the call data is first checked to see if it matches in its entirety with <code>data</code>. If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.</p>
 <p>If the test terminates without the call being made, the test fails.</p>
+<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
+<pre><code class="language-solidity">bytes4 selector = bytes4(keccak256(&quot;fulfillRandomness(bytes32,uint256)&quot;));
+bytes memory expectedData = abi.encodeWithSelector(selector, requestId, 5647236456456);
+cheats.expectCall(address(awesomeContract), expectedData);
+vrfCoordinatorMock.callBackWithRandomness(requestId, 5647236456456, address(awesomeContract));
+// [PASS]
+</code></pre>
+<br>
+<hr />
 <h4 id="getcode"><a class="header" href="#getcode"><code>getCode</code></a></h4>
 <pre><code class="language-solidity">function getCode(string calldata) external returns (bytes memory);
 </code></pre>
