@@ -146,10 +146,16 @@
 <p>To use <code>cast</code>, use the <code>cast</code> keyword followed by a subcommand:</p>
 <pre><code class="language-bash">$ cast &lt;subcommand&gt;
 </code></pre>
-<h4 id="example"><a class="header" href="#example">Example</a></h4>
+<h4 id="examples"><a class="header" href="#examples">Examples</a></h4>
 <p>Let's use <code>cast</code> to retrieve the total supply of the DAI token:</p>
 <pre><code class="language-bash">$ cast call 0x6b175474e89094c44da98b954eedeac495271d0f &quot;totalSupply()(uint256)&quot; --rpc-url &lt;your_rpc_url&gt;
 9086622410684231497979028744
+</code></pre>
+<p><code>cast</code> also provides many convenience functionalities, such as decoding calldata:</p>
+<pre><code class="language-bash">$ cast 4byte-decode 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+1) &quot;fulfillRandomness(bytes32,uint256)&quot;
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
 </code></pre>
 <br>
 <blockquote>

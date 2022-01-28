@@ -195,6 +195,191 @@ storage                  Show the raw value of a contract's storage slot
 tx                       Show information about the transaction &lt;tx-hash&gt;
 wallet                   Set of wallet management utilities
 </code></pre>
+<h3 id="cast-subcommands"><a class="header" href="#cast-subcommands"><code>cast</code> Subcommands</a></h3>
+<p>This section documents all <code>cast</code> subcommands and provides usage examples.
+<br>
+<br></p>
+<blockquote>
+<p>--abi-decode [OPTIONS] &lt;SIG&gt; &lt;CALLDATA&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--input</code></p>
+<p>Decode ABI-encoded hexadecimal output. Pass <code>--input</code> to decode as input, or use <code>--calldata-decode</code>.</p>
+<pre><code class="language-bash">$ cast --abi-decode --input &quot;fulfillRandomness(bytes32,uint256)&quot; 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
+</code></pre>
+<br>
+<blockquote>
+<p>--calldata-decode &lt;SIG&gt; &lt;CALLDATA&gt;</p>
+</blockquote>
+<p>Decode ABI-encoded hexadecimal input. Use <code>--abi-decode</code> to decode output data.</p>
+<pre><code class="language-bash">$ cast --calldata-decode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
+</code></pre>
+<br>
+<blockquote>
+<p>--from-utf8 [TEXT]</p>
+</blockquote>
+<p>Convert from UTF8 to hexadecimal.</p>
+<pre><code class="language-bash">$ cast --from-utf8 &quot;gm&quot;
+0x676d
+</code></pre>
+<br>
+<blockquote>
+<p>--from-wei [ARGS]</p>
+</blockquote>
+<p>Where <code>[ARGS]</code> are <code>&lt;VALUE&gt;</code> and <code>&lt;UNIT&gt;</code></p>
+<p>Convert from <code>wei</code> to <code>ether</code>.</p>
+<pre><code class="language-bash">$ cast --from-wei 100000000000000000
+0.1
+</code></pre>
+<br>
+<blockquote>
+<p>--max-int</p>
+</blockquote>
+<p>Maximum <code>int256</code> value.</p>
+<pre><code class="language-bash">$ cast --max-int
+57896044618658097711785492504343953926634992332820282019728792003956564819967
+</code></pre>
+<br>
+<blockquote>
+<p>--max-uint</p>
+</blockquote>
+<p>Maximum <code>uint256</code> value.</p>
+<pre><code class="language-bash">$ cast --max-uint
+115792089237316195423570985008687907853269984665640564039457584007913129639935
+</code></pre>
+<br>
+<blockquote>
+<p>--min-int</p>
+</blockquote>
+<p>Minimum <code>int256</code> value.</p>
+<pre><code class="language-bash">$ cast --min-int
+-57896044618658097711785492504343953926634992332820282019728792003956564819968
+</code></pre>
+<br>
+<blockquote>
+<p>--to-ascii [HEXDATA]</p>
+</blockquote>
+<p>Convert from hexadecimal to ASCII.</p>
+<pre><code class="language-bash">$ cast --to-ascii 0x676d
+gm
+</code></pre>
+<br>
+<blockquote>
+<p>--to-bytes32 [BYTES]</p>
+</blockquote>
+<p>Left pad hexadecimal to <code>bytes32</code>.</p>
+<pre><code class="language-bash">$ cast --to-bytes32 0x676d
+0x676d000000000000000000000000000000000000000000000000000000000000
+</code></pre>
+<br>
+<blockquote>
+<p>--to-checksum-address [ADDRESS]</p>
+</blockquote>
+<p>Convert an address to a checksummed format (EIP-55)</p>
+<pre><code class="language-bash">$ cast --to-checksum-address 0x6b175474e89094c44da98b954eedeac495271d0f
+0x6B175474E89094C44Da98b954EedeAC495271d0F
+</code></pre>
+<br>
+<blockquote>
+<p>--to-dec [HEXVALUE]</p>
+</blockquote>
+<p>Convert from hexadecimal to decimal.</p>
+<pre><code class="language-bash">$ cast --to-dec 0xf
+15
+</code></pre>
+<br>
+<blockquote>
+<p>--to-fix [ARGS]</p>
+</blockquote>
+<p>Where <code>[ARGS]</code> are <code>&lt;DECIMALS&gt;</code> and <code>&lt;VALUE&gt;</code></p>
+<p>convert integers into fixed point with specified decimals</p>
+<pre><code class="language-bash">cast --to-fix 18 1
+0.000000000000000001
+</code></pre>
+<br>
+<blockquote>
+<p>--to-hex [DECIMAL]</p>
+</blockquote>
+<p>Convert from decimal to hexadecimal.</p>
+<pre><code class="language-bash">$ cast --to-hex 15
+0xf
+</code></pre>
+<br>
+<blockquote>
+<p>--to-hexdata [INPUT]</p>
+</blockquote>
+<p>Where <code>[INPUT]</code> can be:</p>
+<ul>
+<li>mixed case hex with or without <code>0x</code> prefix</li>
+<li><code>0x</code> prefixed hex, concatenated with a <code>:</code></li>
+<li>absolute path to file</li>
+<li><code>@&lt;$TAG&gt;</code>, where <code>$TAG</code> is defined in environment variables</li>
+</ul>
+<p>Convert input to lowercase, <code>0x</code>-prefixed hexadecimal.</p>
+<pre><code class="language-bash">$ export EXAMPLE_INPUT=gm
+$ cast --to-hexdata @EXAMPLE_INPUT
+0x676d
+</code></pre>
+<br>
+<blockquote>
+<p>--to-uint256 [VALUE]</p>
+</blockquote>
+<p>Convert a number into <code>uint256</code> hexadecimal.</p>
+<pre><code class="language-bash">$ cast --to-uint256 15
+0x000000000000000000000000000000000000000000000000000000000000000f
+</code></pre>
+<br>
+<blockquote>
+<p>--to-wei [ARGS]</p>
+</blockquote>
+<p>Where <code>[ARGS]</code> are <code>&lt;VALUE&gt;</code> and <code>&lt;UNIT&gt;</code></p>
+<p>Convert from <code>ether</code> to <code>wei</code>.</p>
+<pre><code class="language-bash">$ cast --to-wei 1
+1000000000000000000
+</code></pre>
+<br>
+<blockquote>
+<p>4byte &lt;SELECTOR&gt;</p>
+</blockquote>
+<p>Fetch function signature using the selector.</p>
+<pre><code class="language-bash">$ cast 4byte 0x1F1F897F
+fulfillRandomness(bytes32,uint256)
+</code></pre>
+<br>
+<blockquote>
+<p>4byte-decode [OPTIONS] &lt;CALLDATA&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--id &lt;ID&gt;</code> (the 4byte selector id to use, can also be <code>earliest</code> or <code>latest</code>)</p>
+<p>Decode calldata by fetching the signature.</p>
+<pre><code class="language-bash">$ cast 4byte-decode 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+1) &quot;fulfillRandomness(bytes32,uint256)&quot;
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
+</code></pre>
+<br>
+<blockquote>
+<p>abi-encode &lt;SIG&gt; &lt;PARAMS&gt;</p>
+</blockquote>
+<p>Endcode the arguments with the function signature using ABI, exculding the selector.</p>
+<pre><code class="language-bash">$ cast abi-encode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
+0x676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+</code></pre>
+<br>
+<blockquote>
+<p>age --rpc-url &lt;RPC_URL&gt; [BLOCK]</p>
+</blockquote>
+<p>Prints the timestamp of a block.</p>
+<pre><code class="language-bash">$ cast age --rpc-url &lt;your_rpc_url&gt; 1
+Thu Jul 30 15:26:28 2015
+</code></pre>
+<br>
+<blockquote>
+<p>🚧 Work in progress</p>
+<p>This chapter is under active development and is not completed yet!</p>
+</blockquote>
 
                     </main>
 

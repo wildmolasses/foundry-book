@@ -812,10 +812,16 @@ jobs:
 <p>To use <code>cast</code>, use the <code>cast</code> keyword followed by a subcommand:</p>
 <pre><code class="language-bash">$ cast &lt;subcommand&gt;
 </code></pre>
-<h4 id="example"><a class="header" href="#example">Example</a></h4>
+<h4 id="examples"><a class="header" href="#examples">Examples</a></h4>
 <p>Let's use <code>cast</code> to retrieve the total supply of the DAI token:</p>
 <pre><code class="language-bash">$ cast call 0x6b175474e89094c44da98b954eedeac495271d0f &quot;totalSupply()(uint256)&quot; --rpc-url &lt;your_rpc_url&gt;
 9086622410684231497979028744
+</code></pre>
+<p><code>cast</code> also provides many convenience functionalities, such as decoding calldata:</p>
+<pre><code class="language-bash">$ cast 4byte-decode 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+1) &quot;fulfillRandomness(bytes32,uint256)&quot;
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
 </code></pre>
 <br>
 <blockquote>
@@ -1356,7 +1362,7 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 <pre><code class="language-solidity">function warp(uint256) external;
 </code></pre>
 <p>Sets <code>block.timestamp</code>.</p>
-<h5 id="example-1"><a class="header" href="#example-1">Example</a></h5>
+<h5 id="example"><a class="header" href="#example">Example</a></h5>
 <pre><code class="language-solidity">cheats.warp(1641070800);
 emit log_uint(block.timestamp); // 1641070800
 </code></pre>
@@ -1366,7 +1372,7 @@ emit log_uint(block.timestamp); // 1641070800
 <pre><code class="language-solidity">function roll(uint256) external;
 </code></pre>
 <p>Sets <code>block.number</code>.</p>
-<h5 id="example-2"><a class="header" href="#example-2">Example</a></h5>
+<h5 id="example-1"><a class="header" href="#example-1">Example</a></h5>
 <pre><code class="language-solidity">cheats.roll(100);
 emit log_uint(block.number); // 100
 </code></pre>
@@ -1376,7 +1382,7 @@ emit log_uint(block.number); // 100
 <pre><code class="language-solidity">function fee(uint256) external;
 </code></pre>
 <p>Sets <code>block.basefee</code>.</p>
-<h5 id="example-3"><a class="header" href="#example-3">Example</a></h5>
+<h5 id="example-2"><a class="header" href="#example-2">Example</a></h5>
 <pre><code class="language-solidity">cheats.fee(25 gwei);
 emit log_uint(block.basefee); // 25000000000
 </code></pre>
@@ -1386,7 +1392,7 @@ emit log_uint(block.basefee); // 25000000000
 <pre><code class="language-solidity">function load(address account, bytes32 slot) external returns (bytes32);
 </code></pre>
 <p>Loads the value from storage slot <code>slot</code> on account <code>account</code>.</p>
-<h5 id="example-4"><a class="header" href="#example-4">Example</a></h5>
+<h5 id="example-3"><a class="header" href="#example-3">Example</a></h5>
 <pre><code class="language-solidity">/// contract LeetContract {
 ///     uint256 private leet = 1337; // slot 0
 /// }
@@ -1400,7 +1406,7 @@ emit log_uint(uint256(leet)); // 1337
 <pre><code class="language-solidity">function store(address account, bytes32 slot, bytes32 value) external;
 </code></pre>
 <p>Stores the value <code>value</code> in storage slot <code>slot</code> on account <code>account</code>.</p>
-<h5 id="example-5"><a class="header" href="#example-5">Example</a></h5>
+<h5 id="example-4"><a class="header" href="#example-4">Example</a></h5>
 <pre><code class="language-solidity">/// contract LeetContract {
 ///     uint256 private leet = 1337; // slot 0
 /// }
@@ -1416,7 +1422,7 @@ emit log_uint(uint256(leet)); // 31337
 </code></pre>
 <p>Signs a digest <code>digest</code> with private key <code>privateKey</code>, returning <code>(v, r, s)</code>.</p>
 <p>This is useful for testing functions that take signed data and performs an <code>ecrecover</code> to verify the signer.</p>
-<h5 id="example-6"><a class="header" href="#example-6">Example</a></h5>
+<h5 id="example-5"><a class="header" href="#example-5">Example</a></h5>
 <pre><code class="language-solidity">address alice = cheats.addr(1);
 bytes32 hash = keccak256(&quot;Signed by Alice&quot;);
 (uint8 v, bytes32 r, bytes32 s) = cheats.sign(1, hash);
@@ -1429,7 +1435,7 @@ assertEq(alice, signer); // [PASS]
 <pre><code class="language-solidity">function addr(uint256 privateKey) external returns (address);
 </code></pre>
 <p>Computes the address for a given private key.</p>
-<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<h5 id="example-6"><a class="header" href="#example-6">Example</a></h5>
 <pre><code class="language-solidity">address alice = cheats.addr(1);
 emit log_address(alice); // 0x7e5f4552091a69125d5dfcb7b8c2659029395bdf
 </code></pre>
@@ -1473,7 +1479,7 @@ myContract.withdraw(); // [PASS]
 <pre><code class="language-solidity">function deal(address who, uint256 newBalance) external;
 </code></pre>
 <p>Sets the balance of an address <code>who</code> to <code>newBalance</code>.</p>
-<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
+<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
 <pre><code class="language-solidity">address alice = address(1);
 cheats.deal(alice, 1 ether);
 log_uint256(alice.balance); // 1000000000000000000
@@ -1484,7 +1490,7 @@ log_uint256(alice.balance); // 1000000000000000000
 <pre><code class="language-solidity">function etch(address who, bytes calldata code) external;
 </code></pre>
 <p>Sets the bytecode of an address <code>who</code> to <code>code</code>.</p>
-<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
+<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
 <pre><code class="language-solidity">address code = address(awesomeContract).code;
 address targetAddr = address(1);
 cheats.etch(targetAddr, code);
@@ -1521,7 +1527,7 @@ log_bytes(address(targetAddr).code); // 0x6080604052348015610010...
 </code></pre>
 <p>Gets all storage slots that have been read (<code>reads</code>) or written to (<code>writes</code>) on an address.</p>
 <p>Note that <a href="reference/cheatcodes.html#record"><code>record</code></a> must be called first.</p>
-<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
+<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
 <pre><code class="language-solidity">/// contract NumsContract {
 ///     uint256 public num1 = 100; // slot 0
 ///     uint256 public num2 = 200; // slot 1
@@ -1607,7 +1613,7 @@ This is because Solidity inserts an <code>extcodesize</code> check before some c
 <p>Expects at least one call to address <code>where</code> where the call data either strictly or loosely matches <code>data</code>.</p>
 <p>When a call is made to <code>where</code> the call data is first checked to see if it matches in its entirety with <code>data</code>. If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.</p>
 <p>If the test terminates without the call being made, the test fails.</p>
-<h5 id="example-11"><a class="header" href="#example-11">Example</a></h5>
+<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
 <pre><code class="language-solidity">bytes4 selector = bytes4(keccak256(&quot;fulfillRandomness(bytes32,uint256)&quot;));
 bytes memory expectedData = abi.encodeWithSelector(selector, requestId, 5647236456456);
 cheats.expectCall(address(awesomeContract), expectedData);
@@ -1675,6 +1681,191 @@ storage                  Show the raw value of a contract's storage slot
 tx                       Show information about the transaction &lt;tx-hash&gt;
 wallet                   Set of wallet management utilities
 </code></pre>
+<h3 id="cast-subcommands"><a class="header" href="#cast-subcommands"><code>cast</code> Subcommands</a></h3>
+<p>This section documents all <code>cast</code> subcommands and provides usage examples.
+<br>
+<br></p>
+<blockquote>
+<p>--abi-decode [OPTIONS] &lt;SIG&gt; &lt;CALLDATA&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--input</code></p>
+<p>Decode ABI-encoded hexadecimal output. Pass <code>--input</code> to decode as input, or use <code>--calldata-decode</code>.</p>
+<pre><code class="language-bash">$ cast --abi-decode --input &quot;fulfillRandomness(bytes32,uint256)&quot; 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
+</code></pre>
+<br>
+<blockquote>
+<p>--calldata-decode &lt;SIG&gt; &lt;CALLDATA&gt;</p>
+</blockquote>
+<p>Decode ABI-encoded hexadecimal input. Use <code>--abi-decode</code> to decode output data.</p>
+<pre><code class="language-bash">$ cast --calldata-decode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
+</code></pre>
+<br>
+<blockquote>
+<p>--from-utf8 [TEXT]</p>
+</blockquote>
+<p>Convert from UTF8 to hexadecimal.</p>
+<pre><code class="language-bash">$ cast --from-utf8 &quot;gm&quot;
+0x676d
+</code></pre>
+<br>
+<blockquote>
+<p>--from-wei [ARGS]</p>
+</blockquote>
+<p>Where <code>[ARGS]</code> are <code>&lt;VALUE&gt;</code> and <code>&lt;UNIT&gt;</code></p>
+<p>Convert from <code>wei</code> to <code>ether</code>.</p>
+<pre><code class="language-bash">$ cast --from-wei 100000000000000000
+0.1
+</code></pre>
+<br>
+<blockquote>
+<p>--max-int</p>
+</blockquote>
+<p>Maximum <code>int256</code> value.</p>
+<pre><code class="language-bash">$ cast --max-int
+57896044618658097711785492504343953926634992332820282019728792003956564819967
+</code></pre>
+<br>
+<blockquote>
+<p>--max-uint</p>
+</blockquote>
+<p>Maximum <code>uint256</code> value.</p>
+<pre><code class="language-bash">$ cast --max-uint
+115792089237316195423570985008687907853269984665640564039457584007913129639935
+</code></pre>
+<br>
+<blockquote>
+<p>--min-int</p>
+</blockquote>
+<p>Minimum <code>int256</code> value.</p>
+<pre><code class="language-bash">$ cast --min-int
+-57896044618658097711785492504343953926634992332820282019728792003956564819968
+</code></pre>
+<br>
+<blockquote>
+<p>--to-ascii [HEXDATA]</p>
+</blockquote>
+<p>Convert from hexadecimal to ASCII.</p>
+<pre><code class="language-bash">$ cast --to-ascii 0x676d
+gm
+</code></pre>
+<br>
+<blockquote>
+<p>--to-bytes32 [BYTES]</p>
+</blockquote>
+<p>Left pad hexadecimal to <code>bytes32</code>.</p>
+<pre><code class="language-bash">$ cast --to-bytes32 0x676d
+0x676d000000000000000000000000000000000000000000000000000000000000
+</code></pre>
+<br>
+<blockquote>
+<p>--to-checksum-address [ADDRESS]</p>
+</blockquote>
+<p>Convert an address to a checksummed format (EIP-55)</p>
+<pre><code class="language-bash">$ cast --to-checksum-address 0x6b175474e89094c44da98b954eedeac495271d0f
+0x6B175474E89094C44Da98b954EedeAC495271d0F
+</code></pre>
+<br>
+<blockquote>
+<p>--to-dec [HEXVALUE]</p>
+</blockquote>
+<p>Convert from hexadecimal to decimal.</p>
+<pre><code class="language-bash">$ cast --to-dec 0xf
+15
+</code></pre>
+<br>
+<blockquote>
+<p>--to-fix [ARGS]</p>
+</blockquote>
+<p>Where <code>[ARGS]</code> are <code>&lt;DECIMALS&gt;</code> and <code>&lt;VALUE&gt;</code></p>
+<p>convert integers into fixed point with specified decimals</p>
+<pre><code class="language-bash">cast --to-fix 18 1
+0.000000000000000001
+</code></pre>
+<br>
+<blockquote>
+<p>--to-hex [DECIMAL]</p>
+</blockquote>
+<p>Convert from decimal to hexadecimal.</p>
+<pre><code class="language-bash">$ cast --to-hex 15
+0xf
+</code></pre>
+<br>
+<blockquote>
+<p>--to-hexdata [INPUT]</p>
+</blockquote>
+<p>Where <code>[INPUT]</code> can be:</p>
+<ul>
+<li>mixed case hex with or without <code>0x</code> prefix</li>
+<li><code>0x</code> prefixed hex, concatenated with a <code>:</code></li>
+<li>absolute path to file</li>
+<li><code>@&lt;$TAG&gt;</code>, where <code>$TAG</code> is defined in environment variables</li>
+</ul>
+<p>Convert input to lowercase, <code>0x</code>-prefixed hexadecimal.</p>
+<pre><code class="language-bash">$ export EXAMPLE_INPUT=gm
+$ cast --to-hexdata @EXAMPLE_INPUT
+0x676d
+</code></pre>
+<br>
+<blockquote>
+<p>--to-uint256 [VALUE]</p>
+</blockquote>
+<p>Convert a number into <code>uint256</code> hexadecimal.</p>
+<pre><code class="language-bash">$ cast --to-uint256 15
+0x000000000000000000000000000000000000000000000000000000000000000f
+</code></pre>
+<br>
+<blockquote>
+<p>--to-wei [ARGS]</p>
+</blockquote>
+<p>Where <code>[ARGS]</code> are <code>&lt;VALUE&gt;</code> and <code>&lt;UNIT&gt;</code></p>
+<p>Convert from <code>ether</code> to <code>wei</code>.</p>
+<pre><code class="language-bash">$ cast --to-wei 1
+1000000000000000000
+</code></pre>
+<br>
+<blockquote>
+<p>4byte &lt;SELECTOR&gt;</p>
+</blockquote>
+<p>Fetch function signature using the selector.</p>
+<pre><code class="language-bash">$ cast 4byte 0x1F1F897F
+fulfillRandomness(bytes32,uint256)
+</code></pre>
+<br>
+<blockquote>
+<p>4byte-decode [OPTIONS] &lt;CALLDATA&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--id &lt;ID&gt;</code> (the 4byte selector id to use, can also be <code>earliest</code> or <code>latest</code>)</p>
+<p>Decode calldata by fetching the signature.</p>
+<pre><code class="language-bash">$ cast 4byte-decode 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+1) &quot;fulfillRandomness(bytes32,uint256)&quot;
+0x676d000000000000000000000000000000000000000000000000000000000000
+999
+</code></pre>
+<br>
+<blockquote>
+<p>abi-encode &lt;SIG&gt; &lt;PARAMS&gt;</p>
+</blockquote>
+<p>Endcode the arguments with the function signature using ABI, exculding the selector.</p>
+<pre><code class="language-bash">$ cast abi-encode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
+0x676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+</code></pre>
+<br>
+<blockquote>
+<p>age --rpc-url &lt;RPC_URL&gt; [BLOCK]</p>
+</blockquote>
+<p>Prints the timestamp of a block.</p>
+<pre><code class="language-bash">$ cast age --rpc-url &lt;your_rpc_url&gt; 1
+Thu Jul 30 15:26:28 2015
+</code></pre>
+<br>
+<blockquote>
+<p>🚧 Work in progress</p>
+<p>This chapter is under active development and is not completed yet!</p>
+</blockquote>
 
                     </main>
 
