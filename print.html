@@ -149,6 +149,8 @@
 <p>To get started with Foundry, install Foundry and set up your first project.</p>
 <p><strong><a href="forge">Forge Guide</a></strong></p>
 <p>The guide will give you all you need to know about how to use <code>forge</code> to develop, test, and deploy smart contracts.</p>
+<p><strong><a href="cast">Cast Guide</a></strong></p>
+<p>Learn how to use <code>cast</code> to interact with smart contracts, send transactions, and get chain data from the command-line.</p>
 <p><strong><a href="guides">Additional Guides</a></strong></p>
 <p>More guides on various topics.</p>
 <ul>
@@ -216,6 +218,11 @@ no files changed, compilation skipped.
 Running 1 test for ContractTest.json:ContractTest
 [PASS] testExample() (gas: 254)
 </code></pre>
+<br>
+<blockquote>
+<p>💡 Tip</p>
+<p>You can always print help for any command (or their subcommands) by adding <code>--help</code> at the end.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="forge-guide"><a class="header" href="#forge-guide">Forge Guide</a></h2>
 <p>This chapter will walk you through using <code>forge</code>, the command-line tool that tests, builds, and deploys your smart contracts.</p>
 <ul>
@@ -430,9 +437,10 @@ optimizer_runs = 20000
 verbosity = 4
 </code></pre>
 <p>When running <code>forge</code>, you can specify the profile to use using the <code>FOUNDRY_PROFILE</code> environment variable.</p>
+<br>
 <blockquote>
-<p>📚 See the <a href="forge/../reference/config.html"><code>foundry.toml</code> Reference</a> for a complete overview
-of what you can configure.</p>
+<p>📚 Reference</p>
+<p>See the <a href="forge/../reference/config.html"><code>foundry.toml</code> Reference</a> for a complete overview of what you can configure.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="tests"><a class="header" href="#tests">Tests</a></h2>
 <p>Forge can run your tests with the <code>forge test</code> command. All tests are written in Solidity.</p>
@@ -515,8 +523,8 @@ function setUp() public {
 <br>
 <p>It is possible to use other testing libraries or roll your own. For example, if you find yourself lacking a special type of assertion, you could extend <code>ds-test</code>.</p>
 <blockquote>
-<p>📚 See the <a href="forge/../reference/ds-test.html"><code>ds-test</code> Reference</a> for a complete overview of
-the logging functionality and assertions in <code>ds-test</code>.</p>
+<p>📚 Reference</p>
+<p>See the <a href="forge/../reference/ds-test.html"><code>ds-test</code> Reference</a> for a complete overview of the logging functionality and assertions in <code>ds-test</code>.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cheatcodes"><a class="header" href="#cheatcodes">Cheatcodes</a></h2>
 <p>Most of the time, simply testing your smart contracts outputs isn't enough. To manipulate the state of the blockchain, as well as test for specific reverts and events, Foundry is shipped with a set of cheatcodes.</p>
@@ -636,8 +644,10 @@ Running 2 tests for OwnerUpOnlyTest.json:OwnerUpOnlyTest
 [PASS] testIncrementAsNotOwner() (gas: 4917)
 [PASS] testIncrementAsOwner() (gas: 24661)
 </code></pre>
+<br>
 <blockquote>
-<p>📚 See the <a href="forge/../reference/cheatcodes.html">Cheatcodes Reference</a> for a complete overview of all the available cheatcodes.</p>
+<p>📚 Reference</p>
+<p>See the <a href="forge/../reference/cheatcodes.html">Cheatcodes Reference</a> for a complete overview of all the available cheatcodes.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="understanding-traces"><a class="header" href="#understanding-traces">Understanding Traces</a></h2>
 <p>Forge can produce traces either for failing tests (<code>-vvv</code>) or all tests (<code>-vvvv</code>).</p>
@@ -825,7 +835,8 @@ jobs:
 </code></pre>
 <br>
 <blockquote>
-<p>📚 See the <a href="cast/../reference/cast.html"><code>cast</code> Reference</a> for a complete overview of all the available subcommands.</p>
+<p>📚 Reference</p>
+<p>See the <a href="cast/../reference/cast.html"><code>cast</code> Reference</a> for a complete overview of all the available subcommands.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="additional-guides"><a class="header" href="#additional-guides">Additional Guides</a></h2>
 <p>This chapter contains additional guides on various topics related to Foundry.</p>
@@ -1781,7 +1792,7 @@ gm
 <p>--to-fix [ARGS]</p>
 </blockquote>
 <p>Where <code>[ARGS]</code> are <code>&lt;DECIMALS&gt;</code> and <code>&lt;VALUE&gt;</code></p>
-<p>convert integers into fixed point with specified decimals</p>
+<p>Convert from integer to fixed-point.</p>
 <pre><code class="language-bash">cast --to-fix 18 1
 0.000000000000000001
 </code></pre>
@@ -1857,14 +1868,263 @@ fulfillRandomness(bytes32,uint256)
 <blockquote>
 <p>age --rpc-url &lt;RPC_URL&gt; [BLOCK]</p>
 </blockquote>
-<p>Prints the timestamp of a block.</p>
+<p>Print the timestamp of a block.</p>
 <pre><code class="language-bash">$ cast age --rpc-url &lt;your_rpc_url&gt; 1
 Thu Jul 30 15:26:28 2015
 </code></pre>
 <br>
 <blockquote>
-<p>🚧 Work in progress</p>
-<p>This chapter is under active development and is not completed yet!</p>
+<p>balance [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
+<p>Print the balance of an account in wei.</p>
+<pre><code class="language-bash">$ cast balance --rpc-url &lt;your_rpc_url&gt; 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+4345868603562666975407
+</code></pre>
+<br>
+<blockquote>
+<p>basefee --rpc-url &lt;RPC_URL&gt; [BLOCK]</p>
+</blockquote>
+<p>Where <code>[BLOCK]</code> is the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code></p>
+<p>Print the basefee of a block.</p>
+<pre><code class="language-bash">$ cast basefee --rpc-url &lt;your_rpc_url&gt;
+75171909348
+</code></pre>
+<br>
+<blockquote>
+<p>block [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;BLOCK&gt; [FIELD]</p>
+</blockquote>
+<p>Where:</p>
+<ul>
+<li><code>[OPTIONS]</code> are <code>--full</code> and <code>--json</code></li>
+<li><code>&lt;BLOCK&gt;</code> is the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code></li>
+</ul>
+<p>Print information about a block or only one of its fields.</p>
+<pre><code class="language-bash">$ cast block --rpc-url &lt;your_rpc_url&gt; latest
+baseFeePerGas        &quot;0x1823d83b1f&quot;
+difficulty           &quot;0x2d3af62284c2ab&quot;
+extraData            &quot;0x466c6578706f6f6c2f53312f55532d57657374202d204d656c626f75726e65&quot;
+gasLimit             &quot;0x...
+...
+</code></pre>
+<br>
+<blockquote>
+<p>block-number --rpc-url &lt;RPC_URL&gt;</p>
+</blockquote>
+<p>Print latest block number.</p>
+<pre><code class="language-bash">$ cast block-number --rpc-url &lt;your_rpc_url&gt;
+14100150
+</code></pre>
+<br>
+<blockquote>
+<p>call [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> are:</p>
+<ul>
+<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet)</li>
+<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code></li>
+<li><code>--from &lt;FROM&gt;</code> (the sender account)</li>
+<li><code>--flashbots</code> (to use a flashbots RPC URL: https://rpc.flashbots.net)</li>
+<li><code>--hd-path &lt;HD_PATH&gt;</code> (derivation path for your hardware wallet, trezor or ledger)</li>
+<li><code>--interactive</code> (interactive prompt to insert your private key)</li>
+<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file)</li>
+<li><code>--ledger</code> (use your Ledger hardware wallet)</li>
+<li><code>--mnemonic-path &lt;MNEMONIC_PATH&gt;</code> (path to your mnemonic file)</li>
+<li><code>--mnemonic_index &lt;MNEMONIC_INDEX&gt;</code> (your index in the standard hd path, default: 0)</li>
+<li><code>--password &lt;KEYSTORE_PASSWORD&gt;</code> (your keystore password)</li>
+<li><code>--private-key &lt;PRIVATE_KEY&gt;</code> (your private key string)</li>
+<li><code>--trezor</code> (use your Trezor hardware wallet)</li>
+</ul>
+<p>Perform a local smart contract call.</p>
+<pre><code class="language-bash">$ cast call 0x6b175474e89094c44da98b954eedeac495271d0f &quot;totalSupply()(uint256)&quot; --rpc-url &lt;your_rpc_url&gt;
+9086622410684231497979028744
+</code></pre>
+<br>
+<blockquote>
+<p>calldata &lt;SIG&gt; [PARAMS]...</p>
+</blockquote>
+<p>Pack a function signature and parameters into hexadecimal calldata.</p>
+<pre><code class="language-bash">$ cast calldata &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
+0x1f1f897f676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+</code></pre>
+<br>
+<blockquote>
+<p>chain --rpc-url &lt;RPC_URL&gt;</p>
+</blockquote>
+<p>Print symbolic name of current blockchain by checking genesis hash.</p>
+<pre><code class="language-bash">$ cast chain --rpc-url &lt;your_rpc_url&gt;
+ethlive
+</code></pre>
+<br>
+<blockquote>
+<p>chain-id --rpc-url &lt;RPC_URL&gt;</p>
+</blockquote>
+<p>Return chain ID.</p>
+<pre><code class="language-bash">$ cast chain-id --rpc-url &lt;your_rpc_url&gt;
+1
+</code></pre>
+<br>
+<blockquote>
+<p>code [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
+<p>Print the bytecode at an address.</p>
+<pre><code class="language-bash">$ cast code --rpc-url &lt;your_rpc_url&gt; 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
+0x60806040523480156100...
+</code></pre>
+<br>
+<blockquote>
+<p>completions &lt;SHELL&gt;</p>
+</blockquote>
+<p>Where <code>&lt;SHELL&gt;</code> can be <code>bash</code>, <code>elvish</code>, <code>fish</code>, <code>powershell</code>, <code>zsh</code></p>
+<p>Generate shell completions script.</p>
+<pre><code class="language-bash">$ cast completions bash
+prints the bash completions script here...
+</code></pre>
+<br>
+<blockquote>
+<p>estimate [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> are:</p>
+<ul>
+<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet)</li>
+<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code></li>
+<li><code>--from &lt;FROM&gt;</code> (the sender account)</li>
+<li><code>--flashbots</code> (to use a flashbots RPC URL: https://rpc.flashbots.net)</li>
+<li><code>--hd-path &lt;HD_PATH&gt;</code> (derivation path for your hardware wallet, trezor or ledger)</li>
+<li><code>--interactive</code> (interactive prompt to insert your private key)</li>
+<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file)</li>
+<li><code>--ledger</code> (use your Ledger hardware wallet)</li>
+<li><code>--mnemonic-path &lt;MNEMONIC_PATH&gt;</code> (path to your mnemonic file)</li>
+<li><code>--mnemonic_index &lt;MNEMONIC_INDEX&gt;</code> (your index in the standard hd path, default: 0)</li>
+<li><code>--password &lt;KEYSTORE_PASSWORD&gt;</code> (your keystore password)</li>
+<li><code>--private-key &lt;PRIVATE_KEY&gt;</code> (your private key string)</li>
+<li><code>--trezor</code> (use your Trezor hardware wallet)</li>
+</ul>
+<p>Estimate the gas cost of a transaction.</p>
+<pre><code class="language-bash">$ cast estimate --from 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 &quot;transfer(address,uint)(bool)&quot; 0x15322B546e31F5Bfe144C4ae133A9Db6F0059fe3 1000000000000000000 --rpc-url &lt;your_rpc_url&gt;
+90677
+</code></pre>
+<br>
+<blockquote>
+<p>gas-price --rpc-url &lt;RPC_URL&gt;</p>
+</blockquote>
+<p>Print current gas price of target chain.</p>
+<pre><code class="language-bash">$ cast gas-price --rpc-url &lt;your_rpc_url&gt;
+89367836498
+</code></pre>
+<br>
+<blockquote>
+<p>keccak &lt;DATA&gt;</p>
+</blockquote>
+<p>Keccak-256-hash arbitrary data.</p>
+<pre><code class="language-bash">$ cast keccak gm
+0x71b78290913af2addd8fcbe5766de306af2c8afbc466ca891e207f73638c7270
+</code></pre>
+<br>
+<blockquote>
+<p>lookup-address [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--verify</code> (do a forward resolution to ensure the address is correct)</p>
+<p>Get the ENS name an address resolves to.</p>
+<pre><code class="language-bash">$ cast lookup-address --rpc-url &lt;your_rpc_url&gt; 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+vitalik.eth
+</code></pre>
+<br>
+<blockquote>
+<p>namehash &lt;NAME&gt;</p>
+</blockquote>
+<p>Print ENS namehash of a ENS name.</p>
+<pre><code class="language-bash">$ cast namehash &quot;vitalik.eth&quot;
+0xee6c4522aab0003e8d14cd40a6af439055fd2577951148c14b6cea9a53475835
+</code></pre>
+<br>
+<blockquote>
+<p>nonce [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
+<p>Get the number of transactions sent from an address.</p>
+<pre><code class="language-bash">$ cast nonce --rpc-url &lt;your_rpc_url&gt; 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+750
+</code></pre>
+<br>
+<blockquote>
+<p>resolve-name [OPTIONS] --rpc-url &lt;RPC_URL&gt; [WHO]</p>
+</blockquote>
+<p>Get the address an ENS name resolves to.</p>
+<pre><code class="language-bash">$ cast resolve-name --rpc-url &lt;your_rpc_url&gt; &quot;vitalik.eth&quot;
+0xd8da6bf26964af9d7eed9e03e53415d37aa96045
+</code></pre>
+<br>
+<blockquote>
+<p>send [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> are:</p>
+<ul>
+<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet)</li>
+<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code></li>
+<li><code>--from &lt;FROM&gt;</code> (the sender account)</li>
+<li><code>--flashbots</code> (to use a flashbots RPC URL: https://rpc.flashbots.net)</li>
+<li><code>--hd-path &lt;HD_PATH&gt;</code> (derivation path for your hardware wallet, trezor or ledger)</li>
+<li><code>--interactive</code> (interactive prompt to insert your private key)</li>
+<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file)</li>
+<li><code>--ledger</code> (use your Ledger hardware wallet)</li>
+<li><code>--mnemonic-path &lt;MNEMONIC_PATH&gt;</code> (path to your mnemonic file)</li>
+<li><code>--mnemonic_index &lt;MNEMONIC_INDEX&gt;</code> (your index in the standard hd path, default: 0)</li>
+<li><code>--password &lt;KEYSTORE_PASSWORD&gt;</code> (your keystore password)</li>
+<li><code>--private-key &lt;PRIVATE_KEY&gt;</code> (your private key string)</li>
+<li><code>--trezor</code> (use your Trezor hardware wallet)</li>
+</ul>
+<p>Publish a transaction.</p>
+<pre><code class="language-bash">$ cast send --chain kovan --from &lt;your_address&gt; --interactive 0xd0A1E359811322d97991E03f863a0C30C2cF029C &quot;withdraw(uint256)&quot; 10000000000000000 --rpc-url &lt;your_rpc_url&gt;
+Insert private key:
+
+prints the transaction receipt...
+</code></pre>
+<br>
+<blockquote>
+<p>storage [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;ADDRESS&gt; &lt;SLOT&gt;</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
+<p>Get the raw value of a contract's storage slot.</p>
+<pre><code class="language-bash">$ cast storage --rpc-url &lt;your_rpc_url&gt; 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 0
+0x577261707065642045746865720000000000000000000000000000000000001a
+</code></pre>
+<br>
+<blockquote>
+<p>tx [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;HASH&gt; [FIELD]</p>
+</blockquote>
+<p>Where <code>[OPTIONS]</code> are <code>--json</code></p>
+<p>Print information about a transaction or only one of its fields.</p>
+<pre><code class="language-bash">$ cast tx --rpc-url &lt;your_rpc_url&gt; 0xf85ece86f9dec5bfa0357606a6afe0d696290cefe117194c8226ed4adfe228e7
+accessList           []
+blockHash            &quot;0x185fc0bf17167beb2a82311ec3739d560cc9107bc109f0e8ab73daf86573d5b8&quot;
+blockNumber          &quot;0xd6e090&quot;
+chainId              &quot;0x...
+...
+</code></pre>
+<br>
+<blockquote>
+<p>wallet &lt;SUBCOMMAND&gt;</p>
+</blockquote>
+<p>Where <code>&lt;SUBCOMMAND&gt;</code> can be:</p>
+<ul>
+<li><code>address</code> (convert a private key to an address)</li>
+<li><code>new</code> (create and output a new random keypair)</li>
+<li><code>sign</code> (sign the message with provided private key)</li>
+<li><code>vanity</code> (generate a vanity address)</li>
+<li><code>verify</code> (verify the signature on the message)</li>
+</ul>
+<p>Set of wallet management utilities.</p>
+<pre><code class="language-bash">$ cast wallet sign --interactive &quot;gm&quot;
+Insert private key:
+
+Signature: 0x533b4950d21c9701021abe78bab597759cb975f41d21c3583b8c910c7f66692949e83dbf94968671f82ba930c284e639778ee15beefec5072697f3cab3d2cff61c
+</code></pre>
+<p><br><br></p>
+<blockquote>
+<p>ℹ️ Information</p>
+<p>You can print help for any subcommand (or their subcommands) by adding <code>--help</code> at the end.</p>
 </blockquote>
 
                     </main>
