@@ -354,6 +354,8 @@ log_bytes(address(targetAddr).code); // 0x6080604052348015610010...
   abi.encodeWithSelector(MyContract.CustomError.selector, 1, 2)
 );
 </code></pre>
+<p>After calling <code>cheats.expectRevert()</code>, calls to other cheat codes before the reverting call are ignored.
+This means, for example, we can call <code>cheats.prank(user)</code> immediately before the reverting call.</p>
 <h5 id="alternative-signature-2"><a class="header" href="#alternative-signature-2">Alternative Signature</a></h5>
 <pre><code class="language-solidity">function expectRevert(bytes4) external;
 </code></pre>
@@ -406,6 +408,39 @@ emit log_uint(uint256(reads[0])); // 1
 
   // We perform the call.
   myToken.transfer(address(1), 10);
+}
+</code></pre>
+<br>
+<p>Calls to other cheat codes before the final call are ignored, meaning we can also do something like this:</p>
+<pre><code class="language-solidity">function testERC20EmitsTransfer() public {
+  // The first two lines are the same as above.
+  cheats.expectEmit(true, true, false, true);
+  emit MyToken.Transfer(address(alice), address(1), 10);
+
+  // Use the `prank` cheat code to impersonate a user.
+  cheats.prank(address(alice));
+
+  // We perform the call.
+  myToken.transfer(address(1), 10);
+}
+</code></pre>
+<br>
+<p>We can also assert that multiple events are emitted in a single call. However this currently requires that we only test event emission and not topics or data. For example:</p>
+<pre><code class="language-solidity">function testERC20EmitsBatchTransfer() public {
+  // We declare multiple expected transfer events
+  for (uint256 i = 0; i &lt; users.length; i++) {
+    // Each parameter must be set to false for batch event emission tests to work.
+    vm.expectEmit(false, false, false, false);
+    emit Transfer(address(this), users[i], 10);
+  }
+
+  // We also expect a custom `BatchTransfer(uint256 numberOfTransfers)` event.
+  // Again, each expectEmit parameter must be false.
+  vm.expectEmit(false, false, false, false);
+  emit BatchTransfer(users.length);
+
+  // We perform the call.
+  myToken.batchTransfer(users, 10);
 }
 </code></pre>
 <br>
