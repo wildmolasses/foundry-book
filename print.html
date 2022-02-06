@@ -141,7 +141,7 @@
                         <p><img src="images/foundry-banner.png" alt="Foundry Banner" /></p>
 <p>Foundry is a smart contract development toolchain. Foundry manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line.</p>
 <blockquote>
-<p>📖 Contributing</p>
+<p>📖 <strong>Contributing</strong></p>
 <p>You can contribute to this book on <a href="https://github.com/onbjerg/foundry-book">GitHub</a>.</p>
 </blockquote>
 <h3 id="sections"><a class="header" href="#sections">Sections</a></h3>
@@ -220,8 +220,8 @@ Running 1 test for ContractTest.json:ContractTest
 </code></pre>
 <br>
 <blockquote>
-<p>💡 Tip</p>
-<p>You can always print help for any command (or their subcommands) by adding <code>--help</code> at the end.</p>
+<p>💡 <strong>Tip</strong></p>
+<p>You can always print help for any subcommand (or their subcommands) by adding <code>--help</code> at the end.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="forge-guide"><a class="header" href="#forge-guide">Forge Guide</a></h2>
 <p>This chapter will walk you through using <code>forge</code>, the command-line tool that tests, builds, and deploys your smart contracts.</p>
@@ -439,7 +439,7 @@ verbosity = 4
 <p>When running <code>forge</code>, you can specify the profile to use using the <code>FOUNDRY_PROFILE</code> environment variable.</p>
 <br>
 <blockquote>
-<p>📚 Reference</p>
+<p>📚 <strong>Reference</strong></p>
 <p>See the <a href="forge/../reference/config.html"><code>foundry.toml</code> Reference</a> for a complete overview of what you can configure.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="tests"><a class="header" href="#tests">Tests</a></h2>
@@ -494,28 +494,31 @@ contract BasicTest is DSTest {
     function testNumberIs42() public {
         assertEq(testNumber, 42);
     }
+
+    function testFailUnderflow() public {
+        testNumber -= 43;
+    }
 }
 </code></pre>
 <p>Forge uses the following keywords in tests:</p>
 <ul>
 <li><code>setUp</code>: An optional function invoked before each test case is run
-<pre><code class="language-solidity">Contract contract;
+<pre><code class="language-solidity">uint256 testNumber;
 
 function setUp() public {
-    contract = new Contract();
+    testNumber = 42;
 }
 </code></pre>
 </li>
 <li><code>test</code>: Functions prefixed with <code>test</code> are run as a test case
-<pre><code class="language-solidity">function testIncrement() public {
-    contract.increment();
-    assertEq(contract.counter(), 1);
+<pre><code class="language-solidity">function testNumberIs42() public {
+    assertEq(testNumber, 42);
 }
 </code></pre>
 </li>
 <li><code>testFail</code>: The inverse of the <code>test</code> prefix - if the function does not revert, the test fails.
-<pre><code class="language-solidity">function testFailDecrement() public {
-    contract.decrement(); // expected to fail
+<pre><code class="language-solidity">function testFailUnderflow() public {
+    testNumber -= 43;
 }
 </code></pre>
 </li>
@@ -523,7 +526,7 @@ function setUp() public {
 <br>
 <p>It is possible to use other testing libraries or roll your own. For example, if you find yourself lacking a special type of assertion, you could extend <code>ds-test</code>.</p>
 <blockquote>
-<p>📚 Reference</p>
+<p>📚 <strong>Reference</strong></p>
 <p>See the <a href="forge/../reference/ds-test.html"><code>ds-test</code> Reference</a> for a complete overview of the logging functionality and assertions in <code>ds-test</code>.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cheatcodes"><a class="header" href="#cheatcodes">Cheatcodes</a></h2>
@@ -646,7 +649,7 @@ Running 2 tests for OwnerUpOnlyTest.json:OwnerUpOnlyTest
 </code></pre>
 <br>
 <blockquote>
-<p>📚 Reference</p>
+<p>📚 <strong>Reference</strong></p>
 <p>See the <a href="forge/../reference/cheatcodes.html">Cheatcodes Reference</a> for a complete overview of all the available cheatcodes.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="understanding-traces"><a class="header" href="#understanding-traces">Understanding Traces</a></h2>
@@ -835,7 +838,7 @@ jobs:
 </code></pre>
 <br>
 <blockquote>
-<p>📚 Reference</p>
+<p>📚 <strong>Reference</strong></p>
 <p>See the <a href="cast/../reference/cast.html"><code>cast</code> Reference</a> for a complete overview of all the available subcommands.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="additional-guides"><a class="header" href="#additional-guides">Additional Guides</a></h2>
@@ -1145,18 +1148,42 @@ block_difficulty = 0                                          # the value of `bl
 </ul>
 <p>The value of <code>block.difficulty</code> in tests.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="ds-test-reference"><a class="header" href="#ds-test-reference"><code>ds-test</code> Reference</a></h2>
-<p><code>ds-test</code> provides basic logging and assertion functionality. </p>
-<p>To use it in your testing contract, import the <code>test.sol</code> and inherit from <code>DSTest</code>, like so:</p>
-<pre><code class="language-solidity">import &quot;ds-test/src/test.sol&quot;
+<p><code>ds-test</code> provides basic logging and assertion functionality.</p>
+<p>To use it in your testing contract, import <code>ds-test/test.sol</code> and inherit from <code>DSTest</code>, like so:</p>
+<pre><code class="language-solidity">import &quot;ds-test/test.sol&quot;;
 
-contract ContractTest is DSTest {}
+contract ContractTest is DSTest {
+    // ... tests ...
+}
 </code></pre>
 <h3 id="cheatcodes-address"><a class="header" href="#cheatcodes-address">Cheatcodes Address</a></h3>
 <p>You can get the address of the cheatcodes account by accessing the <code>HEVM_ADDRESS</code> constant:</p>
 <pre><code class="language-solidity">Cheats cheats = Cheats(HEVM_ADDRESS);
 </code></pre>
 <h3 id="logging"><a class="header" href="#logging">Logging</a></h3>
-<p><code>DSTest</code> contains the following events for logging:</p>
+<p>This is a complete overview of all the available logging events. For detailed descriptions and example usage, see below.</p>
+<pre><code class="language-solidity">event log                    (string);
+event logs                   (bytes);
+
+event log_address            (address);
+event log_bytes32            (bytes32);
+event log_int                (int);
+event log_uint               (uint);
+event log_bytes              (bytes);
+event log_string             (string);
+
+event log_named_address      (string key, address val);
+event log_named_bytes32      (string key, bytes32 val);
+event log_named_decimal_int  (string key, int val, uint decimals);
+event log_named_decimal_uint (string key, uint val, uint decimals);
+event log_named_int          (string key, int val);
+event log_named_uint         (string key, uint val);
+event log_named_bytes        (string key, bytes val);
+event log_named_string       (string key, string val);
+</code></pre>
+<h3 id="logging-events"><a class="header" href="#logging-events">Logging events</a></h3>
+<p>This section documents all events for logging and provides usage examples. </p>
+<br>
 <blockquote>
 <p>log(string)</p>
 </blockquote>
@@ -1197,8 +1224,75 @@ emit log_named_uint(&quot;amount&quot;, amount);
 emit log_named_decimal_uint(&quot;amount&quot;, amount, 18);
 // amount: 1.000000000000000000
 </code></pre>
-<h3 id="assertions"><a class="header" href="#assertions">Assertions</a></h3>
-<p><code>DSTest</code> contains the following assertion functions:</p>
+<h3 id="asserting"><a class="header" href="#asserting">Asserting</a></h3>
+<p>This is a complete overview of all the available assertion functions. For detailed descriptions and example usage, see below.</p>
+<pre><code class="language-solidity">// Assert the `condition` is true
+function assertTrue(bool condition) internal;
+function assertTrue(bool condition, string memory err) internal;
+
+// Assert `a` is equal to `b`
+function assertEq(address a, address b) internal;
+function assertEq(address a, address b, string memory err) internal;
+function assertEq(bytes32 a, bytes32 b) internal;
+function assertEq(bytes32 a, bytes32 b, string memory err) internal;
+function assertEq(int a, int b) internal;
+function assertEq(int a, int b, string memory err) internal;
+function assertEq(uint a, uint b) internal;
+function assertEq(uint a, uint b, string memory err) internal;
+function assertEqDecimal(int a, int b, uint decimals) internal;
+function assertEqDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertEqDecimal(uint a, uint b, uint decimals) internal;
+function assertEqDecimal(uint a, uint b, uint decimals, string memory err) internal;
+function assertEq(string memory a, string memory b) internal;
+function assertEq(string memory a, string memory b, string memory err) internal;
+function assertEq32(bytes32 a, bytes32 b) internal;
+function assertEq32(bytes32 a, bytes32 b, string memory err) internal;
+function assertEq0(bytes memory a, bytes memory b) internal;
+function assertEq0(bytes memory a, bytes memory b, string memory err) internal;
+
+// Assert  `a` is greater than or equal to `b`
+function assertGt(uint a, uint b) internal;
+function assertGt(uint a, uint b, string memory err) internal;
+function assertGt(int a, int b) internal;
+function assertGt(int a, int b, string memory err) internal;
+function assertGtDecimal(int a, int b, uint decimals) internal;
+function assertGtDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertGtDecimal(uint a, uint b, uint decimals) internal;
+function assertGtDecimal(uint a, uint b, uint decimals, string memory err) internal;
+
+// Assert  `a` is greater than `b`
+function assertGe(uint a, uint b) internal;
+function assertGe(uint a, uint b, string memory err) internal;
+function assertGe(int a, int b) internal;
+function assertGe(int a, int b, string memory err) internal;
+function assertGeDecimal(int a, int b, uint decimals) internal;
+function assertGeDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertGeDecimal(uint a, uint b, uint decimals) internal;
+function assertGeDecimal(uint a, uint b, uint decimals, string memory err) internal;
+
+// Assert  `a` is less than or equal to `b`
+function assertLt(uint a, uint b) internal;
+function assertLt(uint a, uint b, string memory err) internal;
+function assertLt(int a, int b) internal;
+function assertLt(int a, int b, string memory err) internal;
+function assertLtDecimal(int a, int b, uint decimals) internal;
+function assertLtDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertLtDecimal(uint a, uint b, uint decimals) internal;
+function assertLtDecimal(uint a, uint b, uint decimals, string memory err) internal;
+
+// Assert  `a` is less than `b`
+function assertLe(uint a, uint b) internal;
+function assertLe(uint a, uint b, string memory err) internal;
+function assertLe(int a, int b) internal;
+function assertLe(int a, int b, string memory err) internal;
+function assertLeDecimal(int a, int b, uint decimals) internal;
+function assertLeDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertLeDecimal(uint a, uint b, uint decimals) internal;
+function assertLeDecimal(uint a, uint b, uint decimals, string memory err) internal;
+</code></pre>
+<h3 id="assertion-functions"><a class="header" href="#assertion-functions">Assertion functions</a></h3>
+<p>This section documents all functions for asserting and provides usage examples. </p>
+<br>
 <blockquote>
 <p>assertTrue(bool condition)</p>
 </blockquote>
@@ -1304,7 +1398,7 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </code></pre>
 <br>
 <blockquote>
-<p>ℹ️ Information</p>
+<p>ℹ️ <strong>Information</strong></p>
 <p>You can pass a custom error message to the above functions by providing an additional parameter <code>string err</code>.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cheatcodes-reference"><a class="header" href="#cheatcodes-reference">Cheatcodes Reference</a></h2>
@@ -1463,9 +1557,11 @@ emit log_address(alice); // 0x7e5f4552091a69125d5dfcb7b8c2659029395bdf
 <pre><code class="language-solidity">function prank(address) external;
 </code></pre>
 <p>Sets <code>msg.sender</code> to the specified address <strong>for the next call</strong>. &quot;The next call&quot; includes static calls as well, but not calls to the cheat code address.</p>
-<pre><code class="language-solidity">/// function withdraw() public onlyOwner {...}
+<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<pre><code class="language-solidity">/// function withdraw() public {
+///     require(msg.sender == owner);
 
-cheats.prank(ownersAddress);
+cheats.prank(owner);
 myContract.withdraw(); // [PASS]
 </code></pre>
 <h5 id="alternative-signature"><a class="header" href="#alternative-signature">Alternative Signature</a></h5>
@@ -1490,7 +1586,7 @@ myContract.withdraw(); // [PASS]
 <pre><code class="language-solidity">function deal(address who, uint256 newBalance) external;
 </code></pre>
 <p>Sets the balance of an address <code>who</code> to <code>newBalance</code>.</p>
-<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
 <pre><code class="language-solidity">address alice = address(1);
 cheats.deal(alice, 1 ether);
 log_uint256(alice.balance); // 1000000000000000000
@@ -1501,7 +1597,7 @@ log_uint256(alice.balance); // 1000000000000000000
 <pre><code class="language-solidity">function etch(address who, bytes calldata code) external;
 </code></pre>
 <p>Sets the bytecode of an address <code>who</code> to <code>code</code>.</p>
-<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
+<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
 <pre><code class="language-solidity">address code = address(awesomeContract).code;
 address targetAddr = address(1);
 cheats.etch(targetAddr, code);
@@ -1540,7 +1636,7 @@ This means, for example, we can call <code>cheats.prank(user)</code> immediately
 </code></pre>
 <p>Gets all storage slots that have been read (<code>reads</code>) or written to (<code>writes</code>) on an address.</p>
 <p>Note that <a href="reference/cheatcodes.html#record"><code>record</code></a> must be called first.</p>
-<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
+<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
 <pre><code class="language-solidity">/// contract NumsContract {
 ///     uint256 public num1 = 100; // slot 0
 ///     uint256 public num2 = 200; // slot 1
@@ -1597,13 +1693,13 @@ emit log_uint(uint256(reads[0])); // 1
   // We declare multiple expected transfer events
   for (uint256 i = 0; i &lt; users.length; i++) {
     // Each parameter must be set to false for batch event emission tests to work.
-    vm.expectEmit(false, false, false, false);
+    cheats.expectEmit(false, false, false, false);
     emit Transfer(address(this), users[i], 10);
   }
 
   // We also expect a custom `BatchTransfer(uint256 numberOfTransfers)` event.
   // Again, each expectEmit parameter must be false.
-  vm.expectEmit(false, false, false, false);
+  cheats.expectEmit(false, false, false, false);
   emit BatchTransfer(users.length);
 
   // We perform the call.
@@ -1620,7 +1716,8 @@ emit log_uint(uint256(reads[0])); // 1
 <p>If a match is found, then <code>retdata</code> is returned from the call.</p>
 <p>Mocked calls are in effect until <a href="reference/cheatcodes.html#clearmockedcalls"><code>clearMockedCalls</code></a> is called.</p>
 <blockquote>
-<p><strong>Note:</strong> Calls to mocked addresses may revert if there is no code on the address.
+<p>💬 <strong>Note</strong></p>
+<p>Calls to mocked addresses may revert if there is no code on the address.
 This is because Solidity inserts an <code>extcodesize</code> check before some contract calls.</p>
 <p>To circumvent this, use the <a href="reference/cheatcodes.html#etch"><code>etch</code></a> cheatcode if the mocked address has no code.</p>
 </blockquote>
@@ -1659,7 +1756,7 @@ This is because Solidity inserts an <code>extcodesize</code> check before some c
 <p>Expects at least one call to address <code>where</code> where the call data either strictly or loosely matches <code>data</code>.</p>
 <p>When a call is made to <code>where</code> the call data is first checked to see if it matches in its entirety with <code>data</code>. If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.</p>
 <p>If the test terminates without the call being made, the test fails.</p>
-<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
+<h5 id="example-11"><a class="header" href="#example-11">Example</a></h5>
 <pre><code class="language-solidity">bytes4 selector = bytes4(keccak256(&quot;fulfillRandomness(bytes32,uint256)&quot;));
 bytes memory expectedData = abi.encodeWithSelector(selector, requestId, 5647236456456);
 cheats.expectCall(address(awesomeContract), expectedData);
@@ -1893,7 +1990,7 @@ fulfillRandomness(bytes32,uint256)
 </code></pre>
 <br>
 <blockquote>
-<p>abi-encode &lt;SIG&gt; &lt;PARAMS&gt;</p>
+<p>abi-encode &lt;SIG&gt; &lt;ARGS&gt;</p>
 </blockquote>
 <p>Endcode the arguments with the function signature using ABI, exculding the selector.</p>
 <pre><code class="language-bash">$ cast abi-encode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
@@ -1952,7 +2049,7 @@ gasLimit             &quot;0x...
 </code></pre>
 <br>
 <blockquote>
-<p>call [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+<p>call [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
 </blockquote>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
@@ -1976,9 +2073,9 @@ gasLimit             &quot;0x...
 </code></pre>
 <br>
 <blockquote>
-<p>calldata &lt;SIG&gt; [PARAMS]...</p>
+<p>calldata &lt;SIG&gt; [ARGS]</p>
 </blockquote>
-<p>Pack a function signature and parameters into hexadecimal calldata.</p>
+<p>Pack a function signature and arguments into hexadecimal calldata.</p>
 <pre><code class="language-bash">$ cast calldata &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
 0x1f1f897f676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
 </code></pre>
@@ -2018,7 +2115,7 @@ prints the bash completions script here...
 </code></pre>
 <br>
 <blockquote>
-<p>estimate [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+<p>estimate [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
 </blockquote>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
@@ -2092,7 +2189,7 @@ vitalik.eth
 </code></pre>
 <br>
 <blockquote>
-<p>send [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+<p>send [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
 </blockquote>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
@@ -2158,7 +2255,7 @@ Signature: 0x533b4950d21c9701021abe78bab597759cb975f41d21c3583b8c910c7f66692949e
 </code></pre>
 <p><br><br></p>
 <blockquote>
-<p>ℹ️ Information</p>
+<p>ℹ️ <strong>Information</strong></p>
 <p>You can print help for any subcommand (or their subcommands) by adding <code>--help</code> at the end.</p>
 </blockquote>
 

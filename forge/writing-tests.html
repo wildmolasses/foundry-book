@@ -164,28 +164,31 @@ contract BasicTest is DSTest {
     function testNumberIs42() public {
         assertEq(testNumber, 42);
     }
+
+    function testFailUnderflow() public {
+        testNumber -= 43;
+    }
 }
 </code></pre>
 <p>Forge uses the following keywords in tests:</p>
 <ul>
 <li><code>setUp</code>: An optional function invoked before each test case is run
-<pre><code class="language-solidity">Contract contract;
+<pre><code class="language-solidity">uint256 testNumber;
 
 function setUp() public {
-    contract = new Contract();
+    testNumber = 42;
 }
 </code></pre>
 </li>
 <li><code>test</code>: Functions prefixed with <code>test</code> are run as a test case
-<pre><code class="language-solidity">function testIncrement() public {
-    contract.increment();
-    assertEq(contract.counter(), 1);
+<pre><code class="language-solidity">function testNumberIs42() public {
+    assertEq(testNumber, 42);
 }
 </code></pre>
 </li>
 <li><code>testFail</code>: The inverse of the <code>test</code> prefix - if the function does not revert, the test fails.
-<pre><code class="language-solidity">function testFailDecrement() public {
-    contract.decrement(); // expected to fail
+<pre><code class="language-solidity">function testFailUnderflow() public {
+    testNumber -= 43;
 }
 </code></pre>
 </li>
@@ -193,7 +196,7 @@ function setUp() public {
 <br>
 <p>It is possible to use other testing libraries or roll your own. For example, if you find yourself lacking a special type of assertion, you could extend <code>ds-test</code>.</p>
 <blockquote>
-<p>📚 Reference</p>
+<p>📚 <strong>Reference</strong></p>
 <p>See the <a href="../reference/ds-test.html"><code>ds-test</code> Reference</a> for a complete overview of the logging functionality and assertions in <code>ds-test</code>.</p>
 </blockquote>
 

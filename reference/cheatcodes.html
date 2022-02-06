@@ -296,9 +296,11 @@ emit log_address(alice); // 0x7e5f4552091a69125d5dfcb7b8c2659029395bdf
 <pre><code class="language-solidity">function prank(address) external;
 </code></pre>
 <p>Sets <code>msg.sender</code> to the specified address <strong>for the next call</strong>. &quot;The next call&quot; includes static calls as well, but not calls to the cheat code address.</p>
-<pre><code class="language-solidity">/// function withdraw() public onlyOwner {...}
+<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<pre><code class="language-solidity">/// function withdraw() public {
+///     require(msg.sender == owner);
 
-cheats.prank(ownersAddress);
+cheats.prank(owner);
 myContract.withdraw(); // [PASS]
 </code></pre>
 <h5 id="alternative-signature"><a class="header" href="#alternative-signature">Alternative Signature</a></h5>
@@ -323,7 +325,7 @@ myContract.withdraw(); // [PASS]
 <pre><code class="language-solidity">function deal(address who, uint256 newBalance) external;
 </code></pre>
 <p>Sets the balance of an address <code>who</code> to <code>newBalance</code>.</p>
-<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
 <pre><code class="language-solidity">address alice = address(1);
 cheats.deal(alice, 1 ether);
 log_uint256(alice.balance); // 1000000000000000000
@@ -334,7 +336,7 @@ log_uint256(alice.balance); // 1000000000000000000
 <pre><code class="language-solidity">function etch(address who, bytes calldata code) external;
 </code></pre>
 <p>Sets the bytecode of an address <code>who</code> to <code>code</code>.</p>
-<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
+<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
 <pre><code class="language-solidity">address code = address(awesomeContract).code;
 address targetAddr = address(1);
 cheats.etch(targetAddr, code);
@@ -373,7 +375,7 @@ This means, for example, we can call <code>cheats.prank(user)</code> immediately
 </code></pre>
 <p>Gets all storage slots that have been read (<code>reads</code>) or written to (<code>writes</code>) on an address.</p>
 <p>Note that <a href="#record"><code>record</code></a> must be called first.</p>
-<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
+<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
 <pre><code class="language-solidity">/// contract NumsContract {
 ///     uint256 public num1 = 100; // slot 0
 ///     uint256 public num2 = 200; // slot 1
@@ -430,13 +432,13 @@ emit log_uint(uint256(reads[0])); // 1
   // We declare multiple expected transfer events
   for (uint256 i = 0; i &lt; users.length; i++) {
     // Each parameter must be set to false for batch event emission tests to work.
-    vm.expectEmit(false, false, false, false);
+    cheats.expectEmit(false, false, false, false);
     emit Transfer(address(this), users[i], 10);
   }
 
   // We also expect a custom `BatchTransfer(uint256 numberOfTransfers)` event.
   // Again, each expectEmit parameter must be false.
-  vm.expectEmit(false, false, false, false);
+  cheats.expectEmit(false, false, false, false);
   emit BatchTransfer(users.length);
 
   // We perform the call.
@@ -453,7 +455,8 @@ emit log_uint(uint256(reads[0])); // 1
 <p>If a match is found, then <code>retdata</code> is returned from the call.</p>
 <p>Mocked calls are in effect until <a href="#clearmockedcalls"><code>clearMockedCalls</code></a> is called.</p>
 <blockquote>
-<p><strong>Note:</strong> Calls to mocked addresses may revert if there is no code on the address.
+<p>💬 <strong>Note</strong></p>
+<p>Calls to mocked addresses may revert if there is no code on the address.
 This is because Solidity inserts an <code>extcodesize</code> check before some contract calls.</p>
 <p>To circumvent this, use the <a href="#etch"><code>etch</code></a> cheatcode if the mocked address has no code.</p>
 </blockquote>
@@ -492,7 +495,7 @@ This is because Solidity inserts an <code>extcodesize</code> check before some c
 <p>Expects at least one call to address <code>where</code> where the call data either strictly or loosely matches <code>data</code>.</p>
 <p>When a call is made to <code>where</code> the call data is first checked to see if it matches in its entirety with <code>data</code>. If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.</p>
 <p>If the test terminates without the call being made, the test fails.</p>
-<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
+<h5 id="example-11"><a class="header" href="#example-11">Example</a></h5>
 <pre><code class="language-solidity">bytes4 selector = bytes4(keccak256(&quot;fulfillRandomness(bytes32,uint256)&quot;));
 bytes memory expectedData = abi.encodeWithSelector(selector, requestId, 5647236456456);
 cheats.expectCall(address(awesomeContract), expectedData);

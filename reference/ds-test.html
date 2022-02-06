@@ -141,18 +141,42 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="ds-test-reference"><a class="header" href="#ds-test-reference"><code>ds-test</code> Reference</a></h2>
-<p><code>ds-test</code> provides basic logging and assertion functionality. </p>
-<p>To use it in your testing contract, import the <code>test.sol</code> and inherit from <code>DSTest</code>, like so:</p>
-<pre><code class="language-solidity">import &quot;ds-test/src/test.sol&quot;
+<p><code>ds-test</code> provides basic logging and assertion functionality.</p>
+<p>To use it in your testing contract, import <code>ds-test/test.sol</code> and inherit from <code>DSTest</code>, like so:</p>
+<pre><code class="language-solidity">import &quot;ds-test/test.sol&quot;;
 
-contract ContractTest is DSTest {}
+contract ContractTest is DSTest {
+    // ... tests ...
+}
 </code></pre>
 <h3 id="cheatcodes-address"><a class="header" href="#cheatcodes-address">Cheatcodes Address</a></h3>
 <p>You can get the address of the cheatcodes account by accessing the <code>HEVM_ADDRESS</code> constant:</p>
 <pre><code class="language-solidity">Cheats cheats = Cheats(HEVM_ADDRESS);
 </code></pre>
 <h3 id="logging"><a class="header" href="#logging">Logging</a></h3>
-<p><code>DSTest</code> contains the following events for logging:</p>
+<p>This is a complete overview of all the available logging events. For detailed descriptions and example usage, see below.</p>
+<pre><code class="language-solidity">event log                    (string);
+event logs                   (bytes);
+
+event log_address            (address);
+event log_bytes32            (bytes32);
+event log_int                (int);
+event log_uint               (uint);
+event log_bytes              (bytes);
+event log_string             (string);
+
+event log_named_address      (string key, address val);
+event log_named_bytes32      (string key, bytes32 val);
+event log_named_decimal_int  (string key, int val, uint decimals);
+event log_named_decimal_uint (string key, uint val, uint decimals);
+event log_named_int          (string key, int val);
+event log_named_uint         (string key, uint val);
+event log_named_bytes        (string key, bytes val);
+event log_named_string       (string key, string val);
+</code></pre>
+<h3 id="logging-events"><a class="header" href="#logging-events">Logging events</a></h3>
+<p>This section documents all events for logging and provides usage examples. </p>
+<br>
 <blockquote>
 <p>log(string)</p>
 </blockquote>
@@ -193,8 +217,75 @@ emit log_named_uint(&quot;amount&quot;, amount);
 emit log_named_decimal_uint(&quot;amount&quot;, amount, 18);
 // amount: 1.000000000000000000
 </code></pre>
-<h3 id="assertions"><a class="header" href="#assertions">Assertions</a></h3>
-<p><code>DSTest</code> contains the following assertion functions:</p>
+<h3 id="asserting"><a class="header" href="#asserting">Asserting</a></h3>
+<p>This is a complete overview of all the available assertion functions. For detailed descriptions and example usage, see below.</p>
+<pre><code class="language-solidity">// Assert the `condition` is true
+function assertTrue(bool condition) internal;
+function assertTrue(bool condition, string memory err) internal;
+
+// Assert `a` is equal to `b`
+function assertEq(address a, address b) internal;
+function assertEq(address a, address b, string memory err) internal;
+function assertEq(bytes32 a, bytes32 b) internal;
+function assertEq(bytes32 a, bytes32 b, string memory err) internal;
+function assertEq(int a, int b) internal;
+function assertEq(int a, int b, string memory err) internal;
+function assertEq(uint a, uint b) internal;
+function assertEq(uint a, uint b, string memory err) internal;
+function assertEqDecimal(int a, int b, uint decimals) internal;
+function assertEqDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertEqDecimal(uint a, uint b, uint decimals) internal;
+function assertEqDecimal(uint a, uint b, uint decimals, string memory err) internal;
+function assertEq(string memory a, string memory b) internal;
+function assertEq(string memory a, string memory b, string memory err) internal;
+function assertEq32(bytes32 a, bytes32 b) internal;
+function assertEq32(bytes32 a, bytes32 b, string memory err) internal;
+function assertEq0(bytes memory a, bytes memory b) internal;
+function assertEq0(bytes memory a, bytes memory b, string memory err) internal;
+
+// Assert  `a` is greater than or equal to `b`
+function assertGt(uint a, uint b) internal;
+function assertGt(uint a, uint b, string memory err) internal;
+function assertGt(int a, int b) internal;
+function assertGt(int a, int b, string memory err) internal;
+function assertGtDecimal(int a, int b, uint decimals) internal;
+function assertGtDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertGtDecimal(uint a, uint b, uint decimals) internal;
+function assertGtDecimal(uint a, uint b, uint decimals, string memory err) internal;
+
+// Assert  `a` is greater than `b`
+function assertGe(uint a, uint b) internal;
+function assertGe(uint a, uint b, string memory err) internal;
+function assertGe(int a, int b) internal;
+function assertGe(int a, int b, string memory err) internal;
+function assertGeDecimal(int a, int b, uint decimals) internal;
+function assertGeDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertGeDecimal(uint a, uint b, uint decimals) internal;
+function assertGeDecimal(uint a, uint b, uint decimals, string memory err) internal;
+
+// Assert  `a` is less than or equal to `b`
+function assertLt(uint a, uint b) internal;
+function assertLt(uint a, uint b, string memory err) internal;
+function assertLt(int a, int b) internal;
+function assertLt(int a, int b, string memory err) internal;
+function assertLtDecimal(int a, int b, uint decimals) internal;
+function assertLtDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertLtDecimal(uint a, uint b, uint decimals) internal;
+function assertLtDecimal(uint a, uint b, uint decimals, string memory err) internal;
+
+// Assert  `a` is less than `b`
+function assertLe(uint a, uint b) internal;
+function assertLe(uint a, uint b, string memory err) internal;
+function assertLe(int a, int b) internal;
+function assertLe(int a, int b, string memory err) internal;
+function assertLeDecimal(int a, int b, uint decimals) internal;
+function assertLeDecimal(int a, int b, uint decimals, string memory err) internal;
+function assertLeDecimal(uint a, uint b, uint decimals) internal;
+function assertLeDecimal(uint a, uint b, uint decimals, string memory err) internal;
+</code></pre>
+<h3 id="assertion-functions"><a class="header" href="#assertion-functions">Assertion functions</a></h3>
+<p>This section documents all functions for asserting and provides usage examples. </p>
+<br>
 <blockquote>
 <p>assertTrue(bool condition)</p>
 </blockquote>
@@ -300,7 +391,7 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </code></pre>
 <br>
 <blockquote>
-<p>ℹ️ Information</p>
+<p>ℹ️ <strong>Information</strong></p>
 <p>You can pass a custom error message to the above functions by providing an additional parameter <code>string err</code>.</p>
 </blockquote>
 

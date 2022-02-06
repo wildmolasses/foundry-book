@@ -361,7 +361,7 @@ fulfillRandomness(bytes32,uint256)
 </code></pre>
 <br>
 <blockquote>
-<p>abi-encode &lt;SIG&gt; &lt;PARAMS&gt;</p>
+<p>abi-encode &lt;SIG&gt; &lt;ARGS&gt;</p>
 </blockquote>
 <p>Endcode the arguments with the function signature using ABI, exculding the selector.</p>
 <pre><code class="language-bash">$ cast abi-encode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
@@ -420,7 +420,7 @@ gasLimit             &quot;0x...
 </code></pre>
 <br>
 <blockquote>
-<p>call [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+<p>call [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
 </blockquote>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
@@ -444,9 +444,9 @@ gasLimit             &quot;0x...
 </code></pre>
 <br>
 <blockquote>
-<p>calldata &lt;SIG&gt; [PARAMS]...</p>
+<p>calldata &lt;SIG&gt; [ARGS]</p>
 </blockquote>
-<p>Pack a function signature and parameters into hexadecimal calldata.</p>
+<p>Pack a function signature and arguments into hexadecimal calldata.</p>
 <pre><code class="language-bash">$ cast calldata &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
 0x1f1f897f676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
 </code></pre>
@@ -486,7 +486,7 @@ prints the bash completions script here...
 </code></pre>
 <br>
 <blockquote>
-<p>estimate [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+<p>estimate [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
 </blockquote>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
@@ -560,7 +560,7 @@ vitalik.eth
 </code></pre>
 <br>
 <blockquote>
-<p>send [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [PARAMS] --rpc-url &lt;RPC_URL&gt;</p>
+<p>send [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
 </blockquote>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
@@ -626,7 +626,7 @@ Signature: 0x533b4950d21c9701021abe78bab597759cb975f41d21c3583b8c910c7f66692949e
 </code></pre>
 <p><br><br></p>
 <blockquote>
-<p>ℹ️ Information</p>
+<p>ℹ️ <strong>Information</strong></p>
 <p>You can print help for any subcommand (or their subcommands) by adding <code>--help</code> at the end.</p>
 </blockquote>
 
