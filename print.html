@@ -1459,6 +1459,8 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
     // Calldata can either be strict or a partial match
     function expectCall(address, bytes calldata) external;
     function getCode(string calldata) external returns (bytes memory);
+    // Label an address in test traces
+    function label(address addr, string label) external;
 }
 </code></pre>
 <h3 id="cheatcodes-1"><a class="header" href="#cheatcodes-1">Cheatcodes</a></h3>
@@ -1769,6 +1771,12 @@ vrfCoordinatorMock.callBackWithRandomness(requestId, 5647236456456, address(awes
 <pre><code class="language-solidity">function getCode(string calldata) external returns (bytes memory);
 </code></pre>
 <p>Returns the bytecode for a contract in the project given the path to the contract.</p>
+<br>
+<hr />
+<h4 id="label"><a class="header" href="#label"><code>label</code></a></h4>
+<pre><code class="language-solidity">function label(address addr, string label) external;
+</code></pre>
+<p>Sets a label <code>label</code> for <code>addr</code> in test traces. If an address is labelled, the label will show up in test traces instead of the address.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cast-reference"><a class="header" href="#cast-reference"><code>cast</code> Reference</a></h2>
 <p><code>cast</code> lets you perform Ethereum RPC calls from the comfort of your command line.</p>
 <h3 id="cast-cli"><a class="header" href="#cast-cli">Cast CLI</a></h3>
