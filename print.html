@@ -243,6 +243,7 @@ Running 1 test for ContractTest.json:ContractTest
 <li><a href="forge/./fuzz-testing.html">Fuzz Testing</a></li>
 </ul>
 </li>
+<li><a href="forge/./deploying.html">Deploying</a></li>
 <li><a href="forge/./continous-integration.html">Continous Integration</a></li>
 <li><a href="forge/./debugger.html">Debugger</a></li>
 <li><a href="forge/./cache.html">Cache</a></li>
@@ -786,59 +787,43 @@ Running 1 test for SafeTest.json:SafeTest
 <p>There are different ways to run property-based tests, notably parametric testing and fuzzing. Forge only supports fuzzing.</p>
 <p>When running a property-based test, the fuzzer will try to generate as many test cases as possible to uncover edge cases. You can configure the amount of scenarios the fuzzer will generate by setting <a href="forge/../reference/config.html#fuzz_runs"><code>FOUNDRY_FUZZ_RUNS</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="deploying"><a class="header" href="#deploying">Deploying</a></h2>
-<p>Forge can deploy your conracts to given network with <code>forge create</code> command. To deploy your contract you need to provide rpc url and private key of the address which going to deploy the contract to network.</p>
-<p>To deploy <code>MyContract</code> to local development instance:</p>
-<pre><code class="language-sh">$ forge create  --rpc-url http://127.0.0.1:8545 --private-key ac0974b...ff80 src/MyContract.sol:MyContract
+<p>Forge can deploy smart contracts to a given network with the <code>forge create</code> command.</p>
+<p>To deploy a contract, you must provide a RPC URL (env: <code>ETH_RPC_URL</code>) and the private key of the account that will deploy the contract.</p>
+<p>To deploy <code>MyContract</code> to a network:</p>
+<pre><code class="language-sh">$ forge create --rpc-url &lt;your_rpc_url&gt; --private-key &lt;your_private_key&gt; src/MyContract.sol:MyContract
 compiling...
 success.
-Deployer: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-Deployed to: 0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+Deployer: 0xa735b3c25f...
+Deployed to: 0x4054415432...
+Transaction hash: 0x6b4e0ff93a...
 </code></pre>
-<p>Alternatively you can set <code>ETH_RPC_URL</code> environment value instead of providing <code>--rpc-url</code> option if env value and command line option both provided command line will be used.</p>
-<pre><code class="language-sh">$ export ETH_RPC_URL=&quot;http://127.0.0.1:8545/&quot;
-$ forge create --private-key ac0974b...ff80 MyContract.sol:MyContract
-compiling...
-</code></pre>
-<p>Use the <code>--constructor-args</code> flag to pass arguments to the constructor.</p>
+<p>Use the <code>--constructor-args</code> flag to pass arguments to the constructor:</p>
 <pre><code class="language-solidity">pragma solidity ^0.8.0;
-import &quot;openz/token/ERC20/ERC20.sol&quot;;
+import {ERC20} from &quot;solmate/tokens/ERC20.sol&quot;;
 
 contract MyToken is ERC20 {
     constructor(
-    string memory name_,
-    string memory symbol_,
-    uint256 initialSupply_
-    ) ERC20(name_, symbol_) {
-        _mint(msg.sender, initialSupply_);
+        string memory name,
+        string memory symbol,
+        uint8 decimals,
+        uint256 initialSupply
+    ) ERC20(name, symbol, decimals) {
+        _mint(msg.sender, initialSupply);
     }
 }
-
 </code></pre>
-<pre><code class="language-sh">$ forge create --rpc-url http://127.0.0.1:8545 --constructor-args ForgeUSD  --constructor-args FUSD  --constructor-args 1000000000000000000000 --private-key df57...3656e MyToken.sol:MyToken
-:MyToken
-compiling...
-no files changed, compilation skipped.
-Deployer: 0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199
-Deployed to: 0x73511669fd4de447fed18bb79bafeac93ab7f31f
+<pre><code class="language-sh">$ forge create --rpc-url &lt;your_rpc_url&gt; --constructor-args &quot;ForgeUSD&quot; &quot;FUSD&quot; 18 1000000000000000000000 --private-key &lt;your_private_key&gt; src/MyToken.sol:MyToken
 </code></pre>
-<h3 id="quick-troubleshot"><a class="header" href="#quick-troubleshot">Quick troubleshot</a></h3>
-<h4 id="error-message-invalid-character-x-at-position-1"><a class="header" href="#error-message-invalid-character-x-at-position-1">Error message: Invalid character 'x' at position 1</a></h4>
-<blockquote>
-<p>When you write your private key you should delete <code>0x</code> in the beginning. Instead of writing <code>--private-key 0xac0974b...ff80</code> write <code>--private-key ac0974b...ff80</code></p>
-</blockquote>
-<h4 id="error-message-the-method-eth_feehistory-does-not-existis-not-available"><a class="header" href="#error-message-the-method-eth_feehistory-does-not-existis-not-available">Error message: The method eth_feeHistory does not exist/is not available.</a></h4>
-<blockquote>
-<p>It means EIP-1559 is not activated on the RPC server. With <code>--legacy</code> flag you can use legacy transactions instead of the <code>EIP1559</code> ones. If you do development in a local environment, you can also use <code>hardhat</code> instead of <code>ganache</code></p>
-</blockquote>
-<h4 id="error-message-failed-to-parse-tokens"><a class="header" href="#error-message-failed-to-parse-tokens">Error message: Failed to parse tokens</a></h4>
-<blockquote>
-<p>Check your arguements which sent with <code>--constructor-args</code> make sure their types are matching contract constructor function.</p>
-</blockquote>
-<h4 id="error-message-signature-error"><a class="header" href="#error-message-signature-error">Error message: Signature error</a></h4>
-<blockquote>
-<p>Make sure your private key is correct.</p>
-</blockquote>
-<p>Currently there is an ongoing effort to develop <code>forge build</code> command to make deployment experience better. Process can be seen here: https://github.com/gakonst/foundry/issues/402 </p>
+<br>
+<h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
+<h5 id="invalid-character-x-at-position-1"><a class="header" href="#invalid-character-x-at-position-1"><code>Invalid character 'x' at position 1</code></a></h5>
+<p>Make sure the private key string does not begin with <code>0x</code>.</p>
+<h5 id="eip-1559-not-activated"><a class="header" href="#eip-1559-not-activated"><code>EIP-1559 not activated</code></a></h5>
+<p>EIP-1559 is not supported or not activated on the RPC server. Pass the <code>--legacy</code> flag to use legacy transactions instead of the EIP-1559 ones. If you do development in a local environment, you can use Hardhat instead of Ganache.</p>
+<h5 id="failed-to-parse-tokens"><a class="header" href="#failed-to-parse-tokens"><code>Failed to parse tokens</code></a></h5>
+<p>Make sure the passed arguments are of correct type.</p>
+<h5 id="signature-error"><a class="header" href="#signature-error"><code>Signature error</code></a></h5>
+<p>Make sure the private key is correct.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="continous-integration"><a class="header" href="#continous-integration">Continous Integration</a></h2>
 <h3 id="github-actions"><a class="header" href="#github-actions">GitHub Actions</a></h3>
 <p>To test your project using GitHub Actions, here is a sample workflow:</p>
