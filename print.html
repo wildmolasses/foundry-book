@@ -823,10 +823,23 @@ contract MyToken is ERC20 {
 <li>the path to the contract <code>&lt;path&gt;:&lt;contractname&gt;</code></li>
 <li>your Etherscan API key (env: <code>ETHERSCAN_API_KEY</code>).</li>
 </ul>
-<p>Moreover, you must provide the contructor arguments in the ABI-encoded format, if there are any, and the <a href="https://chainlist.org/">chain ID</a>, if the contract is not on Ethereum Mainnet.</p>
+<p>Moreover, you may need to provide:</p>
+<ul>
+<li>the contructor arguments in the ABI-encoded format, if there are any</li>
+<li>the number of optimizations, if the Solidity optimizer was activated</li>
+<li>the <a href="https://chainlist.org/">chain ID</a>, if the contract is not on Ethereum Mainnet</li>
+</ul>
 <p>Let's say you want to verify <code>MyToken</code> (see above). You set the <a href="forge/../reference/config.html#optimizer_runs">number of optimizations</a> to 1 million, compiled it with v0.8.10, and deployed it, as shown above, to the Kovan testnet (chain ID: 42).</p>
 <p>Here's how to verify it:</p>
-<pre><code class="language-bash">forge verify-contract --chain-id 42 --num-of-optimizations 1000000 --constructor-args 000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c0000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000003635c9adc5dea000000000000000000000000000000000000000000000000000000000000000000008466f72676555534400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000044655534400000000000000000000000000000000000000000000000000000000 --compiler-version v0.8.10+commit.fc4108 &lt;the_contract_address&gt; src/MyToken.sol:MyToken &lt;your_etherscan_api_key&gt;
+<pre><code class="language-bash">$ forge verify-contract --chain-id 42 --num-of-optimizations 1000000 --constructor-args 000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c0000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000003635c9adc5dea000000000000000000000000000000000000000000000000000000000000000000008466f72676555534400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000044655534400000000000000000000000000000000000000000000000000000000 --compiler-version v0.8.10+commit.fc4108 &lt;the_contract_address&gt; src/MyToken.sol:MyToken &lt;your_etherscan_api_key&gt;
+Submitted contract for verification:
+                Response: `OK`
+                GUID: `a6yrbjp5prvakia6bqp5qdacczyfhkyi5j1r6qbds1js41ak1a`
+                url: https://kovan.etherscan.io//address/0x6a54…3a4c#code
+</code></pre>
+<p>You can check verification status with the <code>forge verify-check</code> command:</p>
+<pre><code class="language-bash">$ forge verify-check --chain-id 42 &lt;GUID&gt; &lt;your_etherscan_api_key&gt;
+Contract successfully verified.
 </code></pre>
 <br>
 <blockquote>
