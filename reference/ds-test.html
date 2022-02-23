@@ -205,7 +205,7 @@ emit log_uint(amount);
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code>, <code>bytes</code>, <code>string</code></p>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
-emit log_named_uint(&quot;amount&quot;, amount);
+emit log_named_uint(&quot;Amount: &quot;, amount);
 // amount: 1000000000000000000
 </code></pre>
 <br>
@@ -214,7 +214,7 @@ emit log_named_uint(&quot;amount&quot;, amount);
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
-emit log_named_decimal_uint(&quot;amount&quot;, amount, 18);
+emit log_named_decimal_uint(&quot;Amount: &quot;, amount, 18);
 // amount: 1.000000000000000000
 </code></pre>
 <h3 id="asserting"><a class="header" href="#asserting">Asserting</a></h3>
@@ -299,7 +299,9 @@ assertTrue(success);
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code></p>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertEq(1 ether, 1e18 wei);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 1e18 wei;
+assertEq(a, b);
 </code></pre>
 <br>
 <blockquote>
@@ -307,7 +309,9 @@ assertTrue(success);
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertEqDecimal(1 ether, 1e18 wei, 18);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 1e18 wei;
+assertEqDecimal(a, b, 18);
 </code></pre>
 <br>
 <blockquote>
@@ -331,7 +335,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than <code>b</code>.</p>
-<pre><code class="language-solidity">assertGt(2 ether, 1e18 wei);
+<pre><code class="language-solidity">uint256 a = 2 ether;
+uint256 b = 1e18 wei;
+assertGt(a, b);
 </code></pre>
 <br>
 <blockquote>
@@ -339,7 +345,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than <code>b</code>.</p>
-<pre><code class="language-solidity">assertGtDecimal(2 ether, 1e18 wei, 18);
+<pre><code class="language-solidity">uint256 a = 2 ether;
+uint256 b = 1e18 wei;
+assertGtDecimal(a, b, 18);
 </code></pre>
 <br>
 <blockquote>
@@ -347,7 +355,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertGe(1 ether, 1e18 wei);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 1e18 wei;
+assertGe(a, b);
 </code></pre>
 <br>
 <blockquote>
@@ -355,7 +365,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertGeDecimal(1 ether, 1e18 wei, 18);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 1e18 wei;
+assertGeDecimal(a, b, 18);
 </code></pre>
 <br>
 <blockquote>
@@ -363,7 +375,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than <code>b</code>.</p>
-<pre><code class="language-solidity">assertLt(1e18 wei, 2 ether);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 2e18 wei;
+assertLt(a, b);
 </code></pre>
 <br>
 <blockquote>
@@ -371,7 +385,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than <code>b</code>.</p>
-<pre><code class="language-solidity">assertLtDecimal(1e18 wei, 2 ether, 18);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 2e18 wei;
+assertLtDecimal(a, b, 18);
 </code></pre>
 <br>
 <blockquote>
@@ -379,7 +395,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertLe(1e18 wei, 2 ether);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 1e18 wei;
+assertLe(a, b);
 </code></pre>
 <br>
 <blockquote>
@@ -387,7 +405,9 @@ assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </blockquote>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than or equal to <code>b</code>.</p>
-<pre><code class="language-solidity">assertLeDecimal(1e18 wei, 2 ether, 18);
+<pre><code class="language-solidity">uint256 a = 1 ether;
+uint256 b = 1e18 wei;
+assertLeDecimal(a, b, 18);
 </code></pre>
 <br>
 <blockquote>
