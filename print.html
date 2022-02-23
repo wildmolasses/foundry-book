@@ -280,7 +280,7 @@ success.
 compiling...
 no files changed, compilation skipped.
 Running 1 test for ContractTest.json:ContractTest
-[PASS] testExample() (gas: 254)
+[PASS] testExample() (gas: 120)
 </code></pre>
 <p>You'll notice that two new directories have popped up: <code>out</code> and <code>cache</code>.</p>
 <p>The <code>out</code> directory contains your contract artifact, such as the ABI, while the <code>cache</code> is used by <code>forge</code> to only recompile what is necessary.</p>
@@ -300,50 +300,56 @@ success.
 <pre><code class="language-sh">$ forge test
 compiling...
 no files changed, compilation skipped.
-Running 4 tests for StdCheatsTest.json:StdCheatsTest
-[PASS] testHoax() (gas: 12061)
-[PASS] testHoaxOrigin() (gas: 12227)
-[PASS] testStartHoax() (gas: 21464)
-[PASS] testStartHoaxOrigin() (gas: 21619)
+Running 9 tests for StdCheatsTest.json:StdCheatsTest
+[PASS] testDeployCode() (gas: 1420013)
+[PASS] testDeployCodeNoArgs() (gas: 1404320)
+[PASS] testHoax() (gas: 11140)
+[PASS] testHoaxDifferentAddresses() (gas: 11303)
+[PASS] testHoaxOrigin() (gas: 11151)
+[PASS] testRewind() (gas: 3703)
+[PASS] testSkip() (gas: 3617)
+[PASS] testStartHoax() (gas: 19791)
+[PASS] testStartHoaxOrigin() (gas: 19819)
 
 Running 9 tests for StdErrorsTest.json:StdErrorsTest
-[PASS] testExpectArithmetic() (gas: 5652)
-[PASS] testExpectAssertion() (gas: 4839)
-[PASS] testExpectDiv() (gas: 5533)
-[PASS] testExpectEnum() (gas: 5435)
-[PASS] testExpectIntern() (gas: 5021)
-[PASS] testExpectMem() (gas: 4884)
-[PASS] testExpectMod() (gas: 5555)
-[PASS] testExpectOOB() (gas: 5462)
-[PASS] testExpectPop() (gas: 6991)
+[PASS] testExpectArithmetic() (gas: 4457)
+[PASS] testExpectAssertion() (gas: 4272)
+[PASS] testExpectDiv() (gas: 4348)
+[PASS] testExpectEnum() (gas: 4357)
+[PASS] testExpectIntern() (gas: 4308)
+[PASS] testExpectMem() (gas: 4306)
+[PASS] testExpectMod() (gas: 4381)
+[PASS] testExpectOOB() (gas: 4326)
+[PASS] testExpectPop() (gas: 6440)
 
-Running 26 tests for StdStorageTest.json:StdStorageTest
-[PASS] testFailStorageCheckedWriteMapPacked() (gas: 130438)
-[PASS] testFailStorageConst() (gas: 81915)
-[PASS] testFailStorageNativePack() (gas: 332331)
-[PASS] testStorageCheckedWriteDeepMap() (gas: 241705)
-[PASS] testStorageCheckedWriteDeepMapStructA() (gas: 270910)
-[PASS] testStorageCheckedWriteDeepMapStructB() (gas: 319479)
-[PASS] testStorageCheckedWriteHidden() (gas: 167166)
-[PASS] testStorageCheckedWriteMapAddr() (gas: 214549)
-[PASS] testStorageCheckedWriteMapPackedSuccess() (gas: 213075)
-[PASS] testStorageCheckedWriteMapStructA() (gas: 243722)
-[PASS] testStorageCheckedWriteMapStructB() (gas: 291929)
-[PASS] testStorageCheckedWriteMapUint() (gas: 214525)
-[PASS] testStorageCheckedWriteObvious() (gas: 143624)
-[PASS] testStorageCheckedWriteStructA() (gas: 190036)
-[PASS] testStorageCheckedWriteStructB() (gas: 236141)
-[PASS] testStorageDeepMap() (gas: 207713)
-[PASS] testStorageDeepMapStructA() (gas: 236545)
-[PASS] testStorageDeepMapStructB() (gas: 285069)
-[PASS] testStorageHidden() (gas: 136554)
-[PASS] testStorageMapAddrFound() (gas: 182086)
-[PASS] testStorageMapStructA() (gas: 210616)
-[PASS] testStorageMapStructB() (gas: 258995)
-[PASS] testStorageMapUintFound() (gas: 182100)
-[PASS] testStorageObvious() (gas: 112963)
-[PASS] testStorageStructA() (gas: 158602)
-[PASS] testStorageStructB() (gas: 204879)
+Running 27 tests for StdStorageTest.json:StdStorageTest
+[PASS] testFailStorageCheckedWriteMapPacked() (gas: 115875)
+[PASS] testFailStorageConst() (gas: 69497)
+[PASS] testFailStorageNativePack() (gas: 289225)
+[PASS] testStorageCheckedWriteDeepMap() (gas: 109464)
+[PASS] testStorageCheckedWriteDeepMapStructA() (gas: 126800)
+[PASS] testStorageCheckedWriteDeepMapStructB() (gas: 143407)
+[PASS] testStorageCheckedWriteHidden() (gas: 99322)
+[PASS] testStorageCheckedWriteMapAddr() (gas: 104614)
+[PASS] testStorageCheckedWriteMapBool() (gas: 104792)
+[PASS] testStorageCheckedWriteMapPackedSuccess() (gas: 102196)
+[PASS] testStorageCheckedWriteMapStructA() (gas: 121756)
+[PASS] testStorageCheckedWriteMapStructB() (gas: 138114)
+[PASS] testStorageCheckedWriteMapUint() (gas: 104330)
+[PASS] testStorageCheckedWriteObvious() (gas: 76022)
+[PASS] testStorageCheckedWriteStructA() (gas: 110620)
+[PASS] testStorageCheckedWriteStructB() (gas: 125241)
+[PASS] testStorageDeepMap() (gas: 89814)
+[PASS] testStorageDeepMapStructA() (gas: 106860)
+[PASS] testStorageDeepMapStructB() (gas: 123422)
+[PASS] testStorageHidden() (gas: 81583)
+[PASS] testStorageMapAddrFound() (gas: 85716)
+[PASS] testStorageMapStructA() (gas: 102441)
+[PASS] testStorageMapStructB() (gas: 118860)
+[PASS] testStorageMapUintFound() (gas: 85544)
+[PASS] testStorageObvious() (gas: 58208)
+[PASS] testStorageStructA() (gas: 92477)
+[PASS] testStorageStructB() (gas: 107076)
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="dependencies"><a class="header" href="#dependencies">Dependencies</a></h2>
 <p>Forge manages dependencies using <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodules</a> by default, which means that it works with any GitHub repository that contains smart contracts.</p>
@@ -451,7 +457,7 @@ verbosity = 4
 compiling...
 success.
 Running 1 test for ContractTest.json:ContractTest
-[PASS] testExample() (gas: 254)
+[PASS] testExample() (gas: 120)
 </code></pre>
 <p>You can also run specific tests by passing a filter:</p>
 <pre><code class="language-sh">$ forge test --match-contract ComplicatedContractTest --match-test testDeposit
@@ -610,6 +616,7 @@ no files changed, compilation skipped.
 Running 2 tests for OwnerUpOnlyTest.json:OwnerUpOnlyTest
 [PASS] testFailIncrementAsNotOwner() (gas: 4030)
 Traces:
+
   [4030] OwnerUpOnlyTest::testFailIncrementAsNotOwner()
     ├─ [0] VM::prank(0x0000000000000000000000000000000000000000)
     │   └─ ← ()
@@ -759,12 +766,15 @@ Running 1 test for SafeTest.json:SafeTest
 <p>If we run the test now, we can see that Forge runs the property-based test, but it fails for high values of <code>amount</code>:</p>
 <pre><code class="language-ignore">$ forge test
 compiling...
-no files changed, compilation skipped.
+Compiling 1 files with 0.8.10
+Compilation finished successfully
+success.
+
 Running 1 test for SafeTest.json:SafeTest
-[FAIL. Counterexample: calldata=0x215a2f200000000000000000000000000000000000000001000000000000000000000000, args=[79228162514264337593543950336]] testWithdraw(uint256) (runs: 1, μ: 14993, ~: 14993)
+[FAIL. Counterexample: calldata=0x215a2f200000000000000000000000000000000000000001000000000000000000000000, args=[79228162514264337593543950336]] testWithdraw(uint256) (runs: 44, μ: 15073, ~: 15073)
 
 Failed tests:
-[FAIL. Counterexample: calldata=0x215a2f200000000000000000000000000000000000000001000000000000000000000000, args=[79228162514264337593543950336]] testWithdraw(uint256) (runs: 1, μ: 14993, ~: 14993)
+[FAIL. Counterexample: calldata=0x215a2f200000000000000000000000000000000000000001000000000000000000000000, args=[79228162514264337593543950336]] testWithdraw(uint256) (runs: 44, μ: 15073, ~: 15073)
 </code></pre>
 <p>The default amount of ether that the test contract is given is <code>2**96</code> wei (as in DappTools), so let's make sure we do not send more than we have:</p>
 <pre><code class="language-solidity">contract SafeTest is DSTest {
@@ -782,7 +792,7 @@ Failed tests:
 compiling...
 success.
 Running 1 test for SafeTest.json:SafeTest
-[PASS] testWithdraw(uint96) (runs: 256, μ: 15086, ~: 15087)
+[PASS] testWithdraw(uint96) (runs: 256, μ: 14591, ~: 15167)
 </code></pre>
 <p>There are different ways to run property-based tests, notably parametric testing and fuzzing. Forge only supports fuzzing.</p>
 <p>When running a property-based test, the fuzzer will try to generate as many test cases as possible to uncover edge cases. You can configure the amount of scenarios the fuzzer will generate by setting <a href="forge/../reference/config.html#fuzz_runs"><code>FOUNDRY_FUZZ_RUNS</code></a>.</p>
