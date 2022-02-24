@@ -469,6 +469,20 @@ Running 2 tests for ComplicatedContractTest.json:ComplicatedContractTest
 </code></pre>
 <p>This will run the tests starting with <code>testDeposit</code> in the <code>ComplicatedContractTest</code> test contract.
 Inverse versions of these flags also exist (<code>--no-match-contract</code> and <code>--no-match-test</code>).</p>
+<p>You can run tests in filenames that match a regex with <code>--match-path</code>. Note: an absolute file path must be provided.</p>
+<pre><code class="language-sh">$ forge test --match-path /path/to/hello_foundry/src/test/*
+compiling...
+no files changed, compilation skipped.
+Running 1 test for ContractA.json:ContractA
+[PASS] testA() (gas: 120)
+
+Running 1 test for ContractB.json:ContractB
+[PASS] testB() (gas: 120)
+
+Running 1 test for ContractC.json:ContractC
+[PASS] testC() (gas: 142)
+</code></pre>
+<p>The inverse of the <code>--match-path</code> flag is <code>--no-match-path</code>.</p>
 <h3 id="logs-and-traces"><a class="header" href="#logs-and-traces">Logs and traces</a></h3>
 <p>The default behavior for <code>forge test</code> is to only display a summary of passing and failing tests. You can control this behavior by increasing the verbosity (using the <code>-v</code> flag). Each level of verbosity adds more information:</p>
 <ul>
