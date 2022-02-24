@@ -200,6 +200,8 @@
     function getCode(string calldata) external returns (bytes memory);
     // Label an address in test traces
     function label(address addr, string label) external;
+    // When fuzzing, generate new inputs if conditional not met
+    function assume(bool) external;
 }
 </code></pre>
 <h3 id="cheatcodes"><a class="header" href="#cheatcodes">Cheatcodes</a></h3>
@@ -516,6 +518,12 @@ vrfCoordinatorMock.callBackWithRandomness(requestId, 5647236456456, address(awes
 <pre><code class="language-solidity">function label(address addr, string label) external;
 </code></pre>
 <p>Sets a label <code>label</code> for <code>addr</code> in test traces. If an address is labelled, the label will show up in test traces instead of the address.</p>
+<br>
+<hr />
+<h4 id="assume"><a class="header" href="#assume"><code>assume</code></a></h4>
+<pre><code class="language-solidity">function assume(bool) external;
+</code></pre>
+<p>If the boolean expression evaluates to false, discard the current fuzz inputs and start a new fuzz run.</p>
 
                     </main>
 
