@@ -551,6 +551,10 @@ function setUp() public {
 <p>📚 <strong>Reference</strong></p>
 <p>See the <a href="forge/../reference/ds-test.html"><code>ds-test</code> Reference</a> for a complete overview of the logging functionality and assertions in <code>ds-test</code>.</p>
 </blockquote>
+<blockquote>
+<p>💡 <strong>Tip</strong></p>
+<p>Use the <a href="forge/../reference/cheatcodes.html#getcode"><code>getCode</code></a> cheatcode to deploy contracts with incompatible Solidity versions.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cheatcodes"><a class="header" href="#cheatcodes">Cheatcodes</a></h2>
 <p>Most of the time, simply testing your smart contracts outputs isn't enough. To manipulate the state of the blockchain, as well as test for specific reverts and events, Foundry is shipped with a set of cheatcodes.</p>
 <p>Cheatcodes allow you to change the block number, your identity, and more. They are invoked by calling specific functions on a specially designated address: <code>0x7109709ECfa91a80626fF3989D68f67F5b1DD12D</code>. If you are using <code>ds-test</code>, then this address is assigned in a constant named <code>HEVM_ADDRESS</code>.</p>
@@ -1947,6 +1951,29 @@ vrfCoordinatorMock.callBackWithRandomness(requestId, 5647236456456, address(awes
 <pre><code class="language-solidity">function getCode(string calldata) external returns (bytes memory);
 </code></pre>
 <p>Returns the bytecode for a contract in the project given the path to the contract.</p>
+<p>The calldata parameter can either be in the form <code>ContractFile.sol</code> (if the filename and contract name are the same), <code>ContractFile.sol:ContractName</code>, or <code>./path/to/artifact.json</code></p>
+<h4 id="example-12"><a class="header" href="#example-12">Example</a></h4>
+<pre><code class="language-solidity">MyContract myContract = new MyContract(arg1, arg2);
+
+// Let's do the same thing with `getCode`
+bytes memory args = abi.encode(arg1, arg2);
+bytes memory bytecode = abi.encodePacked(cheats.getCode(&quot;MyContract.sol:MyContract&quot;), args);
+address anotherAddress;
+assembly {
+    anotherAddress := create(0, add(bytecode, 0x20), mload(bytecode))
+}
+
+assertEq0(address(myContract).code, anotherAddress.code); // [PASS]
+</code></pre>
+<p>If you'd like to use getCode to deploy a contract's bytecode, you can also use <a href="https://github.com/brockelmore/forge-std">forge-std</a>'s <code>deployCode</code> helper. In your test file:</p>
+<pre><code class="language-solidity">    function testDeployCode() public {
+        // deployCode takes a string argument for the contract to deploy
+        // and optionally a bytes argument for any arguments that should
+        // be passed to your contract's constructor
+        address deployed = deployCode(&quot;StdCheats.t.sol:StdCheatsTest&quot;, bytes(&quot;&quot;));
+        ...
+    }
+</code></pre>
 <br>
 <hr />
 <h4 id="label"><a class="header" href="#label"><code>label</code></a></h4>

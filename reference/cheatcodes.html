@@ -512,6 +512,29 @@ vrfCoordinatorMock.callBackWithRandomness(requestId, 5647236456456, address(awes
 <pre><code class="language-solidity">function getCode(string calldata) external returns (bytes memory);
 </code></pre>
 <p>Returns the bytecode for a contract in the project given the path to the contract.</p>
+<p>The calldata parameter can either be in the form <code>ContractFile.sol</code> (if the filename and contract name are the same), <code>ContractFile.sol:ContractName</code>, or <code>./path/to/artifact.json</code></p>
+<h4 id="example-12"><a class="header" href="#example-12">Example</a></h4>
+<pre><code class="language-solidity">MyContract myContract = new MyContract(arg1, arg2);
+
+// Let's do the same thing with `getCode`
+bytes memory args = abi.encode(arg1, arg2);
+bytes memory bytecode = abi.encodePacked(cheats.getCode(&quot;MyContract.sol:MyContract&quot;), args);
+address anotherAddress;
+assembly {
+    anotherAddress := create(0, add(bytecode, 0x20), mload(bytecode))
+}
+
+assertEq0(address(myContract).code, anotherAddress.code); // [PASS]
+</code></pre>
+<p>If you'd like to use getCode to deploy a contract's bytecode, you can also use <a href="https://github.com/brockelmore/forge-std">forge-std</a>'s <code>deployCode</code> helper. In your test file:</p>
+<pre><code class="language-solidity">    function testDeployCode() public {
+        // deployCode takes a string argument for the contract to deploy
+        // and optionally a bytes argument for any arguments that should
+        // be passed to your contract's constructor
+        address deployed = deployCode(&quot;StdCheats.t.sol:StdCheatsTest&quot;, bytes(&quot;&quot;));
+        ...
+    }
+</code></pre>
 <br>
 <hr />
 <h4 id="label"><a class="header" href="#label"><code>label</code></a></h4>
