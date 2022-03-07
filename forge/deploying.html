@@ -181,7 +181,7 @@ contract MyToken is ERC20 {
 <ul>
 <li>the contructor arguments in the ABI-encoded format, if there are any</li>
 <li>the number of optimizations, if the Solidity optimizer was activated</li>
-<li>the <a href="https://chainlist.org/">chain ID</a>, if the contract is not on Ethereum Mainnet</li>
+<li>the <a href="https://evm-chainlist.netlify.app/">chain ID</a>, if the contract is not on Ethereum Mainnet</li>
 </ul>
 <p>Let's say you want to verify <code>MyToken</code> (see above). You set the <a href="../reference/config.html#optimizer_runs">number of optimizations</a> to 1 million, compiled it with v0.8.10, and deployed it, as shown above, to the Kovan testnet (chain ID: 42).</p>
 <p>Here's how to verify it:</p>
@@ -198,7 +198,7 @@ Contract successfully verified.
 <br>
 <blockquote>
 <p>💡 <strong>Tip</strong></p>
-<p>You can use <a href="../cast/index.html">Cast's</a> <code>abi-encode</code> command to ABI-encode arguments.</p>
+<p>Use Cast's <a href="../reference/cast.html#abi-encode"><code>abi-encode</code></a> to ABI-encode arguments.</p>
 <p>In this example, we ran <code>cast abi-encode &quot;constructor(string,string,uint8,uint256)&quot; &quot;ForgeUSD&quot; &quot;FUSD&quot; 18 1000000000000000000000</code> to ABI-encode the arguments.</p>
 </blockquote>
 <br>

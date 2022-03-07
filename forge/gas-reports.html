@@ -148,7 +148,9 @@
 <p>To produce reports for all contracts:</p>
 <pre><code class="language-toml">gas_reports = [&quot;*&quot;]
 </code></pre>
-<p>To generate gas reports, run <code>forge test --gas-report</code>. Example output:</p>
+<p>To generate gas reports, run <code>forge test --gas-report</code>.</p>
+<p>You can also use it in combination with other subcommands, such as <code>forge test --match-test testBurn --gas-report</code>, to generate only a gas report relevant to this test.</p>
+<p>Example output:</p>
 <pre><code class="language-ignore">╭───────────────────────┬─────────────────┬────────┬────────┬────────┬─────────╮
 │ MockERC1155 contract  ┆                 ┆        ┆        ┆        ┆         │
 ╞═══════════════════════╪═════════════════╪════════╪════════╪════════╪═════════╡

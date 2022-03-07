@@ -196,121 +196,145 @@ tx                       Show information about the transaction &lt;tx-hash&gt;
 wallet                   Set of wallet management utilities
 </code></pre>
 <h3 id="cast-subcommands"><a class="header" href="#cast-subcommands"><code>cast</code> Subcommands</a></h3>
-<p>This section documents all <code>cast</code> subcommands and provides usage examples.
-<br>
-<br></p>
-<blockquote>
-<p>--abi-decode [OPTIONS] &lt;SIG&gt; &lt;CALLDATA&gt;</p>
-</blockquote>
+<p>This section documents all <code>cast</code> subcommands and provides usage examples.</p>
+<h4 id="--abi-decode"><a class="header" href="#--abi-decode"><code>--abi-decode</code></a></h4>
+<pre><code class="language-ignore">cast --abi-decode [OPTIONS] &lt;SIG&gt; &lt;CALLDATA&gt;
+</code></pre>
 <p>Where <code>[OPTIONS]</code> is <code>--input</code></p>
 <p>Decode ABI-encoded hexadecimal output. Pass <code>--input</code> to decode as input, or use <code>--calldata-decode</code>.</p>
+<h5 id="example"><a class="header" href="#example">Example</a></h5>
 <pre><code class="language-bash">$ cast --abi-decode --input &quot;fulfillRandomness(bytes32,uint256)&quot; 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
 0x676d000000000000000000000000000000000000000000000000000000000000
 999
 </code></pre>
 <br>
-<blockquote>
-<p>--calldata-decode &lt;SIG&gt; &lt;CALLDATA&gt;</p>
-</blockquote>
+<hr />
+<h4 id="--calldata-decode"><a class="header" href="#--calldata-decode"><code>--calldata-decode</code></a></h4>
+<pre><code class="language-ignore">cast --calldata-decode &lt;SIG&gt; &lt;CALLDATA&gt;
+</code></pre>
 <p>Decode ABI-encoded hexadecimal input. Use <code>--abi-decode</code> to decode output data.</p>
+<h5 id="example-1"><a class="header" href="#example-1">Example</a></h5>
 <pre><code class="language-bash">$ cast --calldata-decode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
 0x676d000000000000000000000000000000000000000000000000000000000000
 999
 </code></pre>
 <br>
-<blockquote>
-<p>--from-utf8 [TEXT]</p>
-</blockquote>
+<hr />
+<h4 id="--from-utf8"><a class="header" href="#--from-utf8"><code>--from-utf8</code></a></h4>
+<pre><code class="language-ignore">cast --from-utf8 [TEXT]
+</code></pre>
 <p>Convert from UTF8 to hexadecimal.</p>
+<h5 id="example-2"><a class="header" href="#example-2">Example</a></h5>
 <pre><code class="language-bash">$ cast --from-utf8 &quot;gm&quot;
 0x676d
 </code></pre>
 <br>
-<blockquote>
-<p>--from-wei [ARGS]</p>
-</blockquote>
+<hr />
+<h4 id="--from-wei"><a class="header" href="#--from-wei"><code>--from-wei</code></a></h4>
+<pre><code class="language-ignore">cast --from-wei [ARGS]
+</code></pre>
 <p>Where <code>[ARGS]</code> are <code>&lt;VALUE&gt;</code> and <code>&lt;UNIT&gt;</code></p>
 <p>Convert from <code>wei</code> to <code>ether</code>.</p>
+<h5 id="example-3"><a class="header" href="#example-3">Example</a></h5>
 <pre><code class="language-bash">$ cast --from-wei 100000000000000000
 0.1
 </code></pre>
 <br>
-<blockquote>
-<p>--max-int</p>
-</blockquote>
+<hr />
+<h4 id="--max-int"><a class="header" href="#--max-int"><code>--max-int</code></a></h4>
+<pre><code class="language-ignore">cast --max-int
+</code></pre>
 <p>Maximum <code>int256</code> value.</p>
+<h5 id="example-4"><a class="header" href="#example-4">Example</a></h5>
 <pre><code class="language-bash">$ cast --max-int
 57896044618658097711785492504343953926634992332820282019728792003956564819967
 </code></pre>
 <br>
-<blockquote>
-<p>--max-uint</p>
-</blockquote>
+<hr />
+<h4 id="--max-uint"><a class="header" href="#--max-uint"><code>--max-uint</code></a></h4>
+<pre><code class="language-ignore">cast --max-uint
+</code></pre>
 <p>Maximum <code>uint256</code> value.</p>
+<h5 id="example-5"><a class="header" href="#example-5">Example</a></h5>
 <pre><code class="language-bash">$ cast --max-uint
 115792089237316195423570985008687907853269984665640564039457584007913129639935
 </code></pre>
 <br>
-<blockquote>
-<p>--min-int</p>
-</blockquote>
+<hr />
+<h4 id="--min-int"><a class="header" href="#--min-int"><code>--min-int</code></a></h4>
+<pre><code class="language-ignore">cast --min-int
+</code></pre>
 <p>Minimum <code>int256</code> value.</p>
+<h5 id="example-6"><a class="header" href="#example-6">Example</a></h5>
 <pre><code class="language-bash">$ cast --min-int
 -57896044618658097711785492504343953926634992332820282019728792003956564819968
 </code></pre>
 <br>
-<blockquote>
-<p>--to-ascii [HEXDATA]</p>
-</blockquote>
+<hr />
+<h4 id="--to-ascii"><a class="header" href="#--to-ascii"><code>--to-ascii</code></a></h4>
+<pre><code class="language-ignore">cast --to-ascii [HEXDATA]
+</code></pre>
 <p>Convert from hexadecimal to ASCII.</p>
+<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
 <pre><code class="language-bash">$ cast --to-ascii 0x676d
 gm
 </code></pre>
 <br>
-<blockquote>
-<p>--to-bytes32 [BYTES]</p>
-</blockquote>
+<hr />
+<h4 id="--to-bytes32"><a class="header" href="#--to-bytes32"><code>--to-bytes32</code></a></h4>
+<pre><code class="language-ignore">cast --to-bytes32 [BYTES]
+</code></pre>
 <p>Left pad hexadecimal to <code>bytes32</code>.</p>
+<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
 <pre><code class="language-bash">$ cast --to-bytes32 0x676d
 0x676d000000000000000000000000000000000000000000000000000000000000
 </code></pre>
 <br>
-<blockquote>
-<p>--to-checksum-address [ADDRESS]</p>
-</blockquote>
+<hr />
+<h4 id="--to-checksum-address"><a class="header" href="#--to-checksum-address"><code>--to-checksum-address</code></a></h4>
+<pre><code class="language-ignore">cast --to-checksum-address [ADDRESS]
+</code></pre>
 <p>Convert an address to a checksummed format (EIP-55)</p>
+<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
 <pre><code class="language-bash">$ cast --to-checksum-address 0x6b175474e89094c44da98b954eedeac495271d0f
 0x6B175474E89094C44Da98b954EedeAC495271d0F
 </code></pre>
 <br>
-<blockquote>
-<p>--to-dec [HEXVALUE]</p>
-</blockquote>
+<hr />
+<h4 id="--to-dec"><a class="header" href="#--to-dec"><code>--to-dec</code></a></h4>
+<pre><code class="language-ignore">cast --to-dec [HEXVALUE]
+</code></pre>
 <p>Convert from hexadecimal to decimal.</p>
+<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
 <pre><code class="language-bash">$ cast --to-dec 0xf
 15
 </code></pre>
 <br>
-<blockquote>
-<p>--to-fix [ARGS]</p>
-</blockquote>
+<hr />
+<h4 id="--to-fix"><a class="header" href="#--to-fix"><code>--to-fix</code></a></h4>
+<pre><code class="language-ignore">cast --to-fix [ARGS]
+</code></pre>
 <p>Where <code>[ARGS]</code> are <code>&lt;DECIMALS&gt;</code> and <code>&lt;VALUE&gt;</code></p>
 <p>Convert from integer to fixed-point.</p>
+<h5 id="example-11"><a class="header" href="#example-11">Example</a></h5>
 <pre><code class="language-bash">cast --to-fix 18 1
 0.000000000000000001
 </code></pre>
 <br>
-<blockquote>
-<p>--to-hex [DECIMAL]</p>
-</blockquote>
+<hr />
+<h4 id="--to-hex"><a class="header" href="#--to-hex"><code>--to-hex</code></a></h4>
+<pre><code class="language-ignore">cast --to-hex [DECIMAL]
+</code></pre>
 <p>Convert from decimal to hexadecimal.</p>
+<h5 id="example-12"><a class="header" href="#example-12">Example</a></h5>
 <pre><code class="language-bash">$ cast --to-hex 15
 0xf
 </code></pre>
 <br>
-<blockquote>
-<p>--to-hexdata [INPUT]</p>
-</blockquote>
+<hr />
+<h4 id="--to-hexdata"><a class="header" href="#--to-hexdata"><code>--to-hexdata</code></a></h4>
+<pre><code class="language-ignore">cast --to-hexdata [INPUT]
+</code></pre>
 <p>Where <code>[INPUT]</code> can be:</p>
 <ul>
 <li>mixed case hex with or without <code>0x</code> prefix</li>
@@ -319,90 +343,113 @@ gm
 <li><code>@&lt;$TAG&gt;</code>, where <code>$TAG</code> is defined in environment variables</li>
 </ul>
 <p>Convert input to lowercase, <code>0x</code>-prefixed hexadecimal.</p>
+<h5 id="example-13"><a class="header" href="#example-13">Example</a></h5>
 <pre><code class="language-bash">$ export EXAMPLE_INPUT=gm
 $ cast --to-hexdata @EXAMPLE_INPUT
 0x676d
 </code></pre>
 <br>
-<blockquote>
-<p>--to-uint256 [VALUE]</p>
-</blockquote>
+<hr />
+<h4 id="--to-uint256"><a class="header" href="#--to-uint256"><code>--to-uint256</code></a></h4>
+<pre><code class="language-ignore">cast --to-uint256 [VALUE]
+</code></pre>
 <p>Convert a number into <code>uint256</code> hexadecimal.</p>
+<h5 id="example-14"><a class="header" href="#example-14">Example</a></h5>
 <pre><code class="language-bash">$ cast --to-uint256 15
 0x000000000000000000000000000000000000000000000000000000000000000f
 </code></pre>
 <br>
-<blockquote>
-<p>--to-wei [ARGS]</p>
-</blockquote>
+<hr />
+<h4 id="--to-wei"><a class="header" href="#--to-wei"><code>--to-wei</code></a></h4>
+<pre><code class="language-ignore">cast --to-wei [ARGS]
+</code></pre>
 <p>Where <code>[ARGS]</code> are <code>&lt;VALUE&gt;</code> and <code>&lt;UNIT&gt;</code></p>
 <p>Convert from <code>ether</code> to <code>wei</code>.</p>
+<h5 id="example-15"><a class="header" href="#example-15">Example</a></h5>
 <pre><code class="language-bash">$ cast --to-wei 1
 1000000000000000000
 </code></pre>
 <br>
-<blockquote>
-<p>4byte &lt;SELECTOR&gt;</p>
-</blockquote>
+<hr />
+<h4 id="4byte"><a class="header" href="#4byte"><code>4byte</code></a></h4>
+<pre><code class="language-ignore">cast 4byte &lt;SELECTOR&gt;
+</code></pre>
 <p>Fetch function signature using the selector.</p>
+<h5 id="example-16"><a class="header" href="#example-16">Example</a></h5>
 <pre><code class="language-bash">$ cast 4byte 0x1F1F897F
 fulfillRandomness(bytes32,uint256)
 </code></pre>
 <br>
-<blockquote>
-<p>4byte-decode [OPTIONS] &lt;CALLDATA&gt;</p>
-</blockquote>
+<hr />
+<h4 id="4byte-decode"><a class="header" href="#4byte-decode"><code>4byte-decode</code></a></h4>
+<pre><code class="language-ignore">cast 4byte-decode [OPTIONS] &lt;CALLDATA&gt;
+</code></pre>
 <p>Where <code>[OPTIONS]</code> is <code>--id &lt;ID&gt;</code> (the 4byte selector id to use, can also be <code>earliest</code> or <code>latest</code>)</p>
 <p>Decode calldata by fetching the signature.</p>
+<h5 id="example-17"><a class="header" href="#example-17">Example</a></h5>
 <pre><code class="language-bash">$ cast 4byte-decode 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
 1) &quot;fulfillRandomness(bytes32,uint256)&quot;
 0x676d000000000000000000000000000000000000000000000000000000000000
 999
 </code></pre>
 <br>
-<blockquote>
-<p>abi-encode &lt;SIG&gt; &lt;ARGS&gt;</p>
-</blockquote>
+<hr />
+<h4 id="abi-encode"><a class="header" href="#abi-encode"><code>abi-encode</code></a></h4>
+<pre><code class="language-ignore">cast abi-encode &lt;SIG&gt; &lt;ARGS&gt;
+</code></pre>
 <p>Endcode the arguments with the function signature using ABI, exculding the selector.</p>
+<h5 id="example-18"><a class="header" href="#example-18">Example</a></h5>
 <pre><code class="language-bash">$ cast abi-encode &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
 0x676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
 </code></pre>
 <br>
-<blockquote>
-<p>age --rpc-url &lt;RPC_URL&gt; [BLOCK]</p>
-</blockquote>
+<hr />
+<h4 id="age"><a class="header" href="#age"><code>age</code></a></h4>
+<pre><code class="language-ignore">cast age --rpc-url &lt;RPC_URL&gt; [BLOCK]
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Print the timestamp of a block.</p>
+<h5 id="example-19"><a class="header" href="#example-19">Example</a></h5>
 <pre><code class="language-bash">$ cast age --rpc-url &lt;your_rpc_url&gt; 1
 Thu Jul 30 15:26:28 2015
 </code></pre>
 <br>
-<blockquote>
-<p>balance [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
-</blockquote>
+<hr />
+<h4 id="balance"><a class="header" href="#balance"><code>balance</code></a></h4>
+<pre><code class="language-ignore">cast balance [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
 <p>Print the balance of an account in wei.</p>
+<h5 id="example-20"><a class="header" href="#example-20">Example</a></h5>
 <pre><code class="language-bash">$ cast balance --rpc-url &lt;your_rpc_url&gt; 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
 4345868603562666975407
 </code></pre>
 <br>
-<blockquote>
-<p>basefee --rpc-url &lt;RPC_URL&gt; [BLOCK]</p>
-</blockquote>
+<hr />
+<h4 id="basefee"><a class="header" href="#basefee"><code>basefee</code></a></h4>
+<pre><code class="language-ignore">cast basefee --rpc-url &lt;RPC_URL&gt; [BLOCK]
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[BLOCK]</code> is the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code></p>
 <p>Print the basefee of a block.</p>
+<h5 id="example-21"><a class="header" href="#example-21">Example</a></h5>
 <pre><code class="language-bash">$ cast basefee --rpc-url &lt;your_rpc_url&gt;
 75171909348
 </code></pre>
 <br>
-<blockquote>
-<p>block [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;BLOCK&gt; [FIELD]</p>
-</blockquote>
+<hr />
+<h4 id="block"><a class="header" href="#block"><code>block</code></a></h4>
+<pre><code class="language-ignore">cast block [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;BLOCK&gt; [FIELD]
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where:</p>
 <ul>
 <li><code>[OPTIONS]</code> are <code>--full</code> and <code>--json</code></li>
 <li><code>&lt;BLOCK&gt;</code> is the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code></li>
 </ul>
 <p>Print information about a block or only one of its fields.</p>
+<h5 id="example-22"><a class="header" href="#example-22">Example</a></h5>
 <pre><code class="language-bash">$ cast block --rpc-url &lt;your_rpc_url&gt; latest
 baseFeePerGas        &quot;0x1823d83b1f&quot;
 difficulty           &quot;0x2d3af62284c2ab&quot;
@@ -411,26 +458,31 @@ gasLimit             &quot;0x...
 ...
 </code></pre>
 <br>
-<blockquote>
-<p>block-number --rpc-url &lt;RPC_URL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="block-number"><a class="header" href="#block-number"><code>block-number</code></a></h4>
+<pre><code class="language-ignore">cast block-number --rpc-url &lt;RPC_URL&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Print latest block number.</p>
+<h5 id="example-23"><a class="header" href="#example-23">Example</a></h5>
 <pre><code class="language-bash">$ cast block-number --rpc-url &lt;your_rpc_url&gt;
 14100150
 </code></pre>
 <br>
-<blockquote>
-<p>call [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="call"><a class="header" href="#call"><code>call</code></a></h4>
+<pre><code class="language-ignore">cast call [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
-<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet)</li>
-<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code></li>
-<li><code>--from &lt;FROM&gt;</code> (the sender account)</li>
+<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet) env: <code>CHAIN</code></li>
+<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code> env: <code>ETHERSCAN_API_KEY</code></li>
+<li><code>--from &lt;FROM&gt;</code> (the sender account) env: <code>ETH_FROM</code></li>
 <li><code>--flashbots</code> (to use a flashbots RPC URL: https://rpc.flashbots.net)</li>
 <li><code>--hd-path &lt;HD_PATH&gt;</code> (derivation path for your hardware wallet, trezor or ledger)</li>
 <li><code>--interactive</code> (interactive prompt to insert your private key)</li>
-<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file)</li>
+<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file) env: <code>ETH_KEYSTORE</code></li>
 <li><code>--ledger</code> (use your Ledger hardware wallet)</li>
 <li><code>--mnemonic-path &lt;MNEMONIC_PATH&gt;</code> (path to your mnemonic file)</li>
 <li><code>--mnemonic_index &lt;MNEMONIC_INDEX&gt;</code> (your index in the standard hd path, default: 0)</li>
@@ -439,64 +491,80 @@ gasLimit             &quot;0x...
 <li><code>--trezor</code> (use your Trezor hardware wallet)</li>
 </ul>
 <p>Perform a local smart contract call.</p>
+<h5 id="example-24"><a class="header" href="#example-24">Example</a></h5>
 <pre><code class="language-bash">$ cast call 0x6b175474e89094c44da98b954eedeac495271d0f &quot;totalSupply()(uint256)&quot; --rpc-url &lt;your_rpc_url&gt;
 9086622410684231497979028744
 </code></pre>
 <br>
-<blockquote>
-<p>calldata &lt;SIG&gt; [ARGS]</p>
-</blockquote>
+<hr />
+<h4 id="calldata"><a class="header" href="#calldata"><code>calldata</code></a></h4>
+<pre><code class="language-ignore">cast calldata &lt;SIG&gt; [ARGS]
+</code></pre>
 <p>Pack a function signature and arguments into hexadecimal calldata.</p>
+<h5 id="example-25"><a class="header" href="#example-25">Example</a></h5>
 <pre><code class="language-bash">$ cast calldata &quot;fulfillRandomness(bytes32,uint256)&quot; 0x676d000000000000000000000000000000000000000000000000000000000000 999
 0x1f1f897f676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
 </code></pre>
 <br>
-<blockquote>
-<p>chain --rpc-url &lt;RPC_URL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="chain"><a class="header" href="#chain"><code>chain</code></a></h4>
+<pre><code class="language-ignore">cast chain --rpc-url &lt;RPC_URL&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Print symbolic name of current blockchain by checking genesis hash.</p>
+<h5 id="example-26"><a class="header" href="#example-26">Example</a></h5>
 <pre><code class="language-bash">$ cast chain --rpc-url &lt;your_rpc_url&gt;
 ethlive
 </code></pre>
 <br>
-<blockquote>
-<p>chain-id --rpc-url &lt;RPC_URL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="chain-id"><a class="header" href="#chain-id"><code>chain-id</code></a></h4>
+<pre><code class="language-ignore">cast chain-id --rpc-url &lt;RPC_URL&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Return chain ID.</p>
+<h5 id="example-27"><a class="header" href="#example-27">Example</a></h5>
 <pre><code class="language-bash">$ cast chain-id --rpc-url &lt;your_rpc_url&gt;
 1
 </code></pre>
 <br>
-<blockquote>
-<p>code [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
-</blockquote>
+<hr />
+<h4 id="code"><a class="header" href="#code"><code>code</code></a></h4>
+<pre><code class="language-ignore">cast code [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
 <p>Print the bytecode at an address.</p>
+<h5 id="example-28"><a class="header" href="#example-28">Example</a></h5>
 <pre><code class="language-bash">$ cast code --rpc-url &lt;your_rpc_url&gt; 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
 0x60806040523480156100...
 </code></pre>
 <br>
-<blockquote>
-<p>completions &lt;SHELL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="completions"><a class="header" href="#completions"><code>completions</code></a></h4>
+<pre><code class="language-ignore">cast completions &lt;SHELL&gt;
+</code></pre>
 <p>Where <code>&lt;SHELL&gt;</code> can be <code>bash</code>, <code>elvish</code>, <code>fish</code>, <code>powershell</code>, <code>zsh</code></p>
 <p>Generate shell completions script.</p>
+<h5 id="example-29"><a class="header" href="#example-29">Example</a></h5>
 <pre><code class="language-bash">$ cast completions bash
 prints the bash completions script here...
 </code></pre>
 <br>
-<blockquote>
-<p>estimate [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="estimate"><a class="header" href="#estimate"><code>estimate</code></a></h4>
+<pre><code class="language-ignore">cast estimate [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
-<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet)</li>
-<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code></li>
-<li><code>--from &lt;FROM&gt;</code> (the sender account)</li>
+<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet) env: <code>CHAIN</code></li>
+<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code> env: <code>ETHERSCAN_API_KEY</code></li>
+<li><code>--from &lt;FROM&gt;</code> (the sender account) env: <code>ETH_FROM</code></li>
 <li><code>--flashbots</code> (to use a flashbots RPC URL: https://rpc.flashbots.net)</li>
 <li><code>--hd-path &lt;HD_PATH&gt;</code> (derivation path for your hardware wallet, trezor or ledger)</li>
 <li><code>--interactive</code> (interactive prompt to insert your private key)</li>
-<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file)</li>
+<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file) env: <code>ETH_KEYSTORE</code></li>
 <li><code>--ledger</code> (use your Ledger hardware wallet)</li>
 <li><code>--mnemonic-path &lt;MNEMONIC_PATH&gt;</code> (path to your mnemonic file)</li>
 <li><code>--mnemonic_index &lt;MNEMONIC_INDEX&gt;</code> (your index in the standard hd path, default: 0)</li>
@@ -505,72 +573,91 @@ prints the bash completions script here...
 <li><code>--trezor</code> (use your Trezor hardware wallet)</li>
 </ul>
 <p>Estimate the gas cost of a transaction.</p>
+<h5 id="example-30"><a class="header" href="#example-30">Example</a></h5>
 <pre><code class="language-bash">$ cast estimate --from 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 0xc18360217d8f7ab5e7c516566761ea12ce7f9d72 &quot;transfer(address,uint)(bool)&quot; 0x15322B546e31F5Bfe144C4ae133A9Db6F0059fe3 1000000000000000000 --rpc-url &lt;your_rpc_url&gt;
 90677
 </code></pre>
 <br>
-<blockquote>
-<p>gas-price --rpc-url &lt;RPC_URL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="gas-price"><a class="header" href="#gas-price"><code>gas-price</code></a></h4>
+<pre><code class="language-ignore">cast gas-price --rpc-url &lt;RPC_URL&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Print current gas price of target chain.</p>
+<h5 id="example-31"><a class="header" href="#example-31">Example</a></h5>
 <pre><code class="language-bash">$ cast gas-price --rpc-url &lt;your_rpc_url&gt;
 89367836498
 </code></pre>
 <br>
-<blockquote>
-<p>keccak &lt;DATA&gt;</p>
-</blockquote>
+<hr />
+<h4 id="keccak"><a class="header" href="#keccak"><code>keccak</code></a></h4>
+<pre><code class="language-ignore">cast keccak &lt;DATA&gt;
+</code></pre>
 <p>Keccak-256-hash arbitrary data.</p>
+<h5 id="example-32"><a class="header" href="#example-32">Example</a></h5>
 <pre><code class="language-bash">$ cast keccak gm
 0x71b78290913af2addd8fcbe5766de306af2c8afbc466ca891e207f73638c7270
 </code></pre>
 <br>
-<blockquote>
-<p>lookup-address [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
-</blockquote>
+<hr />
+<h4 id="lookup-address"><a class="header" href="#lookup-address"><code>lookup-address</code></a></h4>
+<pre><code class="language-ignore">cast lookup-address [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> is <code>--verify</code> (do a forward resolution to ensure the address is correct)</p>
 <p>Get the ENS name an address resolves to.</p>
+<h5 id="example-33"><a class="header" href="#example-33">Example</a></h5>
 <pre><code class="language-bash">$ cast lookup-address --rpc-url &lt;your_rpc_url&gt; 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
 vitalik.eth
 </code></pre>
 <br>
-<blockquote>
-<p>namehash &lt;NAME&gt;</p>
-</blockquote>
+<hr />
+<h4 id="namehash"><a class="header" href="#namehash"><code>namehash</code></a></h4>
+<pre><code class="language-ignore">cast namehash &lt;NAME&gt;
+</code></pre>
 <p>Print ENS namehash of a ENS name.</p>
+<h5 id="example-34"><a class="header" href="#example-34">Example</a></h5>
 <pre><code class="language-bash">$ cast namehash &quot;vitalik.eth&quot;
 0xee6c4522aab0003e8d14cd40a6af439055fd2577951148c14b6cea9a53475835
 </code></pre>
 <br>
-<blockquote>
-<p>nonce [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;</p>
-</blockquote>
+<hr />
+<h4 id="nonce"><a class="header" href="#nonce"><code>nonce</code></a></h4>
+<pre><code class="language-ignore">cast nonce [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;WHO&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
 <p>Get the number of transactions sent from an address.</p>
+<h5 id="example-35"><a class="header" href="#example-35">Example</a></h5>
 <pre><code class="language-bash">$ cast nonce --rpc-url &lt;your_rpc_url&gt; 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
 750
 </code></pre>
 <br>
-<blockquote>
-<p>resolve-name [OPTIONS] --rpc-url &lt;RPC_URL&gt; [WHO]</p>
-</blockquote>
+<hr />
+<h4 id="resolve-name"><a class="header" href="#resolve-name"><code>resolve-name</code></a></h4>
+<pre><code class="language-ignore">cast resolve-name [OPTIONS] --rpc-url &lt;RPC_URL&gt; [WHO]
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Get the address an ENS name resolves to.</p>
+<h5 id="example-36"><a class="header" href="#example-36">Example</a></h5>
 <pre><code class="language-bash">$ cast resolve-name --rpc-url &lt;your_rpc_url&gt; &quot;vitalik.eth&quot;
 0xd8da6bf26964af9d7eed9e03e53415d37aa96045
 </code></pre>
 <br>
-<blockquote>
-<p>send [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;</p>
-</blockquote>
+<hr />
+<h4 id="send"><a class="header" href="#send"><code>send</code></a></h4>
+<pre><code class="language-ignore">cast send [OPTIONS] &lt;ADDRESS&gt; &lt;SIG&gt; [ARGS] --rpc-url &lt;RPC_URL&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> are:</p>
 <ul>
-<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet)</li>
-<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code></li>
-<li><code>--from &lt;FROM&gt;</code> (the sender account)</li>
+<li><code>--chain &lt;CHAIN&gt;</code> (default: mainnet) env: <code>CHAIN</code></li>
+<li><code>--etherscan-api-key &lt;ETHERSCAN_API_KEY&gt;</code> env: <code>ETHERSCAN_API_KEY</code></li>
+<li><code>--from &lt;FROM&gt;</code> (the sender account) env: <code>ETH_FROM</code></li>
 <li><code>--flashbots</code> (to use a flashbots RPC URL: https://rpc.flashbots.net)</li>
 <li><code>--hd-path &lt;HD_PATH&gt;</code> (derivation path for your hardware wallet, trezor or ledger)</li>
 <li><code>--interactive</code> (interactive prompt to insert your private key)</li>
-<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file)</li>
+<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file) env: <code>ETH_KEYSTORE</code></li>
 <li><code>--ledger</code> (use your Ledger hardware wallet)</li>
 <li><code>--mnemonic-path &lt;MNEMONIC_PATH&gt;</code> (path to your mnemonic file)</li>
 <li><code>--mnemonic_index &lt;MNEMONIC_INDEX&gt;</code> (your index in the standard hd path, default: 0)</li>
@@ -579,26 +666,33 @@ vitalik.eth
 <li><code>--trezor</code> (use your Trezor hardware wallet)</li>
 </ul>
 <p>Publish a transaction.</p>
-<pre><code class="language-bash">$ cast send --chain kovan --from &lt;your_address&gt; --interactive 0xd0A1E359811322d97991E03f863a0C30C2cF029C &quot;withdraw(uint256)&quot; 10000000000000000 --rpc-url &lt;your_rpc_url&gt;
+<h5 id="example-37"><a class="header" href="#example-37">Example</a></h5>
+<pre><code class="language-bash">$ cast send --chain kovan --from &lt;your_address&gt; --interactive 0xd0A1E359811322d97991E03f863a0C30C2cF029C &quot;deposit()&quot; --value 0.1ether --rpc-url &lt;your_rpc_url&gt;
 Insert private key:
 
 prints the transaction receipt...
 </code></pre>
 <br>
-<blockquote>
-<p>storage [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;ADDRESS&gt; &lt;SLOT&gt;</p>
-</blockquote>
+<hr />
+<h4 id="storage"><a class="header" href="#storage"><code>storage</code></a></h4>
+<pre><code class="language-ignore">cast storage [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;ADDRESS&gt; &lt;SLOT&gt;
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> is <code>--block &lt;BLOCK&gt;</code> (the block you want to query, can also be <code>earliest</code>,<code>latest</code>,<code>pending</code>)</p>
 <p>Get the raw value of a contract's storage slot.</p>
+<h5 id="example-38"><a class="header" href="#example-38">Example</a></h5>
 <pre><code class="language-bash">$ cast storage --rpc-url &lt;your_rpc_url&gt; 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 0
 0x577261707065642045746865720000000000000000000000000000000000001a
 </code></pre>
 <br>
-<blockquote>
-<p>tx [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;HASH&gt; [FIELD]</p>
-</blockquote>
+<hr />
+<h4 id="tx"><a class="header" href="#tx"><code>tx</code></a></h4>
+<pre><code class="language-ignore">cast tx [OPTIONS] --rpc-url &lt;RPC_URL&gt; &lt;HASH&gt; [FIELD]
+</code></pre>
+<p>env: <code>ETH_RPC_URL</code></p>
 <p>Where <code>[OPTIONS]</code> are <code>--json</code></p>
 <p>Print information about a transaction or only one of its fields.</p>
+<h5 id="example-39"><a class="header" href="#example-39">Example</a></h5>
 <pre><code class="language-bash">$ cast tx --rpc-url &lt;your_rpc_url&gt; 0xf85ece86f9dec5bfa0357606a6afe0d696290cefe117194c8226ed4adfe228e7
 accessList           []
 blockHash            &quot;0x185fc0bf17167beb2a82311ec3739d560cc9107bc109f0e8ab73daf86573d5b8&quot;
@@ -607,9 +701,10 @@ chainId              &quot;0x...
 ...
 </code></pre>
 <br>
-<blockquote>
-<p>wallet &lt;SUBCOMMAND&gt;</p>
-</blockquote>
+<hr />
+<h4 id="wallet"><a class="header" href="#wallet"><code>wallet</code></a></h4>
+<pre><code class="language-ignore">cast wallet &lt;SUBCOMMAND&gt;
+</code></pre>
 <p>Where <code>&lt;SUBCOMMAND&gt;</code> can be:</p>
 <ul>
 <li><code>address</code> (convert a private key to an address)</li>
@@ -619,40 +714,60 @@ chainId              &quot;0x...
 <li><code>verify</code> (verify the signature on the message)</li>
 </ul>
 <p>Set of wallet management utilities.</p>
-<p>Convert a private key to an address.</p>
+<p>Convert a private key to an address with <code>address</code>.</p>
+<pre><code class="language-ignore">cast wallet address [OPTIONS]
+</code></pre>
+<p>Where <code>[OPTIONS]</code> are:</p>
+<ul>
+<li><code>--hd-path &lt;HD_PATH&gt;</code> (derivation path for your hardware wallet, trezor or ledger)</li>
+<li><code>--interactive</code> (interactive prompt to insert your private key)</li>
+<li><code>--keystore &lt;KEYSTORE_PATH&gt;</code> (path to your keystore folder / file) env: <code>ETH_KEYSTORE</code></li>
+<li><code>--ledger</code> (use your Ledger hardware wallet)</li>
+<li><code>--mnemonic-path &lt;MNEMONIC_PATH&gt;</code> (path to your mnemonic file)</li>
+<li><code>--mnemonic_index &lt;MNEMONIC_INDEX&gt;</code> (your index in the standard hd path, default: 0)</li>
+<li><code>--password &lt;KEYSTORE_PASSWORD&gt;</code> (your keystore password)</li>
+<li><code>--private-key &lt;PRIVATE_KEY&gt;</code> (your private key string)</li>
+<li><code>--trezor</code> (use your Trezor hardware wallet)</li>
+</ul>
+<h5 id="example-40"><a class="header" href="#example-40">Example</a></h5>
 <pre><code class="language-bash">cast wallet address --interactive
 Insert private key: &lt;PRIVATE_KEY&gt;
 
 Address: 0xBC084F73B100b50057a5175816a8ce8CfaF43b1C
 </code></pre>
-<p>Create a new public / private keypair.</p>
+<p>Create a new public / private keypair with <code>new</code>.</p>
+<h5 id="example-41"><a class="header" href="#example-41">Example</a></h5>
 <pre><code class="language-bash">$ cast wallet new
 Successfully created new keypair.
 Address: 0x19F4aB0c5ae1245F1E06798856815D82018AFE93
 Private Key: &lt;PRIVATE_KEY&gt;
 </code></pre>
-<p>Sign a message.</p>
+<p>Sign a message with <code>sign</code>.</p>
+<h5 id="example-42"><a class="header" href="#example-42">Example</a></h5>
 <pre><code class="language-bash">$ cast wallet sign --interactive &quot;gm&quot;
 Insert private key:
 
 Signature: 0x22e3ad614cf53211b2ab164b4b46a39f878606f0c9e7b412c3ceb525f039fd1d50e72bdabaef42c295be0914d8c2b720001227d8c9f8d5e13103be65a0392acd1c
 </code></pre>
-<p>Create a new public / private keypair with a specific prefix.</p>
+<p>Create a new public / private keypair with a specific prefix with <code>vanity</code>.</p>
+<h5 id="example-43"><a class="header" href="#example-43">Example</a></h5>
 <pre><code class="language-bash">$ cast wallet vanity --starts-with beef
 Starting to generate vanity address...
 Successfully created new keypair in 3 seconds.
 Address: 0xBEEf111188257c2008271dBD193999FD1516d787
 Private Key: &lt;PRIVATE_KEY&gt;
 </code></pre>
-<p>Verify the signature on a message.</p>
+<p>Verify the signature on a message with <code>verify</code>.</p>
+<h5 id="example-44"><a class="header" href="#example-44">Example</a></h5>
 <pre><code class="language-bash">$ cast wallet verify --address 0xBEEf111188257c2008271dBD193999FD1516d787 &quot;gm&quot; 0x22e3ad614cf53211b2ab164b4b46a39f878606f0c9e7b412c3ceb525f0
 39fd1d50e72bdabaef42c295be0914d8c2b720001227d8c9f8d5e13103be65a0392acd1c
 Validation success. Address 0xBEEf111188257c2008271dBD193999FD1516d787 signed this message.
 </code></pre>
-<p><br><br></p>
+<br>
+<br>
 <blockquote>
 <p>ℹ️ <strong>Information</strong></p>
-<p>You can print help for any subcommand (or their subcommands) by adding <code>--help</code> at the end.</p>
+<p>Print help for any subcommand (or their subcommands) by adding <code>--help</code> at the end.</p>
 </blockquote>
 
                     </main>

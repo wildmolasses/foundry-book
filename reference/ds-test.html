@@ -176,43 +176,51 @@ event log_named_string       (string key, string val);
 </code></pre>
 <h3 id="logging-events"><a class="header" href="#logging-events">Logging events</a></h3>
 <p>This section documents all events for logging and provides usage examples. </p>
-<br>
-<blockquote>
-<p>log(string)</p>
-</blockquote>
+<h4 id="log"><a class="header" href="#log"><code>log</code></a></h4>
+<pre><code class="language-solidity">event log(string);
+</code></pre>
+<h5 id="example"><a class="header" href="#example">Example</a></h5>
 <pre><code class="language-solidity">emit log(&quot;here&quot;);
 // here
 </code></pre>
 <br>
-<blockquote>
-<p>logs(bytes)</p>
-</blockquote>
+<hr />
+<h4 id="logs"><a class="header" href="#logs">logs</a></h4>
+<pre><code class="language-solidity">event logs(bytes);
+</code></pre>
+<h5 id="example-1"><a class="header" href="#example-1">Example</a></h5>
 <pre><code class="language-solidity">emit logs(bytes(&quot;abcd&quot;));
 // 0x6162636400000000000000000000000000000000000000000000000000000000
 </code></pre>
 <br>
-<blockquote>
-<p>log_&lt;type&gt;(&lt;type&gt;)</p>
-</blockquote>
+<hr />
+<h4 id="log_type"><a class="header" href="#log_type">log_&lt;type&gt;</a></h4>
+<pre><code class="language-solidity">event log_&lt;type&gt;(&lt;type&gt;);
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code>, <code>bytes</code>, <code>string</code></p>
+<h5 id="example-2"><a class="header" href="#example-2">Example</a></h5>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
 emit log_uint(amount);
 // 1000000000000000000
 </code></pre>
 <br>
-<blockquote>
-<p>log_named_&lt;type&gt;(string key, &lt;type&gt; val)</p>
-</blockquote>
+<hr />
+<h4 id="log_named_type"><a class="header" href="#log_named_type">log_named_&lt;type&gt;</a></h4>
+<pre><code class="language-solidity">event log_named_&lt;type&gt;(string key, &lt;type&gt; val);
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code>, <code>bytes</code>, <code>string</code></p>
+<h5 id="example-3"><a class="header" href="#example-3">Example</a></h5>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
 emit log_named_uint(&quot;Amount: &quot;, amount);
 // amount: 1000000000000000000
 </code></pre>
 <br>
-<blockquote>
-<p>log_named_decimal_&lt;type&gt;(string key, &lt;type&gt; val, uint decimals)</p>
-</blockquote>
+<hr />
+<h4 id="log_named_decimal_type"><a class="header" href="#log_named_decimal_type">log_named_decimal_&lt;type&gt;</a></h4>
+<pre><code class="language-solidity">event log_named_decimal_&lt;type&gt;(string key, &lt;type&gt; val, uint decimals);
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
+<h5 id="example-4"><a class="header" href="#example-4">Example</a></h5>
 <pre><code class="language-solidity">uint256 amount = 1 ether;
 emit log_named_decimal_uint(&quot;Amount: &quot;, amount, 18);
 // amount: 1.000000000000000000
@@ -285,126 +293,150 @@ function assertLeDecimal(uint a, uint b, uint decimals, string memory err) inter
 </code></pre>
 <h3 id="assertion-functions"><a class="header" href="#assertion-functions">Assertion functions</a></h3>
 <p>This section documents all functions for asserting and provides usage examples. </p>
-<br>
-<blockquote>
-<p>assertTrue(bool condition)</p>
-</blockquote>
+<h4 id="asserttrue"><a class="header" href="#asserttrue"><code>assertTrue</code></a></h4>
+<pre><code class="language-solidity">function assertTrue(bool condition) internal;
+</code></pre>
 <p>Asserts the <code>condition</code> is true.</p>
+<h5 id="example-5"><a class="header" href="#example-5">Example</a></h5>
 <pre><code class="language-solidity">bool success = contract.fun();
 assertTrue(success);
 </code></pre>
 <br>
-<blockquote>
-<p>assertEq(&lt;type&gt; a, &lt;type&gt; b)</p>
-</blockquote>
+<hr />
+<h4 id="asserteq"><a class="header" href="#asserteq"><code>assertEq</code></a></h4>
+<pre><code class="language-solidity">function assertEq(&lt;type&gt; a, &lt;type&gt; b) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>address</code>, <code>bytes32</code>, <code>int</code>, <code>uint</code></p>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
+<h5 id="example-6"><a class="header" href="#example-6">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 1e18 wei;
 assertEq(a, b);
 </code></pre>
 <br>
-<blockquote>
-<p>assertEqDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
-</blockquote>
+<hr />
+<h4 id="asserteqdecimal"><a class="header" href="#asserteqdecimal"><code>assertEqDecimal</code></a></h4>
+<pre><code class="language-solidity">function assertEqDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
+<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 1e18 wei;
 assertEqDecimal(a, b, 18);
 </code></pre>
 <br>
-<blockquote>
-<p>assertEq32(bytes32 a, bytes32 b)</p>
-</blockquote>
+<hr />
+<h4 id="asserteq32"><a class="header" href="#asserteq32"><code>assertEq32</code></a></h4>
+<pre><code class="language-solidity">function assertEq32(bytes32 a, bytes32 b) internal;
+</code></pre>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
+<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
 <pre><code class="language-solidity">assertEq(bytes32(&quot;abcd&quot;), 0x6162636400000000000000000000000000000000000000000000000000000000);
 </code></pre>
 <br>
-<blockquote>
-<p>assertEq0(bytes a, bytes b)</p>
-</blockquote>
+<hr />
+<h4 id="asserteq0"><a class="header" href="#asserteq0"><code>assertEq0</code></a></h4>
+<pre><code class="language-solidity">function assertEq0(bytes a, bytes b) internal;
+</code></pre>
 <p>Asserts <code>a</code> is equal to <code>b</code>.</p>
+<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
 <pre><code class="language-solidity">string memory name1 = &quot;Alice&quot;;
 string memory name2 = &quot;Bob&quot;;
 assertEq0(bytes(name1), bytes(name2)); // [FAIL]
 </code></pre>
 <br>
-<blockquote>
-<p>assertGt(&lt;type&gt; a, &lt;type&gt; b)</p>
-</blockquote>
+<hr />
+<h4 id="assertgt"><a class="header" href="#assertgt"><code>assertGt</code></a></h4>
+<pre><code class="language-solidity">function assertGt(&lt;type&gt; a, &lt;type&gt; b) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than <code>b</code>.</p>
+<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 2 ether;
 uint256 b = 1e18 wei;
 assertGt(a, b);
 </code></pre>
 <br>
-<blockquote>
-<p>assertGtDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
-</blockquote>
+<hr />
+<h4 id="assertgtdecimal"><a class="header" href="#assertgtdecimal"><code>assertGtDecimal</code></a></h4>
+<pre><code class="language-solidity">function assertGtDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than <code>b</code>.</p>
+<h5 id="example-11"><a class="header" href="#example-11">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 2 ether;
 uint256 b = 1e18 wei;
 assertGtDecimal(a, b, 18);
 </code></pre>
 <br>
-<blockquote>
-<p>assertGe(&lt;type&gt; a, &lt;type&gt; b)</p>
-</blockquote>
+<hr />
+<h4 id="assertge"><a class="header" href="#assertge"><code>assertGe</code></a></h4>
+<pre><code class="language-solidity">function assertGe(&lt;type&gt; a, &lt;type&gt; b) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than or equal to <code>b</code>.</p>
+<h5 id="example-12"><a class="header" href="#example-12">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 1e18 wei;
 assertGe(a, b);
 </code></pre>
 <br>
-<blockquote>
-<p>assertGeDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
-</blockquote>
+<hr />
+<h4 id="assertgedecimal"><a class="header" href="#assertgedecimal"><code>assertGeDecimal</code></a></h4>
+<pre><code class="language-solidity">function assertGeDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is greater than or equal to <code>b</code>.</p>
+<h5 id="example-13"><a class="header" href="#example-13">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 1e18 wei;
 assertGeDecimal(a, b, 18);
 </code></pre>
 <br>
-<blockquote>
-<p>assertLt(&lt;type&gt; a, &lt;type&gt; b)</p>
-</blockquote>
+<hr />
+<h4 id="assertlt"><a class="header" href="#assertlt"><code>assertLt</code></a></h4>
+<pre><code class="language-solidity">function assertLt(&lt;type&gt; a, &lt;type&gt; b) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than <code>b</code>.</p>
+<h5 id="example-14"><a class="header" href="#example-14">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 2e18 wei;
 assertLt(a, b);
 </code></pre>
 <br>
-<blockquote>
-<p>assertLtDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
-</blockquote>
+<hr />
+<h4 id="assertltdecimal"><a class="header" href="#assertltdecimal"><code>assertLtDecimal</code></a></h4>
+<pre><code class="language-solidity">function assertLtDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than <code>b</code>.</p>
+<h5 id="example-15"><a class="header" href="#example-15">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 2e18 wei;
 assertLtDecimal(a, b, 18);
 </code></pre>
 <br>
-<blockquote>
-<p>assertLe(&lt;type&gt; a, &lt;type&gt; b)</p>
-</blockquote>
+<hr />
+<h4 id="assertle"><a class="header" href="#assertle"><code>assertLe</code></a></h4>
+<pre><code class="language-solidity">function assertLe(&lt;type&gt; a, &lt;type&gt; b) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than or equal to <code>b</code>.</p>
+<h5 id="example-16"><a class="header" href="#example-16">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 1e18 wei;
 assertLe(a, b);
 </code></pre>
 <br>
-<blockquote>
-<p>assertLeDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals)</p>
-</blockquote>
+<hr />
+<h4 id="assertledecimal"><a class="header" href="#assertledecimal"><code>assertLeDecimal</code></a></h4>
+<pre><code class="language-solidity">function assertLeDecimal(&lt;type&gt; a, &lt;type&gt; b, uint decimals) internal;
+</code></pre>
 <p>Where <code>&lt;type&gt;</code> can be <code>int</code>, <code>uint</code></p>
 <p>Asserts  <code>a</code> is lesser than or equal to <code>b</code>.</p>
+<h5 id="example-17"><a class="header" href="#example-17">Example</a></h5>
 <pre><code class="language-solidity">uint256 a = 1 ether;
 uint256 b = 1e18 wei;
 assertLeDecimal(a, b, 18);

@@ -294,13 +294,24 @@ emit log_address(alice); // 0x7e5f4552091a69125d5dfcb7b8c2659029395bdf
 </code></pre>
 <p>Calls an arbitrary command if <a href="./config.html#ffi"><code>ffi</code></a> is enabled.</p>
 <p>It is generally advised to use this cheat code as a last resort, and to not enable it by default, as anyone who can change the tests of a project will be able to execute arbitrary commands on devices that run the tests.</p>
+<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<pre><code class="language-solidity">string[] memory inputs = new string[](3);
+inputs[0] = &quot;echo&quot;;
+inputs[1] = &quot;-n&quot;;
+// ABI encoded &quot;gm&quot;, as a string
+inputs[2] = &quot;0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002676d000000000000000000000000000000000000000000000000000000000000&quot;;
+
+bytes memory res = cheats.ffi(inputs);
+string memory output = abi.decode(res, (string));
+assertEq(output, &quot;gm&quot;);
+</code></pre>
 <br>
 <hr />
 <h4 id="prank"><a class="header" href="#prank"><code>prank</code></a></h4>
 <pre><code class="language-solidity">function prank(address) external;
 </code></pre>
 <p>Sets <code>msg.sender</code> to the specified address <strong>for the next call</strong>. &quot;The next call&quot; includes static calls as well, but not calls to the cheat code address.</p>
-<h5 id="example-7"><a class="header" href="#example-7">Example</a></h5>
+<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
 <pre><code class="language-solidity">/// function withdraw() public {
 ///     require(msg.sender == owner);
 
@@ -310,15 +321,15 @@ myContract.withdraw(); // [PASS]
 <h5 id="alternative-signature"><a class="header" href="#alternative-signature">Alternative Signature</a></h5>
 <pre><code class="language-solidity">function prank(address sender, address origin) external;
 </code></pre>
-<p>Sets <code>msg.sender</code> to <code>sender</code> and <code>tx.origin</code> to <code>origin</code> for the next call.</p>
+<p>Sets <code>msg.sender</code> to <code>sender</code> and <code>tx.origin</code> to <code>origin</code> <strong>for the next call</strong>.</p>
 <h4 id="startprank"><a class="header" href="#startprank"><code>startPrank</code></a></h4>
 <pre><code class="language-solidity">function startPrank(address) external;
 </code></pre>
-<p>Sets <code>msg.sender</code> for all subsequent calls until <a href="#stopprank"><code>stopPrank</code></a> is called.</p>
+<p>Sets <code>msg.sender</code> <strong>for all subsequent calls</strong> until <a href="#stopprank"><code>stopPrank</code></a> is called.</p>
 <h5 id="alternative-signature-1"><a class="header" href="#alternative-signature-1">Alternative Signature</a></h5>
 <pre><code class="language-solidity">function startPrank(address sender, address origin) external;
 </code></pre>
-<p>Sets <code>msg.sender</code> to <code>sender</code> and <code>tx.origin</code> to <code>origin</code> for all subsequent calls until <a href="#stopprank"><code>stopPrank</code></a> is called.</p>
+<p>Sets <code>msg.sender</code> to <code>sender</code> and <code>tx.origin</code> to <code>origin</code> <strong>for all subsequent calls</strong> until <a href="#stopprank"><code>stopPrank</code></a> is called.</p>
 <h4 id="stopprank"><a class="header" href="#stopprank"><code>stopPrank</code></a></h4>
 <pre><code class="language-solidity">function stopPrank() external;
 </code></pre>
@@ -329,7 +340,7 @@ myContract.withdraw(); // [PASS]
 <pre><code class="language-solidity">function deal(address who, uint256 newBalance) external;
 </code></pre>
 <p>Sets the balance of an address <code>who</code> to <code>newBalance</code>.</p>
-<h5 id="example-8"><a class="header" href="#example-8">Example</a></h5>
+<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
 <pre><code class="language-solidity">address alice = address(1);
 cheats.deal(alice, 1 ether);
 log_uint256(alice.balance); // 1000000000000000000
@@ -340,7 +351,7 @@ log_uint256(alice.balance); // 1000000000000000000
 <pre><code class="language-solidity">function etch(address who, bytes calldata code) external;
 </code></pre>
 <p>Sets the bytecode of an address <code>who</code> to <code>code</code>.</p>
-<h5 id="example-9"><a class="header" href="#example-9">Example</a></h5>
+<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
 <pre><code class="language-solidity">address code = address(awesomeContract).code;
 address targetAddr = address(1);
 cheats.etch(targetAddr, code);
@@ -379,7 +390,7 @@ This means, for example, we can call <code>cheats.prank(user)</code> immediately
 </code></pre>
 <p>Gets all storage slots that have been read (<code>reads</code>) or written to (<code>writes</code>) on an address.</p>
 <p>Note that <a href="#record"><code>record</code></a> must be called first.</p>
-<h5 id="example-10"><a class="header" href="#example-10">Example</a></h5>
+<h5 id="example-11"><a class="header" href="#example-11">Example</a></h5>
 <pre><code class="language-solidity">/// contract NumsContract {
 ///     uint256 public num1 = 100; // slot 0
 ///     uint256 public num2 = 200; // slot 1
@@ -499,11 +510,10 @@ This is because Solidity inserts an <code>extcodesize</code> check before some c
 <p>Expects at least one call to address <code>where</code> where the call data either strictly or loosely matches <code>data</code>.</p>
 <p>When a call is made to <code>where</code> the call data is first checked to see if it matches in its entirety with <code>data</code>. If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.</p>
 <p>If the test terminates without the call being made, the test fails.</p>
-<h5 id="example-11"><a class="header" href="#example-11">Example</a></h5>
-<pre><code class="language-solidity">bytes4 selector = bytes4(keccak256(&quot;fulfillRandomness(bytes32,uint256)&quot;));
-bytes memory expectedData = abi.encodeWithSelector(selector, requestId, 5647236456456);
+<h5 id="example-12"><a class="header" href="#example-12">Example</a></h5>
+<pre><code class="language-solidity">bytes memory expectedData = abi.encodeWithSignature(&quot;fulfillRandomness(bytes32,uint256)&quot;, requestId, randomness);
 cheats.expectCall(address(awesomeContract), expectedData);
-vrfCoordinatorMock.callBackWithRandomness(requestId, 5647236456456, address(awesomeContract));
+vrfCoordinator.callBackWithRandomness(requestId, randomness, address(awesomeContract));
 // [PASS]
 </code></pre>
 <br>
@@ -513,7 +523,7 @@ vrfCoordinatorMock.callBackWithRandomness(requestId, 5647236456456, address(awes
 </code></pre>
 <p>Returns the bytecode for a contract in the project given the path to the contract.</p>
 <p>The calldata parameter can either be in the form <code>ContractFile.sol</code> (if the filename and contract name are the same), <code>ContractFile.sol:ContractName</code>, or <code>./path/to/artifact.json</code></p>
-<h4 id="example-12"><a class="header" href="#example-12">Example</a></h4>
+<h5 id="example-13"><a class="header" href="#example-13">Example</a></h5>
 <pre><code class="language-solidity">MyContract myContract = new MyContract(arg1, arg2);
 
 // Let's do the same thing with `getCode`
@@ -526,7 +536,7 @@ assembly {
 
 assertEq0(address(myContract).code, anotherAddress.code); // [PASS]
 </code></pre>
-<p>If you'd like to use getCode to deploy a contract's bytecode, you can also use <a href="https://github.com/brockelmore/forge-std">forge-std</a>'s <code>deployCode</code> helper. In your test file:</p>
+<p>If you'd like to use getCode to deploy a contract's bytecode, you can also use <a href="https://github.com/brockelmore/forge-std">Forge Std</a>'s <code>deployCode</code> helper. In your test file:</p>
 <pre><code class="language-solidity">    function testDeployCode() public {
         // deployCode takes a string argument for the contract to deploy
         // and optionally a bytes argument for any arguments that should
@@ -540,13 +550,21 @@ assertEq0(address(myContract).code, anotherAddress.code); // [PASS]
 <h4 id="label"><a class="header" href="#label"><code>label</code></a></h4>
 <pre><code class="language-solidity">function label(address addr, string label) external;
 </code></pre>
-<p>Sets a label <code>label</code> for <code>addr</code> in test traces. If an address is labelled, the label will show up in test traces instead of the address.</p>
+<p>Sets a label <code>label</code> for <code>addr</code> in test traces.</p>
+<p>If an address is labelled, the label will show up in test traces instead of the address.</p>
 <br>
 <hr />
 <h4 id="assume"><a class="header" href="#assume"><code>assume</code></a></h4>
 <pre><code class="language-solidity">function assume(bool) external;
 </code></pre>
 <p>If the boolean expression evaluates to false, discard the current fuzz inputs and start a new fuzz run.</p>
+<h5 id="example-14"><a class="header" href="#example-14">Example</a></h5>
+<pre><code class="language-solidity">function testX(uint256 a) public {
+    cheats.assume(a != 1);
+    require(a != 1);
+    // [PASS]
+}
+</code></pre>
 
                     </main>
 
